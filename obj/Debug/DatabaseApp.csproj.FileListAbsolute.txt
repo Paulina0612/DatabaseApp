@@ -1,0 +1,10 @@
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\bin\Debug\DatabaseApp.exe.config
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\bin\Debug\DatabaseApp.exe
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\bin\Debug\DatabaseApp.pdb
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.csproj.AssemblyReference.cache
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.MainLogInForm.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.Properties.Resources.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.csproj.GenerateResource.cache
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.csproj.CoreCompileInputs.cache
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.exe
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.pdb
