@@ -6,11 +6,11 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    internal static class Program
+    // Class connecting GUI with SQLConnectionHandler
+    internal class Program
     {
-        /// <summary>
-        /// The main entry point for the application.
-        /// </summary>
+        private User user = User.NOONE;
+        
         [STAThread]
         static void Main()
         {

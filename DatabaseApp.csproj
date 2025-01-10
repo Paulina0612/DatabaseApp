@@ -138,6 +138,8 @@
     <Compile Include="SearchingClient.Designer.cs">
       <DependentUpon>SearchingClient.cs</DependentUpon>
     </Compile>
+    <Compile Include="SQLCommunicationHandler.cs" />
+    <Compile Include="User.cs" />
     <Compile Include="WorkerLogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
