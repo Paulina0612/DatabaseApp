@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddBook : Form
+    public partial class AddBook : Forms
     {
         public AddBook()
         {
             InitializeComponent();
+        }
+
+        private void commitButton_Click(object sender, EventArgs e)
+        {
+            //bool ifBookAdded = communicationHandler.AddBook(this.TitleTextBox.Text, );
         }
     }
 }

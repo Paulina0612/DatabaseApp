@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class RemoveWorker : Form
+    public partial class RemoveWorker : Forms
     {
         public RemoveWorker()
         {
             InitializeComponent();
+        }
+
+        private void commitButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

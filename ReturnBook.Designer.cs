@@ -55,7 +55,7 @@
             // bookIDLabel
             // 
             this.bookIDLabel.AutoSize = true;
-            this.bookIDLabel.Location = new System.Drawing.Point(30, 99);
+            this.bookIDLabel.Location = new System.Drawing.Point(30, 82);
             this.bookIDLabel.Name = "bookIDLabel";
             this.bookIDLabel.Size = new System.Drawing.Size(108, 20);
             this.bookIDLabel.TabIndex = 3;
@@ -63,24 +63,25 @@
             // 
             // bookIDTextBox
             // 
-            this.bookIDTextBox.Location = new System.Drawing.Point(205, 96);
+            this.bookIDTextBox.Location = new System.Drawing.Point(205, 76);
             this.bookIDTextBox.Name = "bookIDTextBox";
             this.bookIDTextBox.Size = new System.Drawing.Size(392, 26);
             this.bookIDTextBox.TabIndex = 2;
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(465, 145);
+            this.commitButton.Location = new System.Drawing.Point(465, 108);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(132, 35);
             this.commitButton.TabIndex = 4;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // penaltyCheckBox
             // 
             this.penaltyCheckBox.AutoSize = true;
-            this.penaltyCheckBox.Location = new System.Drawing.Point(300, 151);
+            this.penaltyCheckBox.Location = new System.Drawing.Point(308, 119);
             this.penaltyCheckBox.Name = "penaltyCheckBox";
             this.penaltyCheckBox.Size = new System.Drawing.Size(134, 24);
             this.penaltyCheckBox.TabIndex = 5;
@@ -91,7 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(647, 231);
+            this.ClientSize = new System.Drawing.Size(647, 167);
             this.Controls.Add(this.penaltyCheckBox);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.bookIDLabel);

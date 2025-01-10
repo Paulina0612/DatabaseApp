@@ -49,6 +49,7 @@
             this.searchClientButton.TabIndex = 0;
             this.searchClientButton.Text = "Search For Client";
             this.searchClientButton.UseVisualStyleBackColor = true;
+            this.searchClientButton.Click += new System.EventHandler(this.searchClientButton_Click);
             // 
             // payPenaltyButton
             // 

@@ -10,19 +10,14 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class SearchingClient : Form
+    public partial class SearchingClient : Forms
     {
         public SearchingClient()
         {
             InitializeComponent();
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void emailText_TextChanged(object sender, EventArgs e)
+        private void checkButton_Click(object sender, EventArgs e)
         {
 
         }

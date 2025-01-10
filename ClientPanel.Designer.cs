@@ -41,6 +41,7 @@
             this.historyButton.TabIndex = 0;
             this.historyButton.Text = "History";
             this.historyButton.UseVisualStyleBackColor = true;
+            this.historyButton.Click += new System.EventHandler(this.historyButton_Click);
             // 
             // borrowedBooksButton
             // 
@@ -50,6 +51,7 @@
             this.borrowedBooksButton.TabIndex = 1;
             this.borrowedBooksButton.Text = "Borrowed Books";
             this.borrowedBooksButton.UseVisualStyleBackColor = true;
+            this.borrowedBooksButton.Click += new System.EventHandler(this.borrowedBooksButton_Click);
             // 
             // catalogButton
             // 
@@ -59,6 +61,7 @@
             this.catalogButton.TabIndex = 2;
             this.catalogButton.Text = "Catalog";
             this.catalogButton.UseVisualStyleBackColor = true;
+            this.catalogButton.Click += new System.EventHandler(this.catalogButton_Click);
             // 
             // ClientPanel
             // 
@@ -70,7 +73,6 @@
             this.Controls.Add(this.historyButton);
             this.Name = "ClientPanel";
             this.Text = "ClientPanel";
-            this.Load += new System.EventHandler(this.ClientPanel_Load);
             this.ResumeLayout(false);
 
         }

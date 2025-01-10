@@ -24,3 +24,6 @@ C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseAp
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.SearchingClient.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.WorkerLogInForm.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.WorkerPanel.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.History.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.BooksCatalog.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.BorrowedBooks.resources

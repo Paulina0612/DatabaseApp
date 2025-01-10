@@ -147,8 +147,9 @@
             this.commitButton.TabIndex = 12;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
-            // EmployWorker
+            // AddWorker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -166,7 +167,7 @@
             this.Controls.Add(this.textBox3);
             this.Controls.Add(this.textBox2);
             this.Controls.Add(this.textBox1);
-            this.Name = "EmployWorker";
+            this.Name = "AddWorker";
             this.Text = "EmployWorker";
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddWorker : Form
+    public partial class AddWorker : Forms
     {
         public AddWorker()
         {
             InitializeComponent();
+        }
+
+        private void commitButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

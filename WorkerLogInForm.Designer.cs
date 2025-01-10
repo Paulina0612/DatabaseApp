@@ -40,12 +40,13 @@
             // 
             // directorCheckBox
             // 
-            this.directorCheckBox.Location = new System.Drawing.Point(144, 200);
+            this.directorCheckBox.Location = new System.Drawing.Point(178, 152);
             this.directorCheckBox.Name = "directorCheckBox";
             this.directorCheckBox.Size = new System.Drawing.Size(126, 24);
             this.directorCheckBox.TabIndex = 7;
-            this.directorCheckBox.Text = "I\'m a director";
+            this.directorCheckBox.Text = "I\'m director";
             this.directorCheckBox.UseVisualStyleBackColor = true;
+            this.directorCheckBox.CheckedChanged += new System.EventHandler(this.directorCheckBox_CheckedChanged);
             // 
             // firstNameTextBox
             // 
@@ -65,23 +66,24 @@
             // 
             // logInButton
             // 
-            this.logInButton.Location = new System.Drawing.Point(325, 192);
+            this.logInButton.Location = new System.Drawing.Point(325, 137);
             this.logInButton.Name = "logInButton";
             this.logInButton.Size = new System.Drawing.Size(163, 39);
             this.logInButton.TabIndex = 12;
             this.logInButton.Text = "Log In";
             this.logInButton.UseVisualStyleBackColor = true;
+            this.logInButton.Click += new System.EventHandler(this.logInButton_Click);
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(144, 133);
+            this.passwordTextBox.Location = new System.Drawing.Point(144, 105);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(344, 26);
             this.passwordTextBox.TabIndex = 11;
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(144, 87);
+            this.lastNameTextBox.Location = new System.Drawing.Point(144, 73);
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.Size = new System.Drawing.Size(344, 26);
             this.lastNameTextBox.TabIndex = 10;
@@ -89,7 +91,7 @@
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(43, 139);
+            this.passwordLabel.Location = new System.Drawing.Point(37, 111);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(78, 20);
             this.passwordLabel.TabIndex = 9;
@@ -98,7 +100,7 @@
             // lastNameLabel
             // 
             this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(37, 93);
+            this.lastNameLabel.Location = new System.Drawing.Point(37, 79);
             this.lastNameLabel.Name = "lastNameLabel";
             this.lastNameLabel.Size = new System.Drawing.Size(84, 20);
             this.lastNameLabel.TabIndex = 8;
@@ -108,7 +110,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(550, 268);
+            this.ClientSize = new System.Drawing.Size(550, 207);
             this.Controls.Add(this.directorCheckBox);
             this.Controls.Add(this.firstNameTextBox);
             this.Controls.Add(this.nameLabel);
@@ -134,5 +136,7 @@
         private System.Windows.Forms.TextBox lastNameTextBox;
         private System.Windows.Forms.Label passwordLabel;
         private System.Windows.Forms.Label lastNameLabel;
+
+
     }
 }

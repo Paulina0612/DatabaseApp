@@ -58,6 +58,19 @@
     <Compile Include="AddGenre.Designer.cs">
       <DependentUpon>AddGenre.cs</DependentUpon>
     </Compile>
+    <Compile Include="BookData.cs" />
+    <Compile Include="BooksCatalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BooksCatalog.Designer.cs">
+      <DependentUpon>BooksCatalog.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BorrowedBooks.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BorrowedBooks.Designer.cs">
+      <DependentUpon>BorrowedBooks.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChangeWorkerSalary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -87,6 +100,21 @@
     </Compile>
     <Compile Include="AddWorker.Designer.cs">
       <DependentUpon>AddWorker.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DirectorPanel.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DirectorPanel.Designer.cs">
+      <DependentUpon>DirectorPanel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="History.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="History.Designer.cs">
+      <DependentUpon>History.cs</DependentUpon>
     </Compile>
     <Compile Include="LendBook.cs">
       <SubType>Form</SubType>
@@ -139,7 +167,6 @@
       <DependentUpon>SearchingClient.cs</DependentUpon>
     </Compile>
     <Compile Include="SQLCommunicationHandler.cs" />
-    <Compile Include="User.cs" />
     <Compile Include="WorkerLogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -158,6 +185,12 @@
     <EmbeddedResource Include="AddGenre.resx">
       <DependentUpon>AddGenre.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BooksCatalog.resx">
+      <DependentUpon>BooksCatalog.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="BorrowedBooks.resx">
+      <DependentUpon>BorrowedBooks.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChangeWorkerSalary.resx">
       <DependentUpon>ChangeWorkerSalary.cs</DependentUpon>
     </EmbeddedResource>
@@ -172,6 +205,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="AddWorker.resx">
       <DependentUpon>AddWorker.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="History.resx">
+      <DependentUpon>History.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="LendBook.resx">
       <DependentUpon>LendBook.cs</DependentUpon>

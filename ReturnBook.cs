@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ReturnBook : Form
+    public partial class ReturnBook : Forms
     {
         public ReturnBook()
         {
             InitializeComponent();
+        }
+
+        private void commitButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -51,7 +51,7 @@
             // authorLabel
             // 
             this.authorLabel.AutoSize = true;
-            this.authorLabel.Location = new System.Drawing.Point(27, 87);
+            this.authorLabel.Location = new System.Drawing.Point(27, 74);
             this.authorLabel.Name = "authorLabel";
             this.authorLabel.Size = new System.Drawing.Size(202, 20);
             this.authorLabel.TabIndex = 2;
@@ -60,7 +60,7 @@
             // ISBNLabel
             // 
             this.ISBNLabel.AutoSize = true;
-            this.ISBNLabel.Location = new System.Drawing.Point(182, 134);
+            this.ISBNLabel.Location = new System.Drawing.Point(182, 106);
             this.ISBNLabel.Name = "ISBNLabel";
             this.ISBNLabel.Size = new System.Drawing.Size(47, 20);
             this.ISBNLabel.TabIndex = 3;
@@ -69,7 +69,7 @@
             // genreLabel
             // 
             this.genreLabel.AutoSize = true;
-            this.genreLabel.Location = new System.Drawing.Point(175, 180);
+            this.genreLabel.Location = new System.Drawing.Point(175, 140);
             this.genreLabel.Name = "genreLabel";
             this.genreLabel.Size = new System.Drawing.Size(54, 20);
             this.genreLabel.TabIndex = 4;
@@ -84,14 +84,14 @@
             // 
             // authorTextBox
             // 
-            this.authorTextBox.Location = new System.Drawing.Point(268, 81);
+            this.authorTextBox.Location = new System.Drawing.Point(268, 68);
             this.authorTextBox.Name = "authorTextBox";
             this.authorTextBox.Size = new System.Drawing.Size(383, 26);
             this.authorTextBox.TabIndex = 6;
             // 
             // ISBNTextBox
             // 
-            this.ISBNTextBox.Location = new System.Drawing.Point(268, 128);
+            this.ISBNTextBox.Location = new System.Drawing.Point(268, 100);
             this.ISBNTextBox.Name = "ISBNTextBox";
             this.ISBNTextBox.Size = new System.Drawing.Size(383, 26);
             this.ISBNTextBox.TabIndex = 7;
@@ -99,25 +99,26 @@
             // genreComboBox
             // 
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(268, 172);
+            this.genreComboBox.Location = new System.Drawing.Point(268, 132);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(383, 28);
             this.genreComboBox.TabIndex = 8;
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(492, 221);
+            this.commitButton.Location = new System.Drawing.Point(492, 175);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(159, 31);
             this.commitButton.TabIndex = 9;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 291);
+            this.ClientSize = new System.Drawing.Size(696, 241);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.ISBNTextBox);

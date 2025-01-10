@@ -94,6 +94,7 @@
             this.commitButton.TabIndex = 6;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // ChangeWorkerSalary
             // 

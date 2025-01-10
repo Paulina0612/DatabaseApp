@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ClientRegistration : Forms
+    public partial class DirectorPanel : Form
     {
-        public ClientRegistration()
+        public DirectorPanel()
         {
             InitializeComponent();
-        }
-
-        private void registerButton_Click(object sender, EventArgs e)
-        {
-            
         }
     }
 }

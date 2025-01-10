@@ -51,18 +51,19 @@
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(375, 84);
+            this.commitButton.Location = new System.Drawing.Point(375, 73);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(108, 29);
             this.commitButton.TabIndex = 2;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // RemoveBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(524, 153);
+            this.ClientSize = new System.Drawing.Size(524, 136);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.bookIDTextBox);
             this.Controls.Add(this.enterBookIDLabel);

@@ -10,14 +10,14 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class PenaltyPayment : Form
+    public partial class PenaltyPayment : Forms
     {
         public PenaltyPayment()
         {
             InitializeComponent();
         }
 
-        private void PenaltyPayment_Load(object sender, EventArgs e)
+        private void commitButton_Click(object sender, EventArgs e)
         {
 
         }

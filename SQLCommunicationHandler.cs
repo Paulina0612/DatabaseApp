@@ -18,43 +18,55 @@ namespace DatabaseApp
 
 
         // Adding records  
-        public void AddBook()
+        public bool AddBook(string title, string authorData, string ISBN, string genreName)
         {
-            // TODO: Napisac kod xD
+            bool ifDataCorrect = false;
+            int genreID = GetGenreID(genreName);
+            // TODO: Napisac query
+
+            if (ifDataCorrect) return true;
+            else return false;
         }
 
-        public void AddGenre()
+        public void AddGenre(string name)
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public void AddWorker()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public void ClientRegistration()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public void LendBook()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
 
 
 
         // Logging in 
-        public void ClientLogIn()
+        public bool ClientLogIn(string email, string cardNumber)
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
+            // TODO: Ma zwracac true jesli sie uda i fase jesli sie nie uda 
+
+            return true;
         }
 
-        public void WorkerLogIn()
+        public bool WorkerLogIn(bool ifDirector)
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
+            // TODO: Ma zwracac true jesli sie uda i fase jesli sie nie uda 
+
+            if (ifDirector) return true;
+            else return true;
         }
 
 
@@ -63,17 +75,17 @@ namespace DatabaseApp
         // Removing records
         public void RemoveBook()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public void RemoveGenre()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public void RemoveWorker()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
 
@@ -82,24 +94,61 @@ namespace DatabaseApp
         // Other 
         public void ReturnBook()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public int SearchingClient()
         {
             int clientID=0;
-            // TODO: Napisac kod, zeby zwracal id klienta xD
+            // TODO: Napisac query, zeby zwracal id klienta 
             return clientID;
         }
 
         public void ChangeWorkerSalary()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
         }
 
         public void PenaltyPayment()
         {
-            // TODO: Napisac kod xD
+            // TODO: Napisac query
+        }
+
+
+
+
+        // Returning data
+        public List<BookData> GetHistory()
+        {
+            List<BookData> history = new List<BookData>();
+
+            //TODO: Wypelnic liste
+
+            return history;
+        }
+        public List<BookData> GetBorrowedBooks()
+        {
+            List<BookData> borrowedBooks = new List<BookData>();
+
+            //TODO: Wypelnic liste
+
+            return borrowedBooks;
+        }
+        public List<BookData> GetBooksCatalog()
+        {
+            List<BookData> catalog = new List<BookData>();
+
+            //TODO: Wypelnic liste
+            //TODO: Plus tu bedzie trzeba dodac jakies parametry, zeby filtrowac katalog
+
+            return catalog;
+        }
+        public int GetGenreID(string name)
+        {
+            int ID = 0;
+            //TODO: Pobrac id po name
+
+            return ID;
         }
     }
 }

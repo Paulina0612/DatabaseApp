@@ -10,12 +10,16 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddGenre : Form
+    public partial class AddGenre : Forms
     {
         public AddGenre()
         {
             InitializeComponent();
         }
 
+        private void commitButton_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

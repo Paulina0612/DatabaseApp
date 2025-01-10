@@ -6,12 +6,9 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    // Class connecting GUI with SQLConnectionHandler
+    
     internal class Program
     {
-        private User user = User.NOONE;
-        
-        [STAThread]
         static void Main()
         {
             Application.EnableVisualStyles();

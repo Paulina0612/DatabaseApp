@@ -51,6 +51,7 @@
             this.LogInAsWorkerButton.TabIndex = 1;
             this.LogInAsWorkerButton.Text = "Log In As Worker";
             this.LogInAsWorkerButton.UseVisualStyleBackColor = true;
+            this.LogInAsWorkerButton.Click += new System.EventHandler(this.LogInAsWorkerButton_Click);
             // 
             // RegisterClientButton
             // 
@@ -60,6 +61,7 @@
             this.RegisterClientButton.TabIndex = 3;
             this.RegisterClientButton.Text = "Register";
             this.RegisterClientButton.UseVisualStyleBackColor = true;
+            this.RegisterClientButton.Click += new System.EventHandler(this.RegisterClientButton_Click);
             // 
             // MainLogInForm
             // 

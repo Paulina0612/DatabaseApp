@@ -51,24 +51,24 @@
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(484, 84);
+            this.commitButton.Location = new System.Drawing.Point(484, 71);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(112, 36);
             this.commitButton.TabIndex = 4;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // PenaltyPayment
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(644, 164);
+            this.ClientSize = new System.Drawing.Size(644, 136);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.clientEmailLabel);
             this.Controls.Add(this.clientEmailTextBox);
             this.Name = "PenaltyPayment";
             this.Text = "PenaltyPayment";
-            this.Load += new System.EventHandler(this.PenaltyPayment_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

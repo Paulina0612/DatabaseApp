@@ -35,12 +35,13 @@
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(364, 76);
+            this.commitButton.Location = new System.Drawing.Point(364, 65);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(108, 29);
             this.commitButton.TabIndex = 5;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // enterBookIDLabel
             // 
@@ -63,7 +64,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(512, 160);
+            this.ClientSize = new System.Drawing.Size(512, 134);
             this.Controls.Add(this.genreNameComboBox);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.enterBookIDLabel);

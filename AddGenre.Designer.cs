@@ -35,12 +35,13 @@
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(375, 81);
+            this.commitButton.Location = new System.Drawing.Point(375, 70);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(108, 29);
             this.commitButton.TabIndex = 5;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // genreNameTextBox
             // 
@@ -62,7 +63,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(546, 159);
+            this.ClientSize = new System.Drawing.Size(546, 141);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.genreNameTextBox);
             this.Controls.Add(this.enterGenreNameLabel);

@@ -54,7 +54,7 @@
             // 
             // catalogButton
             // 
-            this.catalogButton.Location = new System.Drawing.Point(49, 88);
+            this.catalogButton.Location = new System.Drawing.Point(49, 80);
             this.catalogButton.Name = "catalogButton";
             this.catalogButton.Size = new System.Drawing.Size(142, 36);
             this.catalogButton.TabIndex = 2;
@@ -64,7 +64,7 @@
             // bookIDLabel
             // 
             this.bookIDLabel.AutoSize = true;
-            this.bookIDLabel.Location = new System.Drawing.Point(242, 96);
+            this.bookIDLabel.Location = new System.Drawing.Point(242, 80);
             this.bookIDLabel.Name = "bookIDLabel";
             this.bookIDLabel.Size = new System.Drawing.Size(108, 20);
             this.bookIDLabel.TabIndex = 3;
@@ -72,25 +72,26 @@
             // 
             // bookIDTextBox
             // 
-            this.bookIDTextBox.Location = new System.Drawing.Point(379, 90);
+            this.bookIDTextBox.Location = new System.Drawing.Point(379, 74);
             this.bookIDTextBox.Name = "bookIDTextBox";
             this.bookIDTextBox.Size = new System.Drawing.Size(284, 26);
             this.bookIDTextBox.TabIndex = 4;
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(556, 146);
+            this.commitButton.Location = new System.Drawing.Point(556, 106);
             this.commitButton.Name = "commitButton";
-            this.commitButton.Size = new System.Drawing.Size(107, 29);
+            this.commitButton.Size = new System.Drawing.Size(107, 39);
             this.commitButton.TabIndex = 5;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // LendBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(716, 222);
+            this.ClientSize = new System.Drawing.Size(716, 174);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.bookIDTextBox);
             this.Controls.Add(this.bookIDLabel);

@@ -10,16 +10,14 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ClientRegistration : Forms
+    public partial class History : Forms
     {
-        public ClientRegistration()
+        public History()
         {
             InitializeComponent();
         }
 
-        private void registerButton_Click(object sender, EventArgs e)
-        {
-            
-        }
+
+        // TODO: Tu trzeba zrobic, zeby wyswietaly sie dane w tabeli, ale narazie to zostawiam, bo potrzebujemy, zeby reszta rzeczy dziala
     }
 }

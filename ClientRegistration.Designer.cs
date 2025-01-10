@@ -39,12 +39,13 @@
             // 
             // registerButton
             // 
-            this.registerButton.Location = new System.Drawing.Point(378, 192);
+            this.registerButton.Location = new System.Drawing.Point(378, 140);
             this.registerButton.Name = "registerButton";
-            this.registerButton.Size = new System.Drawing.Size(104, 30);
+            this.registerButton.Size = new System.Drawing.Size(104, 34);
             this.registerButton.TabIndex = 0;
             this.registerButton.Text = "Register";
             this.registerButton.UseVisualStyleBackColor = true;
+            this.registerButton.Click += new System.EventHandler(this.registerButton_Click);
             // 
             // firstNameLabel
             // 
@@ -58,7 +59,7 @@
             // LastNameLabel
             // 
             this.LastNameLabel.AutoSize = true;
-            this.LastNameLabel.Location = new System.Drawing.Point(39, 97);
+            this.LastNameLabel.Location = new System.Drawing.Point(39, 82);
             this.LastNameLabel.Name = "LastNameLabel";
             this.LastNameLabel.Size = new System.Drawing.Size(84, 20);
             this.LastNameLabel.TabIndex = 2;
@@ -67,7 +68,7 @@
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(39, 146);
+            this.emailLabel.Location = new System.Drawing.Point(39, 114);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(53, 20);
             this.emailLabel.TabIndex = 3;
@@ -82,14 +83,14 @@
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(153, 91);
+            this.lastNameTextBox.Location = new System.Drawing.Point(153, 76);
             this.lastNameTextBox.Name = "lastNameTextBox";
             this.lastNameTextBox.Size = new System.Drawing.Size(329, 26);
             this.lastNameTextBox.TabIndex = 5;
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(153, 140);
+            this.emailTextBox.Location = new System.Drawing.Point(153, 108);
             this.emailTextBox.Name = "emailTextBox";
             this.emailTextBox.Size = new System.Drawing.Size(329, 26);
             this.emailTextBox.TabIndex = 6;
@@ -98,7 +99,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(540, 279);
+            this.ClientSize = new System.Drawing.Size(540, 202);
             this.Controls.Add(this.emailTextBox);
             this.Controls.Add(this.lastNameTextBox);
             this.Controls.Add(this.firstNameTextBox);

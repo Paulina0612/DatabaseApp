@@ -52,18 +52,19 @@
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(524, 95);
+            this.commitButton.Location = new System.Drawing.Point(524, 81);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(120, 30);
             this.commitButton.TabIndex = 2;
             this.commitButton.Text = "Commit";
             this.commitButton.UseVisualStyleBackColor = true;
+            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
             // RemoveWorker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(710, 169);
+            this.ClientSize = new System.Drawing.Size(710, 151);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.workerDataLabel);
             this.Controls.Add(this.workerDataComboBox);

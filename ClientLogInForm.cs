@@ -10,21 +10,23 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ClientLogInForm : Form
+    public partial class ClientLogInForm : Forms
     {
         public ClientLogInForm()
         {
             InitializeComponent();
         }
 
-        private void emailLabel_Click(object sender, EventArgs e)
+        private void logInButton_Click(object sender, EventArgs e)
         {
+            bool ifSuccessful = communicationHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
 
-        }
-
-        private void ClientLogInForm_Load(object sender, EventArgs e)
-        {
-
+            if (ifSuccessful)
+            {
+                ClientPanel clientPanel = new ClientPanel();
+                clientPanel.Show();
+            }
+            else MessageBox.Show("Incorrect data");
         }
     }
 }
