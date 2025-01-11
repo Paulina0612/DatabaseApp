@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DatabaseApp
@@ -19,14 +12,23 @@ namespace DatabaseApp
 
         private void logInButton_Click(object sender, EventArgs e)
         {
-            bool ifSuccessful = communicationHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
+            bool ifCardNumberNumeric = int.TryParse(cardNumberTextBox.Text, out int n);
 
-            if (ifSuccessful)
+            if (string.IsNullOrEmpty(emailTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(cardNumberTextBox.Text) && ifCardNumberNumeric && cardNumberTextBox.Text.Length != 7)
+                Program.IncorrectDataInformation();
+            else
             {
-                ClientPanel clientPanel = new ClientPanel();
-                clientPanel.Show();
+                bool ifSuccessful = communicationHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
+
+                if (ifSuccessful)
+                {
+                    ClientPanel clientPanel = new ClientPanel();
+                    clientPanel.Show();
+                    this.Close();
+                }
+                else MessageBox.Show("E-mail or card number incorrect.");
             }
-            else MessageBox.Show("Incorrect data");
         }
     }
 }

@@ -28,62 +28,66 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.firstNameTextBox = new System.Windows.Forms.TextBox();
+            this.lastNameTextBox = new System.Windows.Forms.TextBox();
+            this.phoneNumberTextBox = new System.Windows.Forms.TextBox();
+            this.emailTextBox = new System.Windows.Forms.TextBox();
+            this.PESELTextBox = new System.Windows.Forms.TextBox();
+            this.salaryTextBox = new System.Windows.Forms.TextBox();
             this.firstNameLabel = new System.Windows.Forms.Label();
             this.lastNameLabel = new System.Windows.Forms.Label();
             this.phoneNumberLabel = new System.Windows.Forms.Label();
             this.PESELLabel = new System.Windows.Forms.Label();
-            this.EmailLabel = new System.Windows.Forms.Label();
-            this.SalaryLabel = new System.Windows.Forms.Label();
+            this.emailLabel = new System.Windows.Forms.Label();
+            this.salaryLabel = new System.Windows.Forms.Label();
             this.commitButton = new System.Windows.Forms.Button();
+            this.positionComboBox = new System.Windows.Forms.ComboBox();
+            this.managerComboBox = new System.Windows.Forms.ComboBox();
+            this.managerLabel = new System.Windows.Forms.Label();
+            this.positionLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // textBox1
+            // firstNameTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(165, 30);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(406, 26);
-            this.textBox1.TabIndex = 0;
+            this.firstNameTextBox.Location = new System.Drawing.Point(165, 30);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(406, 26);
+            this.firstNameTextBox.TabIndex = 0;
             // 
-            // textBox2
+            // lastNameTextBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(165, 62);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(406, 26);
-            this.textBox2.TabIndex = 1;
+            this.lastNameTextBox.Location = new System.Drawing.Point(165, 62);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.Size = new System.Drawing.Size(406, 26);
+            this.lastNameTextBox.TabIndex = 1;
             // 
-            // textBox3
+            // phoneNumberTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(165, 94);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(406, 26);
-            this.textBox3.TabIndex = 2;
+            this.phoneNumberTextBox.Location = new System.Drawing.Point(165, 94);
+            this.phoneNumberTextBox.Name = "phoneNumberTextBox";
+            this.phoneNumberTextBox.Size = new System.Drawing.Size(406, 26);
+            this.phoneNumberTextBox.TabIndex = 2;
             // 
-            // textBox4
+            // emailTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(165, 126);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(406, 26);
-            this.textBox4.TabIndex = 3;
+            this.emailTextBox.Location = new System.Drawing.Point(165, 126);
+            this.emailTextBox.Name = "emailTextBox";
+            this.emailTextBox.Size = new System.Drawing.Size(406, 26);
+            this.emailTextBox.TabIndex = 3;
             // 
-            // textBox5
+            // PESELTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(165, 158);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(406, 26);
-            this.textBox5.TabIndex = 4;
+            this.PESELTextBox.Location = new System.Drawing.Point(165, 158);
+            this.PESELTextBox.Name = "PESELTextBox";
+            this.PESELTextBox.Size = new System.Drawing.Size(406, 26);
+            this.PESELTextBox.TabIndex = 4;
             // 
-            // textBox6
+            // salaryTextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(165, 190);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(406, 26);
-            this.textBox6.TabIndex = 5;
+            this.salaryTextBox.Location = new System.Drawing.Point(165, 190);
+            this.salaryTextBox.Name = "salaryTextBox";
+            this.salaryTextBox.Size = new System.Drawing.Size(406, 26);
+            this.salaryTextBox.TabIndex = 5;
             // 
             // firstNameLabel
             // 
@@ -121,27 +125,27 @@
             this.PESELLabel.TabIndex = 9;
             this.PESELLabel.Text = "PESEL";
             // 
-            // EmailLabel
+            // emailLabel
             // 
-            this.EmailLabel.AutoSize = true;
-            this.EmailLabel.Location = new System.Drawing.Point(42, 132);
-            this.EmailLabel.Name = "EmailLabel";
-            this.EmailLabel.Size = new System.Drawing.Size(53, 20);
-            this.EmailLabel.TabIndex = 10;
-            this.EmailLabel.Text = "E-mail";
+            this.emailLabel.AutoSize = true;
+            this.emailLabel.Location = new System.Drawing.Point(42, 132);
+            this.emailLabel.Name = "emailLabel";
+            this.emailLabel.Size = new System.Drawing.Size(53, 20);
+            this.emailLabel.TabIndex = 10;
+            this.emailLabel.Text = "E-mail";
             // 
-            // SalaryLabel
+            // salaryLabel
             // 
-            this.SalaryLabel.AutoSize = true;
-            this.SalaryLabel.Location = new System.Drawing.Point(42, 196);
-            this.SalaryLabel.Name = "SalaryLabel";
-            this.SalaryLabel.Size = new System.Drawing.Size(53, 20);
-            this.SalaryLabel.TabIndex = 11;
-            this.SalaryLabel.Text = "Salary";
+            this.salaryLabel.AutoSize = true;
+            this.salaryLabel.Location = new System.Drawing.Point(42, 196);
+            this.salaryLabel.Name = "salaryLabel";
+            this.salaryLabel.Size = new System.Drawing.Size(53, 20);
+            this.salaryLabel.TabIndex = 11;
+            this.salaryLabel.Text = "Salary";
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(447, 222);
+            this.commitButton.Location = new System.Drawing.Point(447, 290);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(124, 32);
             this.commitButton.TabIndex = 12;
@@ -149,24 +153,62 @@
             this.commitButton.UseVisualStyleBackColor = true;
             this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
+            // positionComboBox
+            // 
+            this.positionComboBox.FormattingEnabled = true;
+            this.positionComboBox.Location = new System.Drawing.Point(165, 256);
+            this.positionComboBox.Name = "positionComboBox";
+            this.positionComboBox.Size = new System.Drawing.Size(406, 28);
+            this.positionComboBox.TabIndex = 13;
+            // 
+            // managerComboBox
+            // 
+            this.managerComboBox.FormattingEnabled = true;
+            this.managerComboBox.Location = new System.Drawing.Point(165, 222);
+            this.managerComboBox.Name = "managerComboBox";
+            this.managerComboBox.Size = new System.Drawing.Size(406, 28);
+            this.managerComboBox.TabIndex = 14;
+            // 
+            // managerLabel
+            // 
+            this.managerLabel.AutoSize = true;
+            this.managerLabel.Location = new System.Drawing.Point(42, 230);
+            this.managerLabel.Name = "managerLabel";
+            this.managerLabel.Size = new System.Drawing.Size(72, 20);
+            this.managerLabel.TabIndex = 15;
+            this.managerLabel.Text = "Manager";
+            // 
+            // positionLabel
+            // 
+            this.positionLabel.AutoSize = true;
+            this.positionLabel.Location = new System.Drawing.Point(42, 264);
+            this.positionLabel.Name = "positionLabel";
+            this.positionLabel.Size = new System.Drawing.Size(65, 20);
+            this.positionLabel.TabIndex = 16;
+            this.positionLabel.Text = "Position";
+            // 
             // AddWorker
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(621, 287);
+            this.ClientSize = new System.Drawing.Size(621, 355);
+            this.Controls.Add(this.positionLabel);
+            this.Controls.Add(this.managerLabel);
+            this.Controls.Add(this.managerComboBox);
+            this.Controls.Add(this.positionComboBox);
             this.Controls.Add(this.commitButton);
-            this.Controls.Add(this.SalaryLabel);
-            this.Controls.Add(this.EmailLabel);
+            this.Controls.Add(this.salaryLabel);
+            this.Controls.Add(this.emailLabel);
             this.Controls.Add(this.PESELLabel);
             this.Controls.Add(this.phoneNumberLabel);
             this.Controls.Add(this.lastNameLabel);
             this.Controls.Add(this.firstNameLabel);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.salaryTextBox);
+            this.Controls.Add(this.PESELTextBox);
+            this.Controls.Add(this.emailTextBox);
+            this.Controls.Add(this.phoneNumberTextBox);
+            this.Controls.Add(this.lastNameTextBox);
+            this.Controls.Add(this.firstNameTextBox);
             this.Name = "AddWorker";
             this.Text = "EmployWorker";
             this.ResumeLayout(false);
@@ -176,18 +218,22 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox firstNameTextBox;
+        private System.Windows.Forms.TextBox lastNameTextBox;
+        private System.Windows.Forms.TextBox phoneNumberTextBox;
+        private System.Windows.Forms.TextBox emailTextBox;
+        private System.Windows.Forms.TextBox PESELTextBox;
+        private System.Windows.Forms.TextBox salaryTextBox;
         private System.Windows.Forms.Label firstNameLabel;
         private System.Windows.Forms.Label lastNameLabel;
         private System.Windows.Forms.Label phoneNumberLabel;
         private System.Windows.Forms.Label PESELLabel;
-        private System.Windows.Forms.Label EmailLabel;
-        private System.Windows.Forms.Label SalaryLabel;
+        private System.Windows.Forms.Label emailLabel;
+        private System.Windows.Forms.Label salaryLabel;
         private System.Windows.Forms.Button commitButton;
+        private System.Windows.Forms.ComboBox positionComboBox;
+        private System.Windows.Forms.ComboBox managerComboBox;
+        private System.Windows.Forms.Label managerLabel;
+        private System.Windows.Forms.Label positionLabel;
     }
 }

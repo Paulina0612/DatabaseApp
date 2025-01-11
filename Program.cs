@@ -7,13 +7,18 @@ using System.Windows.Forms;
 namespace DatabaseApp
 {
     
-    internal class Program
+    public class Program
     {
         static void Main()
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainLogInForm());
+        }
+
+        public static void IncorrectDataInformation()
+        {
+            MessageBox.Show("Incorrect data. Please try again.");
         }
     }
 }

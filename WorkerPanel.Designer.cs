@@ -30,15 +30,17 @@
         {
             this.searchClientButton = new System.Windows.Forms.Button();
             this.payPenaltyButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.searchForBooksButton = new System.Windows.Forms.Button();
             this.lendBookButton = new System.Windows.Forms.Button();
             this.returnBookButton = new System.Windows.Forms.Button();
             this.manageClientsLabel = new System.Windows.Forms.Label();
             this.manageBooksLabel = new System.Windows.Forms.Label();
             this.addBookButton = new System.Windows.Forms.Button();
-            this.deleteBookButton = new System.Windows.Forms.Button();
+            this.removeBookButton = new System.Windows.Forms.Button();
             this.addGenreButton = new System.Windows.Forms.Button();
-            this.deleteGenreButton = new System.Windows.Forms.Button();
+            this.removeGenreButton = new System.Windows.Forms.Button();
+            this.removeAuthorButton = new System.Windows.Forms.Button();
+            this.addAuthorButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // searchClientButton
@@ -58,15 +60,17 @@
             this.payPenaltyButton.Size = new System.Drawing.Size(172, 31);
             this.payPenaltyButton.TabIndex = 0;
             this.payPenaltyButton.Text = "Penalty Payment";
+            this.payPenaltyButton.Click += new System.EventHandler(this.payPenaltyButton_Click);
             // 
-            // button1
+            // searchForBooksButton
             // 
-            this.button1.Location = new System.Drawing.Point(238, 62);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(172, 31);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "Search For Books";
-            this.button1.UseVisualStyleBackColor = true;
+            this.searchForBooksButton.Location = new System.Drawing.Point(238, 62);
+            this.searchForBooksButton.Name = "searchForBooksButton";
+            this.searchForBooksButton.Size = new System.Drawing.Size(172, 31);
+            this.searchForBooksButton.TabIndex = 1;
+            this.searchForBooksButton.Text = "Search For Books";
+            this.searchForBooksButton.UseVisualStyleBackColor = true;
+            this.searchForBooksButton.Click += new System.EventHandler(this.searchForBooksButton_Click_1);
             // 
             // lendBookButton
             // 
@@ -76,6 +80,7 @@
             this.lendBookButton.TabIndex = 2;
             this.lendBookButton.Text = "Lend Book";
             this.lendBookButton.UseVisualStyleBackColor = true;
+            this.lendBookButton.Click += new System.EventHandler(this.lendBookButton_Click);
             // 
             // returnBookButton
             // 
@@ -85,6 +90,7 @@
             this.returnBookButton.TabIndex = 3;
             this.returnBookButton.Text = "Return Book";
             this.returnBookButton.UseVisualStyleBackColor = true;
+            this.returnBookButton.Click += new System.EventHandler(this.returnBookButton_Click);
             // 
             // manageClientsLabel
             // 
@@ -112,15 +118,17 @@
             this.addBookButton.TabIndex = 6;
             this.addBookButton.Text = "Add Book";
             this.addBookButton.UseVisualStyleBackColor = true;
+            this.addBookButton.Click += new System.EventHandler(this.addBookButton_Click);
             // 
-            // deleteBookButton
+            // removeBookButton
             // 
-            this.deleteBookButton.Location = new System.Drawing.Point(238, 210);
-            this.deleteBookButton.Name = "deleteBookButton";
-            this.deleteBookButton.Size = new System.Drawing.Size(172, 31);
-            this.deleteBookButton.TabIndex = 7;
-            this.deleteBookButton.Text = "Delete Book";
-            this.deleteBookButton.UseVisualStyleBackColor = true;
+            this.removeBookButton.Location = new System.Drawing.Point(238, 210);
+            this.removeBookButton.Name = "removeBookButton";
+            this.removeBookButton.Size = new System.Drawing.Size(172, 31);
+            this.removeBookButton.TabIndex = 7;
+            this.removeBookButton.Text = "Remove Book";
+            this.removeBookButton.UseVisualStyleBackColor = true;
+            this.removeBookButton.Click += new System.EventHandler(this.removeBookButton_Click);
             // 
             // addGenreButton
             // 
@@ -130,35 +138,58 @@
             this.addGenreButton.TabIndex = 8;
             this.addGenreButton.Text = "Add Genre";
             this.addGenreButton.UseVisualStyleBackColor = true;
+            this.addGenreButton.Click += new System.EventHandler(this.addGenreButton_Click);
             // 
-            // deleteGenreButton
+            // removeGenreButton
             // 
-            this.deleteGenreButton.Location = new System.Drawing.Point(238, 284);
-            this.deleteGenreButton.Name = "deleteGenreButton";
-            this.deleteGenreButton.Size = new System.Drawing.Size(172, 31);
-            this.deleteGenreButton.TabIndex = 9;
-            this.deleteGenreButton.Text = "Delete Genre";
-            this.deleteGenreButton.UseVisualStyleBackColor = true;
+            this.removeGenreButton.Location = new System.Drawing.Point(238, 284);
+            this.removeGenreButton.Name = "removeGenreButton";
+            this.removeGenreButton.Size = new System.Drawing.Size(172, 31);
+            this.removeGenreButton.TabIndex = 9;
+            this.removeGenreButton.Text = "Remove Genre";
+            this.removeGenreButton.UseVisualStyleBackColor = true;
+            this.removeGenreButton.Click += new System.EventHandler(this.removeGenreButton_Click);
+            // 
+            // removeAuthorButton
+            // 
+            this.removeAuthorButton.Location = new System.Drawing.Point(238, 358);
+            this.removeAuthorButton.Name = "removeAuthorButton";
+            this.removeAuthorButton.Size = new System.Drawing.Size(172, 31);
+            this.removeAuthorButton.TabIndex = 11;
+            this.removeAuthorButton.Text = "Remove Author";
+            this.removeAuthorButton.UseVisualStyleBackColor = true;
+            this.removeAuthorButton.Click += new System.EventHandler(this.removeAuthorButton_Click);
+            // 
+            // addAuthorButton
+            // 
+            this.addAuthorButton.Location = new System.Drawing.Point(238, 321);
+            this.addAuthorButton.Name = "addAuthorButton";
+            this.addAuthorButton.Size = new System.Drawing.Size(172, 31);
+            this.addAuthorButton.TabIndex = 10;
+            this.addAuthorButton.Text = "Add Author";
+            this.addAuthorButton.UseVisualStyleBackColor = true;
+            this.addAuthorButton.Click += new System.EventHandler(this.addAuthorButton_Click);
             // 
             // WorkerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(458, 357);
-            this.Controls.Add(this.deleteGenreButton);
+            this.ClientSize = new System.Drawing.Size(460, 416);
+            this.Controls.Add(this.removeAuthorButton);
+            this.Controls.Add(this.addAuthorButton);
+            this.Controls.Add(this.removeGenreButton);
             this.Controls.Add(this.addGenreButton);
-            this.Controls.Add(this.deleteBookButton);
+            this.Controls.Add(this.removeBookButton);
             this.Controls.Add(this.addBookButton);
             this.Controls.Add(this.manageBooksLabel);
             this.Controls.Add(this.manageClientsLabel);
             this.Controls.Add(this.payPenaltyButton);
             this.Controls.Add(this.returnBookButton);
             this.Controls.Add(this.lendBookButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.searchForBooksButton);
             this.Controls.Add(this.searchClientButton);
             this.Name = "WorkerPanel";
             this.Text = "WorkerPanel";
-            this.Load += new System.EventHandler(this.WorkerPanel_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -168,14 +199,16 @@
 
         private System.Windows.Forms.Button searchClientButton;
         private System.Windows.Forms.Button payPenaltyButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button searchForBooksButton;
         private System.Windows.Forms.Button lendBookButton;
         private System.Windows.Forms.Button returnBookButton;
         private System.Windows.Forms.Label manageClientsLabel;
         private System.Windows.Forms.Label manageBooksLabel;
         private System.Windows.Forms.Button addBookButton;
-        private System.Windows.Forms.Button deleteBookButton;
+        private System.Windows.Forms.Button removeBookButton;
         private System.Windows.Forms.Button addGenreButton;
-        private System.Windows.Forms.Button deleteGenreButton;
+        private System.Windows.Forms.Button removeGenreButton;
+        private System.Windows.Forms.Button removeAuthorButton;
+        private System.Windows.Forms.Button addAuthorButton;
     }
 }

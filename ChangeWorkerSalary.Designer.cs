@@ -28,31 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.workerDataComboBox = new System.Windows.Forms.ComboBox();
+            this.workerDataLabel = new System.Windows.Forms.Label();
             this.currentSalaryLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.currentSalaryTextBox = new System.Windows.Forms.TextBox();
             this.newSalaryLabel = new System.Windows.Forms.Label();
             this.newSalaryTextBox = new System.Windows.Forms.TextBox();
             this.commitButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // comboBox1
+            // workerDataComboBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(174, 33);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(247, 28);
-            this.comboBox1.TabIndex = 0;
+            this.workerDataComboBox.FormattingEnabled = true;
+            this.workerDataComboBox.Location = new System.Drawing.Point(174, 33);
+            this.workerDataComboBox.Name = "workerDataComboBox";
+            this.workerDataComboBox.Size = new System.Drawing.Size(247, 28);
+            this.workerDataComboBox.TabIndex = 0;
+            this.workerDataComboBox.SelectedIndexChanged += new System.EventHandler(this.workerDataComboBox_SelectedIndexChanged);
             // 
-            // label1
+            // workerDataLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 41);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(65, 20);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "PESEL ";
+            this.workerDataLabel.AutoSize = true;
+            this.workerDataLabel.Location = new System.Drawing.Point(36, 41);
+            this.workerDataLabel.Name = "workerDataLabel";
+            this.workerDataLabel.Size = new System.Drawing.Size(96, 20);
+            this.workerDataLabel.TabIndex = 1;
+            this.workerDataLabel.Text = "Worker data";
             // 
             // currentSalaryLabel
             // 
@@ -63,12 +64,12 @@
             this.currentSalaryLabel.TabIndex = 2;
             this.currentSalaryLabel.Text = "Current Salary";
             // 
-            // textBox1
+            // currentSalaryTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(174, 67);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(247, 26);
-            this.textBox1.TabIndex = 3;
+            this.currentSalaryTextBox.Location = new System.Drawing.Point(174, 67);
+            this.currentSalaryTextBox.Name = "currentSalaryTextBox";
+            this.currentSalaryTextBox.Size = new System.Drawing.Size(247, 26);
+            this.currentSalaryTextBox.TabIndex = 3;
             // 
             // newSalaryLabel
             // 
@@ -88,7 +89,7 @@
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(319, 146);
+            this.commitButton.Location = new System.Drawing.Point(319, 131);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(102, 30);
             this.commitButton.TabIndex = 6;
@@ -100,14 +101,14 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(487, 207);
+            this.ClientSize = new System.Drawing.Size(487, 193);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.newSalaryTextBox);
             this.Controls.Add(this.newSalaryLabel);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.currentSalaryTextBox);
             this.Controls.Add(this.currentSalaryLabel);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.workerDataLabel);
+            this.Controls.Add(this.workerDataComboBox);
             this.Name = "ChangeWorkerSalary";
             this.Text = "ChangeWorkerSalary";
             this.ResumeLayout(false);
@@ -117,10 +118,10 @@
 
         #endregion
 
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox workerDataComboBox;
+        private System.Windows.Forms.Label workerDataLabel;
         private System.Windows.Forms.Label currentSalaryLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox currentSalaryTextBox;
         private System.Windows.Forms.Label newSalaryLabel;
         private System.Windows.Forms.TextBox newSalaryTextBox;
         private System.Windows.Forms.Button commitButton;

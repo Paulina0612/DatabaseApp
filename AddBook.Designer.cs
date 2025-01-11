@@ -32,17 +32,17 @@
             this.authorLabel = new System.Windows.Forms.Label();
             this.ISBNLabel = new System.Windows.Forms.Label();
             this.genreLabel = new System.Windows.Forms.Label();
-            this.TitleTextBox = new System.Windows.Forms.TextBox();
-            this.authorTextBox = new System.Windows.Forms.TextBox();
+            this.titleTextBox = new System.Windows.Forms.TextBox();
             this.ISBNTextBox = new System.Windows.Forms.TextBox();
             this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.commitButton = new System.Windows.Forms.Button();
+            this.authorDataComboBox = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(191, 42);
+            this.titleLabel.Location = new System.Drawing.Point(27, 42);
             this.titleLabel.Name = "titleLabel";
             this.titleLabel.Size = new System.Drawing.Size(38, 20);
             this.titleLabel.TabIndex = 0;
@@ -53,14 +53,14 @@
             this.authorLabel.AutoSize = true;
             this.authorLabel.Location = new System.Drawing.Point(27, 74);
             this.authorLabel.Name = "authorLabel";
-            this.authorLabel.Size = new System.Drawing.Size(202, 20);
+            this.authorLabel.Size = new System.Drawing.Size(93, 20);
             this.authorLabel.TabIndex = 2;
-            this.authorLabel.Text = "Author\'s first and last name";
+            this.authorLabel.Text = "Author data";
             // 
             // ISBNLabel
             // 
             this.ISBNLabel.AutoSize = true;
-            this.ISBNLabel.Location = new System.Drawing.Point(182, 106);
+            this.ISBNLabel.Location = new System.Drawing.Point(27, 106);
             this.ISBNLabel.Name = "ISBNLabel";
             this.ISBNLabel.Size = new System.Drawing.Size(47, 20);
             this.ISBNLabel.TabIndex = 3;
@@ -69,29 +69,22 @@
             // genreLabel
             // 
             this.genreLabel.AutoSize = true;
-            this.genreLabel.Location = new System.Drawing.Point(175, 140);
+            this.genreLabel.Location = new System.Drawing.Point(27, 140);
             this.genreLabel.Name = "genreLabel";
             this.genreLabel.Size = new System.Drawing.Size(54, 20);
             this.genreLabel.TabIndex = 4;
             this.genreLabel.Text = "Genre";
             // 
-            // TitleTextBox
+            // titleTextBox
             // 
-            this.TitleTextBox.Location = new System.Drawing.Point(268, 36);
-            this.TitleTextBox.Name = "TitleTextBox";
-            this.TitleTextBox.Size = new System.Drawing.Size(383, 26);
-            this.TitleTextBox.TabIndex = 5;
-            // 
-            // authorTextBox
-            // 
-            this.authorTextBox.Location = new System.Drawing.Point(268, 68);
-            this.authorTextBox.Name = "authorTextBox";
-            this.authorTextBox.Size = new System.Drawing.Size(383, 26);
-            this.authorTextBox.TabIndex = 6;
+            this.titleTextBox.Location = new System.Drawing.Point(133, 36);
+            this.titleTextBox.Name = "titleTextBox";
+            this.titleTextBox.Size = new System.Drawing.Size(383, 26);
+            this.titleTextBox.TabIndex = 5;
             // 
             // ISBNTextBox
             // 
-            this.ISBNTextBox.Location = new System.Drawing.Point(268, 100);
+            this.ISBNTextBox.Location = new System.Drawing.Point(133, 100);
             this.ISBNTextBox.Name = "ISBNTextBox";
             this.ISBNTextBox.Size = new System.Drawing.Size(383, 26);
             this.ISBNTextBox.TabIndex = 7;
@@ -99,14 +92,14 @@
             // genreComboBox
             // 
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(268, 132);
+            this.genreComboBox.Location = new System.Drawing.Point(133, 132);
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(383, 28);
             this.genreComboBox.TabIndex = 8;
             // 
             // commitButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(492, 175);
+            this.commitButton.Location = new System.Drawing.Point(357, 166);
             this.commitButton.Name = "commitButton";
             this.commitButton.Size = new System.Drawing.Size(159, 31);
             this.commitButton.TabIndex = 9;
@@ -114,16 +107,24 @@
             this.commitButton.UseVisualStyleBackColor = true;
             this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
             // 
+            // authorDataComboBox
+            // 
+            this.authorDataComboBox.FormattingEnabled = true;
+            this.authorDataComboBox.Location = new System.Drawing.Point(133, 66);
+            this.authorDataComboBox.Name = "authorDataComboBox";
+            this.authorDataComboBox.Size = new System.Drawing.Size(383, 28);
+            this.authorDataComboBox.TabIndex = 10;
+            // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(696, 241);
+            this.ClientSize = new System.Drawing.Size(557, 228);
+            this.Controls.Add(this.authorDataComboBox);
             this.Controls.Add(this.commitButton);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.ISBNTextBox);
-            this.Controls.Add(this.authorTextBox);
-            this.Controls.Add(this.TitleTextBox);
+            this.Controls.Add(this.titleTextBox);
             this.Controls.Add(this.genreLabel);
             this.Controls.Add(this.ISBNLabel);
             this.Controls.Add(this.authorLabel);
@@ -141,10 +142,10 @@
         private System.Windows.Forms.Label authorLabel;
         private System.Windows.Forms.Label ISBNLabel;
         private System.Windows.Forms.Label genreLabel;
-        private System.Windows.Forms.TextBox TitleTextBox;
-        private System.Windows.Forms.TextBox authorTextBox;
+        private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.TextBox ISBNTextBox;
         private System.Windows.Forms.ComboBox genreComboBox;
         private System.Windows.Forms.Button commitButton;
+        private System.Windows.Forms.ComboBox authorDataComboBox;
     }
 }

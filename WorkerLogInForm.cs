@@ -1,12 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace DatabaseApp
 {
@@ -22,14 +14,31 @@ namespace DatabaseApp
 
         private void logInButton_Click(object sender, EventArgs e)
         {
-            communicationHandler.WorkerLogIn(ifDirector);
-        }
+            if (string.IsNullOrEmpty(firstNameTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(lastNameTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(passwordTextBox.Text)) Program.IncorrectDataInformation();
+            else
+            {
+                bool ifSuccessful = communicationHandler.WorkerLogIn(ifDirector, firstNameTextBox.Text, lastNameTextBox.Text,
+                    passwordTextBox.Text);
 
-        private void directorCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if(ifDirector) ifDirector = false;
-            else ifDirector = true;
-        }
+                if (ifSuccessful)
+                {
+                    if (ifDirector)
+                    {
+                        DirectorPanel directorPanel = new DirectorPanel();
+                        directorPanel.Show();
+                    }
+                    else
+                    {
+                        WorkerPanel workerPanel = new WorkerPanel();
+                        workerPanel.Show();
+                    }
+                }
+                else Program.IncorrectDataInformation();
+            }
+
+        } //TODO: Dodac szyfrowanie
 
     }
 }

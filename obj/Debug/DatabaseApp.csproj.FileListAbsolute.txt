@@ -27,3 +27,6 @@ C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseAp
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.History.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.BooksCatalog.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.BorrowedBooks.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.AddAuthor.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.DirectorPanel.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.RemoveAuthor.resources

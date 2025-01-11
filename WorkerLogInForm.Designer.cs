@@ -46,7 +46,6 @@
             this.directorCheckBox.TabIndex = 7;
             this.directorCheckBox.Text = "I\'m director";
             this.directorCheckBox.UseVisualStyleBackColor = true;
-            this.directorCheckBox.CheckedChanged += new System.EventHandler(this.directorCheckBox_CheckedChanged);
             // 
             // firstNameTextBox
             // 

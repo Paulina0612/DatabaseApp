@@ -18,34 +18,35 @@ namespace DatabaseApp
 
 
         // Adding records  
-        public bool AddBook(string title, string authorData, string ISBN, string genreName)
+        public void AddBook(string title, string authorData, string ISBN, string genreName)
         {
-            bool ifDataCorrect = false;
             int genreID = GetGenreID(genreName);
             // TODO: Napisac query
-
-            if (ifDataCorrect) return true;
-            else return false;
         }
-
+        public void AddAuthor(string firstName, string lastName)
+        {
+            // TODO: Napisac query
+        }
         public void AddGenre(string name)
         {
             // TODO: Napisac query
         }
 
-        public void AddWorker()
+        public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, string managerData, string positionName)
         {
             // TODO: Napisac query
         }
 
-        public void ClientRegistration()
+        public void ClientRegistration(string firstName, string lastName, string email)
         {
             // TODO: Napisac query
+            // TODO: Ogarnac ten numer karty 
         }
 
-        public void LendBook()
+        public void LendBook(string clientEmail, int bookID)
         {
             // TODO: Napisac query
+            //TODO: Tu jeszcze trzeba wymyslic jak pobrac, ktory to pracownik dodaje plus te daty
         }
 
 
@@ -60,30 +61,34 @@ namespace DatabaseApp
             return true;
         }
 
-        public bool WorkerLogIn(bool ifDirector)
+        public bool WorkerLogIn(bool ifDirector, string firstName, string lastName, string password)
         {
             // TODO: Napisac query
             // TODO: Ma zwracac true jesli sie uda i fase jesli sie nie uda 
 
-            if (ifDirector) return true;
-            else return true;
+            return true;
         }
 
 
 
 
         // Removing records
-        public void RemoveBook()
+        public void RemoveBook(int bookID)
         {
             // TODO: Napisac query
         }
 
-        public void RemoveGenre()
+        public void RemoveGenre(string name)
         {
             // TODO: Napisac query
         }
 
-        public void RemoveWorker()
+        public void RemoveAuthor(string data)
+        {
+            // TODO: Napisac query
+        }
+
+        public void RemoveWorker(string data)
         {
             // TODO: Napisac query
         }
@@ -92,24 +97,19 @@ namespace DatabaseApp
 
 
         // Other 
-        public void ReturnBook()
+        public void ReturnBook(string email, int bookID, bool ifPenaltyPayed)
         {
+            int clientID = GetClientID(email);
             // TODO: Napisac query
         }
 
-        public int SearchingClient()
+        public void ChangeWorkerSalary(string data, float newSalary)
         {
-            int clientID=0;
-            // TODO: Napisac query, zeby zwracal id klienta 
-            return clientID;
-        }
-
-        public void ChangeWorkerSalary()
-        {
+            int workerID = GetWorkerID(data);
             // TODO: Napisac query
         }
 
-        public void PenaltyPayment()
+        public void PenaltyPayment(string email)
         {
             // TODO: Napisac query
         }
@@ -134,7 +134,7 @@ namespace DatabaseApp
 
             return borrowedBooks;
         }
-        public List<BookData> GetBooksCatalog()
+        public List<BookData> GetBooksCatalog(CatalogFilters filter)
         {
             List<BookData> catalog = new List<BookData>();
 
@@ -149,6 +149,76 @@ namespace DatabaseApp
             //TODO: Pobrac id po name
 
             return ID;
+        }
+        public int GetPositionID(string name)
+        {
+            int ID = 0;
+            //TODO: Pobrac id po name
+
+            return ID;
+        }
+        public int GetAuthorID(string data)
+        {
+            int ID = 0;
+            //TODO: Pobrac id po name
+
+            return ID;
+        }
+        public int GetWorkerID(string data)
+        {
+            int ID = 0;
+            //TODO: Pobrac id po name
+
+            return ID;
+        }
+        public int GetLendID(int clientID, int bookID)
+        {
+            int ID = 0;
+            //TODO: Pobrac id po name
+
+            return ID;
+        }
+        public int GetClientID(string email)
+        {
+            int ID = 0;
+            //TODO: Pobrac id po name
+
+            return ID;
+        }
+        public float GetWorkerSalary(string data)
+        {
+            int ID = GetWorkerID(data);
+            //TODO: Pobrac wyplate po name
+
+            return ID;
+        }
+        public bool IsBookAvailable(int ID)
+        {
+            //TODO: Sprawdzic, czy ksiazka jest dostepna
+
+            return true;
+
+        }
+        public bool IsClientInDatabase(int ID)
+        {
+            //TODO: Sprawdzic, czy klient jest w bazie
+
+            return true;
+        }
+        public bool IsBookInDatabase(int id)
+        {
+            //TODO: Sprawdzic, czy klient jest w bazie
+
+            return true;
+        }
+        public bool IsBookBorrowedByClient(int clientID, int bookID)
+        {
+            bool ifBookInDatabase = IsBookInDatabase(bookID);
+            bool ifBookBorrowedByClient = true;
+            //TODO: Sprawdzic, czy klient wypozyczyl ksiazke
+
+            if (ifBookInDatabase && ifBookBorrowedByClient) return true;
+            else return false;
         }
     }
 }

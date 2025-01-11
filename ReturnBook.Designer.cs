@@ -87,6 +87,7 @@
             this.penaltyCheckBox.TabIndex = 5;
             this.penaltyCheckBox.Text = "Penalty payed";
             this.penaltyCheckBox.UseVisualStyleBackColor = true;
+            this.penaltyCheckBox.CheckedChanged += new System.EventHandler(this.penaltyCheckBox_CheckedChanged);
             // 
             // ReturnBook
             // 

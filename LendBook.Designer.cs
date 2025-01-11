@@ -54,12 +54,13 @@
             // 
             // catalogButton
             // 
-            this.catalogButton.Location = new System.Drawing.Point(49, 80);
+            this.catalogButton.Location = new System.Drawing.Point(49, 74);
             this.catalogButton.Name = "catalogButton";
             this.catalogButton.Size = new System.Drawing.Size(142, 36);
             this.catalogButton.TabIndex = 2;
             this.catalogButton.Text = "Catalog";
             this.catalogButton.UseVisualStyleBackColor = true;
+            this.catalogButton.Click += new System.EventHandler(this.catalogButton_Click);
             // 
             // bookIDLabel
             // 

@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DatabaseApp
@@ -19,7 +12,14 @@ namespace DatabaseApp
 
         private void commitButton_Click(object sender, EventArgs e)
         {
-
+            if (string.IsNullOrEmpty(clientEmailTextBox.Text) && 
+                communicationHandler.IsClientInDatabase(communicationHandler.GetClientID(clientEmailTextBox.Text))) 
+                Program.IncorrectDataInformation();
+            else
+            {
+                communicationHandler.PenaltyPayment(clientEmailTextBox.Text);
+                MessageBox.Show("Operation successful.");
+            }
         }
     }
 }
