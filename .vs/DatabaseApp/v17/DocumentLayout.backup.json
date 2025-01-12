@@ -1,14 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\",
+  "WorkspaceRootPath": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\clientloginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:clientloginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\48730\\source\\repos\\databaseapp\\sqlcommunicationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:sqlcommunicationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\clientloginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:clientloginform.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|C:\\Users\\48730\\source\\repos\\DatabaseApp\\bookdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:bookdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|C:\\Users\\48730\\source\\repos\\DatabaseApp\\catalogfilters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:catalogfilters.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,36 +22,60 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 6,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:128:0:{116d2292-e37d-41cd-a077-ebacac4c8cc4}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:129:0:{1fc202d4-d401-403c-9834-5b218574bb67}"
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ClientLogInForm.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\ClientLogInForm.cs",
-              "RelativeDocumentMoniker": "ClientLogInForm.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\ClientLogInForm.cs*",
-              "RelativeToolTip": "ClientLogInForm.cs*",
-              "ViewState": "AgIAABMAAAAAAAAAAAAswCIAAAAhAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "CatalogFilters.cs",
+              "DocumentMoniker": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\CatalogFilters.cs",
+              "RelativeDocumentMoniker": "CatalogFilters.cs",
+              "ToolTip": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\CatalogFilters.cs",
+              "RelativeToolTip": "CatalogFilters.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T20:46:24.208Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-12T19:35:52.511Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ClientLogInForm.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\ClientLogInForm.cs",
-              "RelativeDocumentMoniker": "ClientLogInForm.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\ClientLogInForm.cs [Design]*",
-              "RelativeToolTip": "ClientLogInForm.cs [Design]*",
+              "Title": "BookData.cs",
+              "DocumentMoniker": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\BookData.cs",
+              "RelativeDocumentMoniker": "BookData.cs",
+              "ToolTip": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\BookData.cs",
+              "RelativeToolTip": "BookData.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-11T20:42:09Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-01-12T19:19:20.363Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "SQLCommunicationHandler.cs",
+              "DocumentMoniker": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\SQLCommunicationHandler.cs",
+              "RelativeDocumentMoniker": "SQLCommunicationHandler.cs",
+              "ToolTip": "C:\\Users\\48730\\source\\repos\\DatabaseApp\\SQLCommunicationHandler.cs",
+              "RelativeToolTip": "SQLCommunicationHandler.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAAACcAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-01-12T15:12:42.65Z",
+              "EditorCaption": ""
             }
           ]
         }

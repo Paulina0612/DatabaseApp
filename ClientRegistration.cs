@@ -18,7 +18,7 @@ namespace DatabaseApp
             else
             {
                 communicationHandler.ClientRegistration(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text);
-                MessageBox.Show("Registration successful.")
+                MessageBox.Show("Registration successful.");
             }
         }
     }

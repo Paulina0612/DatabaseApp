@@ -1,4 +1,6 @@
-﻿namespace DatabaseApp
+﻿using System;
+
+namespace DatabaseApp
 {
     partial class WorkerPanel
     {
@@ -193,6 +195,11 @@
             this.ResumeLayout(false);
             this.PerformLayout();
 
+        }
+
+        private void searchForBooksButton_Click_1(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         #endregion
