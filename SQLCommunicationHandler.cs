@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
@@ -58,11 +59,11 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Książka została dodana.");
+                Console.WriteLine("Ksiazka została dodana.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd dodawania książki: {ex.Message}");
+                Console.WriteLine($"Blad dodawania ksiązki: {ex.Message}");
             }
         }
         public void AddAuthor(string firstName, string lastName)
@@ -81,7 +82,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd dodawania autora: {ex.Message}");
+                Console.WriteLine($"Blad dodawania autora: {ex.Message}");
             }
         }
         public void AddGenre(string name)
@@ -98,7 +99,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("$Blad dodawania gatunku: {ex.Message}");
+                Console.WriteLine($"Blad dodawania gatunku: {ex.Message}");
             }
         }
 
@@ -128,7 +129,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                    Console.WriteLine("$Blad dodawania pracownika: {ex.Message}");
+                    Console.WriteLine($"Blad dodawania pracownika: {ex.Message}");
             }
         }
 
@@ -165,7 +166,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd podczas dodawania klienta: {ex.Message}");
+                Console.WriteLine($"Blad podczas dodawania klienta: {ex.Message}");
             }
         }
 
@@ -215,11 +216,11 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Wypożyczenie zostało dodane.");
+                Console.WriteLine("Wypozyczenie zostalo dodane.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd wypożyczenia książki: {ex.Message}");
+                Console.WriteLine($"Blad wypożyczenia ksiazki: {ex.Message}");
             }
             //TODO: Tu jeszcze trzeba wymyslic jak pobrac, ktory to pracownik dodaje plus te daty
         }
@@ -246,7 +247,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd logowania klienta: {ex.Message}");
+                Console.WriteLine($"Blad logowania klienta: {ex.Message}");
                 return false;
             }
         }
@@ -268,7 +269,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd logowania pracownika: {ex.Message}");
+                Console.WriteLine($"Blad logowania pracownika: {ex.Message}");
                 return false;
             }
         }
@@ -412,7 +413,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad podczas realizacji platności za kare: {ex.Message}");
+                Console.WriteLine($"Blad podczas realizacji platnosci za kare: {ex.Message}");
             }
         }
 
@@ -458,7 +459,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd pobierania historii: {ex.Message}");
+                Console.WriteLine($"Blad pobierania historii: {ex.Message}");
             }
 
             return history;
@@ -501,7 +502,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Błąd pobierania wypożyczonych książek: {ex.Message}");
+                Console.WriteLine($"Blad pobierania wypozyczonych ksiazek: {ex.Message}");
             }
 
             return borrowedBooks;
@@ -518,7 +519,7 @@ namespace DatabaseApp
 
         public int GetGenreID(string genreName)
         {
-            string query = "SELECT GatunekID FROM Gatunki WHERE Nazwa_gatunku = @GenreName";
+            string query = "SELECT ID FROM Gatunki WHERE Nazwa_gatunku = @GenreName";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
                 command.Parameters.AddWithValue("@GenreName", genreName);
@@ -536,7 +537,6 @@ namespace DatabaseApp
         }
         public int GetAuthorID(string data)
         {
-            int ID = 0;
             string query = "SELECT ID FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
             using (MySqlCommand command = new MySqlCommand(query, connection))
             {
@@ -555,10 +555,30 @@ namespace DatabaseApp
         }
         public int GetLendID(int clientID, int bookID)
         {
-            int ID = 0;
-            //TODO: Pobrac id po name
-
-            return ID;
+            try
+            {
+                string query = "SELECT ID FROM Wypozyczenia WHERE KlienciID = @KlientID AND Katalog_ksiazekID = @KsiazkaID";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@KlientID", clientID);
+                    command.Parameters.AddWithValue("@KsiazkaID", bookID);
+                    object result = command.ExecuteScalar();
+                    if(result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono wypozyczenia dla podanych danych");
+                        return -1;
+                    }
+                }
+            }
+            catch(MySqlException ex)
+            {
+                Console.WriteLine($"Blad sprawdzania ID wypozyczenia {ex.Message}");
+                return 0;
+            }
         }
         public int GetClientID(string email)
         {
@@ -571,38 +591,131 @@ namespace DatabaseApp
         }
         public float GetWorkerSalary(string data)
         {
-            int ID = GetWorkerID(data);
-            //TODO: Pobrac wyplate po name
-
-            return ID;
+            try
+            {
+                int ID = GetWorkerID(data);
+                string query = "SELECT SALARY FROM Pracownik WHERE ID == @ID";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", ID);
+                    object result = command.ExecuteScalar();
+                    if(result != DBNull.Value)
+                    {
+                        return Convert.ToSingle(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono pracownika z podanym ID");
+                        return 0;
+                    }
+                }
+            }
+            catch(MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania wyplaty pracownika: {ex.Message}");
+                return 0;
+            }
         }
         public bool IsBookAvailable(int ID)
         {
-            //TODO: Sprawdzic, czy ksiazka jest dostepna
-
-            return true;
-
+            try
+            {
+                string query = "SELECT Stan_magazynowy_ksiazki FROM Katalog_ksiazek WHERE KsiazkiID = @KsiazkiID";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@KsiazkiID", ID);
+                    object result = command.ExecuteScalar();
+                    if (result != null && result.ToString() == "dostepna")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad sprawdzania dostepnosci ksiazki{ex.Message}");
+                return false;
+            }
         }
         public bool IsClientInDatabase(int ID)
         {
-            //TODO: Sprawdzic, czy klient jest w bazie
-
-            return true;
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Klienci WHERE ID = @ID";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", ID);
+                    object result = command.ExecuteScalar();
+                    if(result != null && Convert.ToInt32(result) > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch(MySqlException ex)
+            {
+                Console.WriteLine($"Blad sprawdzania czy klient jest w bazie {ex.Message}");
+                return false;
+            }
         }
-        public bool IsBookInDatabase(int id)
+        public bool IsBookInDatabase(int ID)
         {
-            //TODO: Sprawdzic, czy klient jest w bazie
-
-            return true;
+            try
+            {
+                string query = "SELECT  COUNT(*) FROM Ksiazki WHERE ID = @ID";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@ID", ID);
+                    object result = command.ExecuteScalar();
+                    if(result != null && Convert.ToInt32(result) > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad sprawdzania dostepnosci ksiazki {ex.Message}");
+                return false;
+            }
         }
         public bool IsBookBorrowedByClient(int clientID, int bookID)
         {
-            bool ifBookInDatabase = IsBookInDatabase(bookID);
-            bool ifBookBorrowedByClient = true;
-            //TODO: Sprawdzic, czy klient wypozyczyl ksiazke
-
-            if (ifBookInDatabase && ifBookBorrowedByClient) return true;
-            else return false;
+            try
+            {
+                string query = "SELECT COUNT(*) FROM Wypozyczenia WHERE KlienciID = @KlientID AND Katalog_ksiazekID = @KsiazkaID ";
+                using (MySqlCommand command = new MySqlCommand(@query, connection))
+                {
+                    command.Parameters.AddWithValue("@KlientID", clientID);
+                    command.Parameters.AddWithValue("@KsiazkaID", bookID);
+                    object result = command.ExecuteScalar();
+                    if (result != null && Convert.ToInt32(result) > 0)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad sprawdzania czy ksiazka jest wypozyczona {ex.Message}");
+                return false;
+            }
         }
     }
 }
