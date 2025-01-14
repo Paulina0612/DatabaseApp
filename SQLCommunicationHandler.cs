@@ -2,11 +2,13 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Asn1.X509;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
@@ -186,11 +188,20 @@ namespace DatabaseApp
         // Metoda pobierająca ostatni numer karty z bazy danych (do inkrementacji)
         private int GetLastCardNumber()
         {
-            string query = "SELECT IFNULL(MAX(CAST(Numer_karty AS UNSIGNED)), 0) FROM Klienci";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                return Convert.ToInt32(command.ExecuteScalar());
+                string query = "SELECT IFNULL(MAX(CAST(Numer_karty AS UNSIGNED)), 0) FROM Klienci";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    return Convert.ToInt32(command.ExecuteScalar());
+                }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania ostatniego numeru karty {ex.Message}");
+                return -1;
+            }
+
         }
 
         // Metoda maskująca numer karty
@@ -220,7 +231,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad wypożyczenia ksiazki: {ex.Message}");
+                Console.WriteLine($"Blad wypozyczenia ksiazki: {ex.Message}");
             }
             //TODO: Tu jeszcze trzeba wymyslic jak pobrac, ktory to pracownik dodaje plus te daty
         }
@@ -519,38 +530,108 @@ namespace DatabaseApp
 
         public int GetGenreID(string genreName)
         {
-            string query = "SELECT ID FROM Gatunki WHERE Nazwa_gatunku = @GenreName";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@GenreName", genreName);
-                return Convert.ToInt32(command.ExecuteScalar());
+                string query = "SELECT ID FROM Gatunki WHERE Nazwa_gatunku = @GenreName";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@GenreName", genreName);
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono gatunku");
+                        return 0;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania ID gatunku {ex.Message}");
+                return -1;
             }
         }
         public int GetPositionID(string name)
         {
-            string query = "SELECT ID FROM Stanowisko WHERE Nazwa_stanowiska = @Name";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@Name", name);
-                return Convert.ToInt32(command.ExecuteScalar());
+                string query = "SELECT ID FROM Stanowisko WHERE Nazwa_stanowiska = @Name";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", name);
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono ID stanowiska");
+                        return 0;
+                    }
+                }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania ID stanowiska {ex.Message}");
+                return -1;
+            }
+
         }
         public int GetAuthorID(string data)
         {
-            string query = "SELECT ID FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@Data", data);
-                return Convert.ToInt32(command.ExecuteScalar());
+                string query = "SELECT ID FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Data", data);
+                    object result = command.ExecuteScalar();
+                    if(result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono ID autora");
+                        return 0;
+                    }
+                }
             }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania ID autora {ex.Message}");
+                return -1;
+            }
+
         }
         public int GetWorkerID(string data)
         {
-            string query = "SELECT ID FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@Data", data);
-                return Convert.ToInt32(command.ExecuteScalar());
+                string query = "SELECT ID FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Data", data);
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                            return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono ID pracownika");
+                        return 0;
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania ID pracownika {ex.Message}");
+                return -1;
             }
         }
         public int GetLendID(int clientID, int bookID)
@@ -582,11 +663,28 @@ namespace DatabaseApp
         }
         public int GetClientID(string email)
         {
-            string query = "SELECT ID FROM Klienci WHERE Adres_e_mail = @Email";
-            using (MySqlCommand command = new MySqlCommand(query, connection))
+            try
             {
-                command.Parameters.AddWithValue("@Email", email);
-                return Convert.ToInt32(command.ExecuteScalar());
+                string query = "SELECT ID FROM Klienci WHERE Adres_e_mail = @Email";
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Email", email);
+                    object result = command.ExecuteScalar();
+                    if (result != null)
+                    {
+                        return Convert.ToInt32(result);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Nie znaleziono ID klienta");
+                        return 0;
+                    }
+                }
+            }
+            catch(MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania ID klienta {ex.Message}");
+                return -1;
             }
         }
         public float GetWorkerSalary(string data)
