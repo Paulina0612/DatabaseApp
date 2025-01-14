@@ -17,12 +17,13 @@ namespace DatabaseApp
     public class SQLCommunicationHandler 
     {
         private MySqlConnection connection;
+        public static int LoggedWorkerID = 0; // zmienna globalna ustawiana przez logującego się pracownika
 
         public SQLCommunicationHandler() 
         {
             try
             {
-                // Wstaw tu swoje dane testując
+                // Wstaw tu swoje dane testując, generalnie jest to niebezpieczne by się logować jako root ale to projekt studencki
                 string connectionString = "Server=localhost;Database=Biblioteka;User Id=root;Password=root_password;";
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
@@ -218,12 +219,12 @@ namespace DatabaseApp
             try
             {
                 int clientID = GetClientID(clientEmail);
-                string query = "CALL DodajWypozyczenie(@KlientID, @KsiazkiID, @PracownikID, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY))";
+                string query = "CALL DodajWypozyczenie(@ClientID, @BookID, @WorkerID, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY))";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ClientID", clientID);
                     command.Parameters.AddWithValue("@BookID", bookID);
-                    command.Parameters.AddWithValue("@WorkerID", GetCurrentWorkerID());
+                    command.Parameters.AddWithValue("@WorkerID", LoggedWorkerID);
                     command.ExecuteNonQuery();
                 }
 
@@ -233,14 +234,8 @@ namespace DatabaseApp
             {
                 Console.WriteLine($"Blad wypozyczenia ksiazki: {ex.Message}");
             }
-            //TODO: Tu jeszcze trzeba wymyslic jak pobrac, ktory to pracownik dodaje plus te daty
         }
 
-        private int GetCurrentWorkerID()
-        {
-            //TODO: No ten tego, jakby to zrobic zeby dzialalo, na razie niech zwraca 1
-            return 1;
-        }
 
 
         // Logging in 
@@ -253,7 +248,20 @@ namespace DatabaseApp
                 {
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@CardNumber", cardNumber);
-                    return Convert.ToInt32(command.ExecuteScalar()) > 0;
+                    if (Convert.ToInt32(command.ExecuteScalar()) > 0)
+                    {
+                        string clientConnectionString = "Server=localhost;Database=Biblioteka;Uid=Klient;Pwd=klient_password;";
+                        connection = new MySqlConnection(clientConnectionString);
+                        connection.Open();
+
+                        Console.WriteLine("Zalogowano jako Klient.");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bledny email lub numer karty.");
+                        return false;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -268,14 +276,39 @@ namespace DatabaseApp
             try
             {
                 string query = ifDirector ?
-                    "SELECT COUNT(*) FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password AND Kierownik_ID IS NULL" :
-                    "SELECT COUNT(*) FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
+                    "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password AND Kierownik_ID IS NULL" :
+                    "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
+
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@FirstName", firstName);
                     command.Parameters.AddWithValue("@LastName", lastName);
                     command.Parameters.AddWithValue("@Password", password);
-                    return Convert.ToInt32(command.ExecuteScalar()) > 0;
+                    object result = command.ExecuteScalar();
+
+                    if (result != null)
+                    {
+                        LoggedWorkerID = Convert.ToInt32(result);
+                        if (ifDirector)
+                        {
+                            string directorConnectionString = "Server=localhost;Database=Biblioteka;Uid=Kierownik;Pwd=kierownik_password;";
+                            connection = new MySqlConnection(directorConnectionString);
+                        }
+                        else
+                        {
+                            string workerConnectionString = "Server=localhost;Database=Biblioteka;Uid=Pracownik;Pwd=pracownik_password;";
+                            connection = new MySqlConnection(workerConnectionString);
+                        }
+
+                        connection.Open();
+                        Console.WriteLine(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
+                        return true;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Bledne dane logowania.");
+                        return false;
+                    }
                 }
             }
             catch (MySqlException ex)
@@ -284,6 +317,7 @@ namespace DatabaseApp
                 return false;
             }
         }
+
 
 
 
@@ -523,7 +557,50 @@ namespace DatabaseApp
         {
             List<BookData> catalog = new List<BookData>();
 
-            //TODO: Plus tu bedzie trzeba dodac jakies parametry, zeby filtrowac katalog
+            try
+            {
+                string query = @"
+        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
+               CASE WHEN w.Data_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
+        FROM Ksiazki k
+        LEFT JOIN Wypozyczenia w ON k.ID = w.KsiazkiID AND w.Data_zwrotu IS NULL
+        JOIN Autor a ON k.AutorID = a.ID
+        JOIN Gatunki g ON k.GatunekID = g.ID
+        WHERE (@Genre IS NULL OR g.Nazwa_gatunku = @Genre)
+        AND (@AuthorFirstName IS NULL OR a.Imie = @AuthorFirstName)
+        AND (@AuthorLastName IS NULL OR a.Nazwisko = @AuthorLastName)
+        AND (@Title IS NULL OR k.Tytul LIKE @Title)";
+
+                using (MySqlCommand command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Genre", filter.Genre ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@AuthorFirstName", filter.AuthorFirstName ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@AuthorLastName", filter.AuthorLastName ?? (object)DBNull.Value);
+                    command.Parameters.AddWithValue("@Title", filter.Title != null ? $"%{filter.Title}%" : (object)DBNull.Value);
+
+                    using (MySqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BookData book = new BookData
+                            {
+                                ID = reader.GetInt32("ID"),
+                                title = reader.GetString("Tytul"),
+                                authorFirstName = reader.GetString("Imie"),
+                                authorLastName = reader.GetString("Nazwisko"),
+                                genreName = reader.GetString("Nazwa_gatunku"),
+                                ISBN = reader.GetString("ISBN"),
+                                ifAvailable = reader.GetBoolean("ifAvailable")
+                            };
+                            catalog.Add(book);
+                        }
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine($"Blad pobierania katalogu ksiazek: {ex.Message}");
+            }
 
             return catalog;
         }
