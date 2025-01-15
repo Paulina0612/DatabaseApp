@@ -22,7 +22,6 @@ namespace DatabaseApp
             else
             {
                 communicationHandler.AddBook(titleTextBox.Text, authorDataComboBox.Text, ISBNTextBox.Text, genreComboBox.Text);
-                MessageBox.Show("Book successfully added. ");
             }
         }
 

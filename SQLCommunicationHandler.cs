@@ -7,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Asn1.X509;
@@ -24,22 +25,13 @@ namespace DatabaseApp
             try
             {
                 // Wstaw tu swoje dane testując, generalnie jest to niebezpieczne by się logować jako root ale to projekt studencki
-                string connectionString = "Server=localhost;Database=Biblioteka;User Id=root;Password=root_password;";
+                string connectionString = "Server=localhost;Database=Biblioteka;User Id=Kierownik;Password=kierownik_password;";
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
-                Console.WriteLine("Polaczenie z baza danych zostało otwarte.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad polaczenia z baza danych: {ex.Message}");
-            }
-            finally
-            {
-                if (connection != null && connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                    Console.WriteLine("Polaczenie z baza danych zostało zamkniete.");
-                }
+                MessageBox.Show("Connected to database failed.\n" + ex.Message);
             }
         }
 
@@ -61,12 +53,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@ISBN", ISBN);
                     command.ExecuteNonQuery();
                 }
-
-                Console.WriteLine("Ksiazka została dodana.");
+                MessageBox.Show("Book successfully added. ");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad dodawania ksiązki: {ex.Message}");
+                MessageBox.Show("Failed to add book. ");
             }
         }
         public void AddAuthor(string firstName, string lastName)
@@ -106,7 +97,7 @@ namespace DatabaseApp
             }
         }
 
-        public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, string managerData, string positionName, string haslo)
+        public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, string managerData, string positionName, string password)
         {
             try
             {
@@ -124,15 +115,17 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@PESEL", PESEL);
                     command.Parameters.AddWithValue("@Salary", salary);
                     command.Parameters.AddWithValue("@ManagerID", managerID);
-                    command.Parameters.AddWithValue("@PositionID", positionID);
-                    command.Parameters.AddWithValue("@Password", haslo);
+                    command.Parameters.AddWithValue("@PositionID", 1);
+                    command.Parameters.AddWithValue("@Password", password);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Pracownik zostal dodany");
+                MessageBox.Show("Pracownik zostal dodany");
+                //..Console.WriteLine();
             }
             catch (MySqlException ex)
             {
-                    Console.WriteLine($"Blad dodawania pracownika: {ex.Message}");
+                MessageBox.Show($"Blad dodawania pracownika: {ex.Message}");
+                    //Console.WriteLine($"Blad dodawania pracownika: {ex.Message}");
             }
         }
 

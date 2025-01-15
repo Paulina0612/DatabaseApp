@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Web;
+using System.Text;
 using System.Windows.Forms;
 
 namespace DatabaseApp
@@ -16,6 +18,20 @@ namespace DatabaseApp
             bool ifPESELNumeric = int.TryParse(PESELTextBox.Text, out n);
             bool ifSalaryNumeric = float.TryParse(salaryTextBox.Text, out float m);
 
+            // Generating password
+            //string password = System.Web.Security.
+            string chars = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            StringBuilder sb = new StringBuilder();
+            Random rnd = new Random();
+
+            for (int i = 0; i < 8; i++)
+            {
+                int index = rnd.Next(chars.Length);
+                sb.Append(chars[index]);
+            }
+
+            string password = sb.ToString();
+
             if (string.IsNullOrEmpty(firstNameTextBox.Text)) Program.IncorrectDataInformation();
             else if (string.IsNullOrEmpty(lastNameTextBox.Text)) Program.IncorrectDataInformation();
             else if (string.IsNullOrEmpty(phoneNumberTextBox.Text) && ifPhoneNumberNumeric && phoneNumberTextBox.Text.Length != 9)
@@ -29,8 +45,8 @@ namespace DatabaseApp
             {
                 communicationHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text, 
                     emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), managerComboBox.Text, 
-                    positionComboBox.Text);
-                MessageBox.Show("Worker successfully added. ");
+                    positionComboBox.Text, password);
+                MessageBox.Show("Worker successfully added.\nGeneated password is: " + password);
             }
         }
     }

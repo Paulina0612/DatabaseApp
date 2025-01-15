@@ -229,7 +229,6 @@
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AddWorker";
             this.Text = "EmployWorker";
-            this.Load += new System.EventHandler(this.AddWorker_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
