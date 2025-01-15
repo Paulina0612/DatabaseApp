@@ -33,6 +33,10 @@ namespace DatabaseApp
             {
                 MessageBox.Show("Connected to database failed.\n" + ex.Message);
             }
+            finally
+            {
+                //connection.Close();
+            }
         }
 
 
