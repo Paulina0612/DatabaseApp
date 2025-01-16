@@ -97,6 +97,7 @@
             this.Controls.Add(this.dataGridView2);
             this.Name = "BorrowedBooks";
             this.Text = "BorrowedBooks";
+            this.Load += new System.EventHandler(this.BorrowedBooks_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             this.ResumeLayout(false);
 
