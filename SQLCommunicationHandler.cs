@@ -393,7 +393,14 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad usuwania autora: {ex.Message}");
+                if (ex.Number == 1451)
+                {
+                    MessageBox.Show("Aby usunac autora najpierw nalezy usunac wszystkie jego ksiazki.");
+                }
+                else
+                {
+                    MessageBox.Show($"Blad usuwania autora: {ex.Message}");
+                }
             }
         }
 
