@@ -15,27 +15,36 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DatabaseApp
 {
-    public class SQLCommunicationHandler 
+    public class SQLCommunicationHandler
     {
         private MySqlConnection connection;
+
         public static int LoggedWorkerID = 0; // zmienna globalna ustawiana przez logującego się pracownika
 
-        public SQLCommunicationHandler() 
+        public SQLCommunicationHandler()
+        {
+            InitializeConnection("Pracownik", "pracownik_password");
+        }
+
+        // Metoda do inicjalizacji połączenia z określonym użytkownikiem
+        private void InitializeConnection(string userId, string password)
         {
             try
             {
-                // Wstaw tu swoje dane testując, generalnie jest to niebezpieczne by się logować jako root ale to projekt studencki
-                string connectionString = "Server=localhost;Database=Biblioteka;User Id=Kierownik;Password=kierownik_password;";
+                // Zamknięcie starego połączenia, jeżeli istnieje
+                if (connection != null && connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+
+                // Tworzymy nowe połączenie z użytkownikiem'
+                string connectionString = $"Server=localhost;Database=Biblioteka;User Id={userId};Password={password};";
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Connected to database failed.\n" + ex.Message);
-            }
-            finally
-            {
-                //connection.Close();
+                MessageBox.Show($"Connection to database failed.\n{ex.Message}");
             }
         }
 
@@ -87,7 +96,7 @@ namespace DatabaseApp
         {
             try
             {
-                string query = "INSERT INTO Gatunki (Nazwa_garunku) VALUES (@Name)";
+                string query = "INSERT INTO Gatunki (Nazwa_gatunku) VALUES (@Name)";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", name);
@@ -131,7 +140,7 @@ namespace DatabaseApp
             }
         }
 
-        public void ClientRegistration(string firstName, string lastName, string email) // to nie działa w bazie, tu kod jest ok
+        public void ClientRegistration(string firstName, string lastName, string email)
         {
             float balance = 0;
             string cardNumber = string.Empty;  // Zmienna na numer karty, początkowo pusta
@@ -241,33 +250,44 @@ namespace DatabaseApp
         {
             try
             {
+                // Zapytanie o użytkownika
                 string query = "SELECT COUNT(*) FROM Klienci WHERE Adres_e_mail = @Email AND Numer_karty = @CardNumber";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@CardNumber", cardNumber);
+
+                    // Sprawdzamy, czy użytkownik istnieje
                     if (Convert.ToInt32(command.ExecuteScalar()) > 0)
                     {
-                        string clientConnectionString = "Server=localhost;Database=Biblioteka;Uid=Klient;Pwd=klient_password;";
-                        connection = new MySqlConnection(clientConnectionString);
-                        connection.Open();
+                        // Zamykanie poprzedniego połączenia, jeśli jesteśmy już połączeni jako Kierownik
+                        if (connection.State == System.Data.ConnectionState.Open)
+                        {
+                            connection.Close(); // Zamykamy połączenie 'Kierownik'
+                        }
+
+                        // Nowe połączenie jako 'Klient'
+                        InitializeConnection("Klient", "klient_password"); // Tworzymy nowe połączenie
 
                         MessageBox.Show("Zalogowano jako Klient.");
                         return true;
                     }
                     else
                     {
-                        MessageBox.Show("Bledny email lub numer karty.");
+                        MessageBox.Show("Błędny email lub numer karty.");
                         return false;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad logowania klienta: {ex.Message}");
+                MessageBox.Show($"Błąd logowania klienta: {ex.Message}");
                 return false;
             }
         }
+
+
+
 
         public bool WorkerLogIn(bool ifDirector, string firstName, string lastName, string password)
         {
@@ -471,16 +491,19 @@ namespace DatabaseApp
             try
             {
                 string query = @"
-            SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, 
-                   CASE WHEN w.Data_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
-            FROM Wypozyczenia w
-            JOIN Klienci c ON w.KlientID = c.ID
-            JOIN Ksiazki k ON w.KsiazkiID = k.ID
-            JOIN Autor a ON k.AutorID = a.ID
-            JOIN Gatunki g ON k.GatunekID = g.ID";
+        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, 
+               CASE WHEN w.Data_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
+        FROM Wypozyczenia w
+        JOIN Klienci c ON w.KlientID = c.ID
+        JOIN Ksiazki k ON w.KsiazkiID = k.ID
+        JOIN Autor a ON k.AutorID = a.ID
+        JOIN Gatunki g ON k.GatunekID = g.ID
+        WHERE c.ID = @ClientId";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@ClientId", LoggedWorkerID);
+
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())

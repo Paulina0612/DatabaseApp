@@ -12,6 +12,7 @@ namespace DatabaseApp
 {
     public partial class ClientPanel : Forms
     {
+        private int clientId;
         public ClientPanel()
         {
             InitializeComponent();
