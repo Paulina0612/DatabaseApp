@@ -114,6 +114,10 @@ namespace DatabaseApp
         {
             try
             {
+                if (connection == null || connection.State != System.Data.ConnectionState.Open)
+                {
+                    InitializeConnection("Kierownik", "kierownik_password"); // Kierownik ma uprawnienia do dodawania pracowników
+                }
                 int managerID = GetWorkerID(managerData);
                 int positionID = GetPositionID(positionName);
 
@@ -691,6 +695,10 @@ namespace DatabaseApp
         {
             try
             {
+                if (connection == null || connection.State != System.Data.ConnectionState.Open)
+                {
+                    InitializeConnection("Kierownik", "kierownik_password");
+                }
                 string query = "SELECT ID FROM Stanowisko WHERE Nazwa_stanowiska = @Name";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
