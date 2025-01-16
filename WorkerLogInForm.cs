@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Windows.Forms;
 
 namespace DatabaseApp
 {
@@ -41,9 +40,5 @@ namespace DatabaseApp
 
         } //TODO: Dodac szyfrowanie
 
-        private void directorCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            ifDirector = directorCheckBox.Checked;
-        }
     }
 }
