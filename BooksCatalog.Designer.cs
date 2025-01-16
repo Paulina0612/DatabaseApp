@@ -107,6 +107,7 @@
             this.genreComboBox.Name = "genreComboBox";
             this.genreComboBox.Size = new System.Drawing.Size(283, 28);
             this.genreComboBox.TabIndex = 18;
+            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
             // 
             // genreLabel
             // 

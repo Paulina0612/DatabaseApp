@@ -643,10 +643,7 @@ namespace DatabaseApp
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
-                        {
-                            MessageBox.Show(reader.GetString("Nazwa_gatunku"));
                             genres.Add(reader.GetString("Nazwa_gatunku"));
-                        }
                     }
                 }
             }

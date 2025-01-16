@@ -11,6 +11,7 @@ namespace DatabaseApp
         {
             InitializeComponent();
             List<String> genres = new List<String>();
+            genres = communicationHandler.GetGenres();
             foreach (String genre in genres) {
                 MessageBox.Show(genre);
                 genreComboBox.Items.Add(genre);
@@ -30,6 +31,11 @@ namespace DatabaseApp
                 }
                 catch(MySqlException ex) { MessageBox.Show(ex.ToString()); }
             }
+        }
+
+        private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            BooksCatalog_Load(sender, e);
         }
     }
 }
