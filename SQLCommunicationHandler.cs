@@ -23,7 +23,7 @@ namespace DatabaseApp
 
         public SQLCommunicationHandler()
         {
-            InitializeConnection("Pracownik", "pracownik_password");
+            //InitializeConnection("Pracownik", "pracownik_password");
         }
 
         // Metoda do inicjalizacji połączenia z określonym użytkownikiem
@@ -293,6 +293,17 @@ namespace DatabaseApp
         {
             try
             {
+                // Inicjalizacja połączenia w zależności od typu logowania
+                if (ifDirector)
+                {
+                    InitializeConnection("Kierownik", "kierownik_password");
+                }
+                else
+                {
+                    InitializeConnection("Pracownik", "pracownik_password");
+                }
+
+                // Zapytanie SQL do logowania
                 string query = ifDirector ?
                     "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password AND Kierownik_ID IS NULL" :
                     "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
@@ -302,39 +313,30 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@FirstName", firstName);
                     command.Parameters.AddWithValue("@LastName", lastName);
                     command.Parameters.AddWithValue("@Password", password);
+
                     object result = command.ExecuteScalar();
 
                     if (result != null)
                     {
                         LoggedWorkerID = Convert.ToInt32(result);
-                        if (ifDirector)
-                        {
-                            string directorConnectionString = "Server=localhost;Database=Biblioteka;Uid=Kierownik;Pwd=kierownik_password;";
-                            connection = new MySqlConnection(directorConnectionString);
-                        }
-                        else
-                        {
-                            string workerConnectionString = "Server=localhost;Database=Biblioteka;Uid=Pracownik;Pwd=pracownik_password;";
-                            connection = new MySqlConnection(workerConnectionString);
-                        }
 
-                        connection.Open();
                         MessageBox.Show(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
                         return true;
                     }
                     else
                     {
-                        MessageBox.Show("Bledne dane logowania.");
+                        MessageBox.Show("Błędne dane logowania.");
                         return false;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad logowania pracownika: {ex.Message}");
+                MessageBox.Show($"Błąd logowania pracownika: {ex.Message}");
                 return false;
             }
         }
+
 
 
 
