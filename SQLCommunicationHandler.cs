@@ -76,11 +76,11 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Autor został dodany.");
+                MessageBox.Show("Autor został dodany.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad dodawania autora: {ex.Message}");
+                MessageBox.Show($"Blad dodawania autora: {ex.Message}");
             }
         }
         public void AddGenre(string name)
@@ -93,11 +93,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@Name", name);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Gatunek zostal dodany.");
+                MessageBox.Show("Gatunek zostal dodany.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad dodawania gatunku: {ex.Message}");
+                MessageBox.Show($"Blad dodawania gatunku: {ex.Message}");
             }
         }
 
@@ -109,7 +109,7 @@ namespace DatabaseApp
                 int positionID = GetPositionID(positionName);
 
                 string query = "INSERT INTO Pracownik (Imie, Nazwisko, Numer_Telefonu, Adres_e_mail, PESEL, Wyplata, Kierownik_ID, StanowiskoID, Haslo)" +
-                    "VALUES (@FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, @PositionID, @Password";
+                    "VALUES (@FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, @PositionID, @Password)";
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@FirstName", firstName);
@@ -124,16 +124,14 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
                 MessageBox.Show("Pracownik zostal dodany");
-                //..Console.WriteLine();
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Blad dodawania pracownika: {ex.Message}");
-                    //Console.WriteLine($"Blad dodawania pracownika: {ex.Message}");
             }
         }
 
-        public void ClientRegistration(string firstName, string lastName, string email)
+        public void ClientRegistration(string firstName, string lastName, string email) // to nie działa w bazie, tu kod jest ok
         {
             float balance = 0;
             string cardNumber = string.Empty;  // Zmienna na numer karty, początkowo pusta
@@ -145,7 +143,7 @@ namespace DatabaseApp
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     // Generowanie prostego numeru karty (po prostu inkrementujemy liczbę)
-                    cardNumber = GenerateSimpleCardNumber();
+                    cardNumber = GenerateSimpleCardNumber().Trim();
 
                     // Dodanie parametrów procedury
                     command.Parameters.AddWithValue("@p_Imie", firstName);
@@ -154,19 +152,22 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@p_Naleznosc", balance);
                     command.Parameters.AddWithValue("@p_NumerKarty", cardNumber);
 
+                    // Dodanie ustawienia typu dla parametru NumerKarty
+                    command.Parameters["@p_NumerKarty"].MySqlDbType = MySqlDbType.VarChar;
+
                     // Wykonanie procedury
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Klient został pomyślnie dodany.");
+                MessageBox.Show("Klient został pomyślnie dodany.");
 
                 // Wyświetlenie zamaskowanego numeru karty
                 string maskedCard = MaskCardNumber(cardNumber);
-                Console.WriteLine($"Numer karty klienta: {maskedCard}");
+                MessageBox.Show($"Numer karty klienta: {maskedCard}");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad podczas dodawania klienta: {ex.Message}");
+                MessageBox.Show($"Blad podczas dodawania klienta: {ex.Message}");
             }
         }
 
@@ -196,7 +197,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania ostatniego numeru karty {ex.Message}");
+                MessageBox.Show($"Blad pobierania ostatniego numeru karty {ex.Message}");
                 return -1;
             }
 
@@ -225,11 +226,11 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Wypozyczenie zostalo dodane.");
+                MessageBox.Show("Wypozyczenie zostalo dodane.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad wypozyczenia ksiazki: {ex.Message}");
+                MessageBox.Show($"Blad wypozyczenia ksiazki: {ex.Message}");
             }
         }
 
@@ -251,19 +252,19 @@ namespace DatabaseApp
                         connection = new MySqlConnection(clientConnectionString);
                         connection.Open();
 
-                        Console.WriteLine("Zalogowano jako Klient.");
+                        MessageBox.Show("Zalogowano jako Klient.");
                         return true;
                     }
                     else
                     {
-                        Console.WriteLine("Bledny email lub numer karty.");
+                        MessageBox.Show("Bledny email lub numer karty.");
                         return false;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad logowania klienta: {ex.Message}");
+                MessageBox.Show($"Blad logowania klienta: {ex.Message}");
                 return false;
             }
         }
@@ -298,19 +299,19 @@ namespace DatabaseApp
                         }
 
                         connection.Open();
-                        Console.WriteLine(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
+                        MessageBox.Show(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
                         return true;
                     }
                     else
                     {
-                        Console.WriteLine("Bledne dane logowania.");
+                        MessageBox.Show("Bledne dane logowania.");
                         return false;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad logowania pracownika: {ex.Message}");
+                MessageBox.Show($"Blad logowania pracownika: {ex.Message}");
                 return false;
             }
         }
@@ -330,11 +331,11 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Ksiazka została usunieta.");
+                MessageBox.Show("Ksiazka została usunieta.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad usuwania ksiazki: {ex.Message}");
+                MessageBox.Show($"Blad usuwania ksiazki: {ex.Message}");
             }
 
         }
@@ -350,11 +351,11 @@ namespace DatabaseApp
                     command.ExecuteNonQuery();
                 }
 
-                Console.WriteLine("Gatunek zostal usuniety.");
+                MessageBox.Show("Gatunek zostal usuniety.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad usuwania gatunku: {ex.Message}");
+                MessageBox.Show($"Blad usuwania gatunku: {ex.Message}");
             }
         }
 
@@ -368,11 +369,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@Data", data);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Autor zostal usuniety.");
+                MessageBox.Show("Autor zostal usuniety.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad usuwania autora: {ex.Message}");
+                MessageBox.Show($"Blad usuwania autora: {ex.Message}");
             }
         }
 
@@ -386,11 +387,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@Data", data);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Pracownik zostal usuniety.");
+                MessageBox.Show("Pracownik zostal usuniety.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad usuwania pracownika: {ex.Message}");
+                MessageBox.Show($"Blad usuwania pracownika: {ex.Message}");
             }
         }
 
@@ -411,11 +412,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@IfPenaltyPayed", ifPenaltyPayed);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Ksiazka została zwrocona.");
+                MessageBox.Show("Ksiazka została zwrocona.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad zwracania ksiazki: {ex.Message}");
+                MessageBox.Show($"Blad zwracania ksiazki: {ex.Message}");
             }
 
         }
@@ -432,11 +433,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@WorkerID", workerID);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Wynagrodzenie pracownika zostało zaktualizowane.");
+                MessageBox.Show("Wynagrodzenie pracownika zostało zaktualizowane.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad zmiany wynagrodzenia pracownika: {ex.Message}");
+                MessageBox.Show($"Blad zmiany wynagrodzenia pracownika: {ex.Message}");
             }
         }
 
@@ -451,11 +452,11 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@ClientID", clientID);
                     command.ExecuteNonQuery();
                 }
-                Console.WriteLine("Platnosc za karę została zrealizowana.");
+                MessageBox.Show("Platnosc za karę została zrealizowana.");
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad podczas realizacji platnosci za kare: {ex.Message}");
+                MessageBox.Show($"Blad podczas realizacji platnosci za kare: {ex.Message}");
             }
         }
 
@@ -501,7 +502,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania historii: {ex.Message}");
+                MessageBox.Show($"Blad pobierania historii: {ex.Message}");
             }
 
             return history;
@@ -544,7 +545,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania wypozyczonych ksiazek: {ex.Message}");
+                MessageBox.Show($"Blad pobierania wypozyczonych ksiazek: {ex.Message}");
             }
 
             return borrowedBooks;
@@ -596,7 +597,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania katalogu ksiazek: {ex.Message}");
+                MessageBox.Show($"Blad pobierania katalogu ksiazek: {ex.Message}");
             }
 
             return catalog;
@@ -617,14 +618,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono gatunku");
+                        MessageBox.Show("Nie znaleziono gatunku");
                         return 0;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania ID gatunku {ex.Message}");
+                MessageBox.Show($"Blad pobierania ID gatunku {ex.Message}");
                 return -1;
             }
         }
@@ -643,14 +644,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono ID stanowiska");
+                        MessageBox.Show("Nie znaleziono ID stanowiska");
                         return 0;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania ID stanowiska {ex.Message}");
+                MessageBox.Show($"Blad pobierania ID stanowiska {ex.Message}");
                 return -1;
             }
 
@@ -670,14 +671,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono ID autora");
+                        MessageBox.Show("Nie znaleziono ID autora");
                         return 0;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania ID autora {ex.Message}");
+                MessageBox.Show($"Blad pobierania ID autora {ex.Message}");
                 return -1;
             }
 
@@ -697,14 +698,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono ID pracownika");
+                        MessageBox.Show("Nie znaleziono ID pracownika");
                         return 0;
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania ID pracownika {ex.Message}");
+                MessageBox.Show($"Blad pobierania ID pracownika {ex.Message}");
                 return -1;
             }
         }
@@ -724,14 +725,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono wypozyczenia dla podanych danych");
+                        MessageBox.Show("Nie znaleziono wypozyczenia dla podanych danych");
                         return -1;
                     }
                 }
             }
             catch(MySqlException ex)
             {
-                Console.WriteLine($"Blad sprawdzania ID wypozyczenia {ex.Message}");
+                MessageBox.Show($"Blad sprawdzania ID wypozyczenia {ex.Message}");
                 return 0;
             }
         }
@@ -750,14 +751,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono ID klienta");
+                        MessageBox.Show("Nie znaleziono ID klienta");
                         return 0;
                     }
                 }
             }
             catch(MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania ID klienta {ex.Message}");
+                MessageBox.Show($"Blad pobierania ID klienta {ex.Message}");
                 return -1;
             }
         }
@@ -777,14 +778,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        Console.WriteLine("Nie znaleziono pracownika z podanym ID");
+                        MessageBox.Show("Nie znaleziono pracownika z podanym ID");
                         return 0;
                     }
                 }
             }
             catch(MySqlException ex)
             {
-                Console.WriteLine($"Blad pobierania wyplaty pracownika: {ex.Message}");
+                MessageBox.Show($"Blad pobierania wyplaty pracownika: {ex.Message}");
                 return 0;
             }
         }
@@ -809,7 +810,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad sprawdzania dostepnosci ksiazki{ex.Message}");
+                MessageBox.Show($"Blad sprawdzania dostepnosci ksiazki{ex.Message}");
                 return false;
             }
         }
@@ -834,7 +835,7 @@ namespace DatabaseApp
             }
             catch(MySqlException ex)
             {
-                Console.WriteLine($"Blad sprawdzania czy klient jest w bazie {ex.Message}");
+                MessageBox.Show($"Blad sprawdzania czy klient jest w bazie {ex.Message}");
                 return false;
             }
         }
@@ -859,7 +860,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad sprawdzania dostepnosci ksiazki {ex.Message}");
+                MessageBox.Show($"Blad sprawdzania dostepnosci ksiazki {ex.Message}");
                 return false;
             }
         }
@@ -885,7 +886,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine($"Blad sprawdzania czy ksiazka jest wypozyczona {ex.Message}");
+                MessageBox.Show($"Blad sprawdzania czy ksiazka jest wypozyczona {ex.Message}");
                 return false;
             }
         }

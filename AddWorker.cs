@@ -15,7 +15,7 @@ namespace DatabaseApp
         private void commitButton_Click(object sender, EventArgs e)
         {
             bool ifPhoneNumberNumeric = int.TryParse(phoneNumberTextBox.Text, out int n);
-            bool ifPESELNumeric = int.TryParse(PESELTextBox.Text, out n);
+            bool ifPESELNumeric = long.TryParse(PESELTextBox.Text, out _); // Zmiana z int na long by naprawić problem z długością
             bool ifSalaryNumeric = float.TryParse(salaryTextBox.Text, out float m);
 
             // Generating password
@@ -43,10 +43,18 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(positionComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text, 
-                    emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), managerComboBox.Text, 
-                    positionComboBox.Text, password);
-                MessageBox.Show("Worker successfully added.\nGeneated password is: " + password);
+                try
+                {
+                    communicationHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                        emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), managerComboBox.Text,
+                        positionComboBox.Text, password);
+                    MessageBox.Show("Worker successfully added.\nGenerated password is: " + password);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show($"Error adding worker: {ex.Message}");
+                }
+
             }
         }
     }
