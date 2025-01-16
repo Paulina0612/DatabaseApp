@@ -129,7 +129,6 @@
     <Compile Include="BorrowedBooks.Designer.cs">
       <DependentUpon>BorrowedBooks.cs</DependentUpon>
     </Compile>
-    <Compile Include="CatalogFilters.cs" />
     <Compile Include="ChangeWorkerSalary.cs">
       <SubType>Form</SubType>
     </Compile>

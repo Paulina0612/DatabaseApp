@@ -492,10 +492,10 @@ namespace DatabaseApp
             {
                 string query = @"
         SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, 
-               CASE WHEN w.Data_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
+               CASE WHEN w.Data_spodziewanego_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
         FROM Wypozyczenia w
         JOIN Klienci c ON w.KlientID = c.ID
-        JOIN Ksiazki k ON w.KsiazkiID = k.ID
+        JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
         JOIN Autor a ON k.AutorID = a.ID
         JOIN Gatunki g ON k.GatunekID = g.ID
         WHERE c.ID = @ClientId";
@@ -540,10 +540,10 @@ namespace DatabaseApp
                 string query = @"
             SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, false AS ifAvailable
             FROM Wypozyczenia w
-            JOIN Ksiazki k ON w.KsiazkiID = k.ID
+            JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
             JOIN Autor a ON k.AutorID = a.ID
             JOIN Gatunki g ON k.GatunekID = g.ID
-            WHERE w.Data_zwrotu IS NULL";
+            WHERE w.Data_spodziewanego_zwrotu IS NULL";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
@@ -574,57 +574,83 @@ namespace DatabaseApp
             return borrowedBooks;
         }
 
-        public List<BookData> GetBooksCatalog(CatalogFilters filter)
+        public List<BookData> GetBooksCatalog(string genre)
         {
             List<BookData> catalog = new List<BookData>();
 
             try
             {
+                    string query = @"
+                    SELECT kk.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, kk.Stan_magazynowy_ksiazki,
+                    CASE WHEN w.Katalog_ksiazekID IS NULL THEN 1 ELSE 0 END AS ifAvailable
+                    FROM biblioteka.Katalog_ksiazek kk
+                    JOIN biblioteka.Ksiazki k ON kk.KsiazkiID = k.ID 
+                    LEFT JOIN biblioteka.Wypozyczenia w ON kk.ID = w.Katalog_ksiazekID AND w.Data_spodziewanego_zwrotu IS NULL
+                    JOIN biblioteka.Autor a ON k.AutorID = a.ID
+                    JOIN biblioteka.Gatunki g ON k.GatunekID = g.ID
+                    WHERE (g.Nazwa_gatunku = @Genre)";
+
+                    using (MySqlCommand command = new MySqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@Genre", genre ?? (object)DBNull.Value);
+
+                        using (MySqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                BookData book = new BookData
+                                {
+                                    ID = reader.GetInt32("ID"),
+                                    title = reader.GetString("Tytul"),
+                                    authorFirstName = reader.GetString("Imie"),
+                                    authorLastName = reader.GetString("Nazwisko"),
+                                    genreName = reader.GetString("Nazwa_gatunku"),
+                                    ISBN = reader.GetString("ISBN"),
+                                    ifAvailable = reader.GetBoolean("ifAvailable")
+                                };
+                                catalog.Add(book);
+                            }
+                        }
+                    }
+                
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error fetching books catalog: {ex.Message}");
+            }
+
+            return catalog;
+        }
+
+        public List<String> GetGenres()
+        {
+            List<String> genres = new List<String>();
+
+            try
+            {
                 string query = @"
-        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
-               CASE WHEN w.Data_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
-        FROM Ksiazki k
-        LEFT JOIN Wypozyczenia w ON k.ID = w.KsiazkiID AND w.Data_zwrotu IS NULL
-        JOIN Autor a ON k.AutorID = a.ID
-        JOIN Gatunki g ON k.GatunekID = g.ID
-        WHERE (@Genre IS NULL OR g.Nazwa_gatunku = @Genre)
-        AND (@AuthorFirstName IS NULL OR a.Imie = @AuthorFirstName)
-        AND (@AuthorLastName IS NULL OR a.Nazwisko = @AuthorLastName)
-        AND (@Title IS NULL OR k.Tytul LIKE @Title)";
+                    SELECT Nazwa_gatunku FROM gatunki";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Genre", filter.Genre ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@AuthorFirstName", filter.AuthorFirstName ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@AuthorLastName", filter.AuthorLastName ?? (object)DBNull.Value);
-                    command.Parameters.AddWithValue("@Title", filter.Title != null ? $"%{filter.Title}%" : (object)DBNull.Value);
-
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            BookData book = new BookData
-                            {
-                                ID = reader.GetInt32("ID"),
-                                title = reader.GetString("Tytul"),
-                                authorFirstName = reader.GetString("Imie"),
-                                authorLastName = reader.GetString("Nazwisko"),
-                                genreName = reader.GetString("Nazwa_gatunku"),
-                                ISBN = reader.GetString("ISBN"),
-                                ifAvailable = reader.GetBoolean("ifAvailable")
-                            };
-                            catalog.Add(book);
+                            MessageBox.Show(reader.GetString("Nazwa_gatunku"));
+                            genres.Add(reader.GetString("Nazwa_gatunku"));
                         }
                     }
                 }
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania katalogu ksiazek: {ex.Message}");
+                MessageBox.Show($"Error fetching genres: {ex.Message}");
             }
 
-            return catalog;
+            return genres;
         }
+
 
         public int GetGenreID(string genreName)
         {
