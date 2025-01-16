@@ -27,10 +27,6 @@ namespace DatabaseApp
             clientRegistration.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            communicationHandler.AddWorker("Paulina", "Bartczak", "123456789", "poijhgffgyu", "12345678901", 4000, "Paulina", "asd", "wsedrtgyh");
-        }
     }
 }
 
