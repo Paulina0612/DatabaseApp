@@ -7,16 +7,16 @@
       "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\sqlcommunicationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:sqlcommunicationhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\bookdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:bookdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\paula\\AppData\\Local\\Temp\\.vsdbgsrc\\855104fdf94c3da3cbd87b0d98a19ed2c127f9e5badecca13379617ce911265a\\ResultSet.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -88,7 +88,7 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "SQLCommunicationHandler.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\SQLCommunicationHandler.cs",
               "RelativeDocumentMoniker": "SQLCommunicationHandler.cs",
@@ -101,7 +101,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "BookData.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BookData.cs",
               "RelativeDocumentMoniker": "BookData.cs",
@@ -114,7 +114,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 1,
               "Title": "BooksCatalog.cs [Design]",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BooksCatalog.cs",
               "RelativeDocumentMoniker": "BooksCatalog.cs",
@@ -132,7 +132,7 @@
               "RelativeDocumentMoniker": "BooksCatalog.cs",
               "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BooksCatalog.cs*",
               "RelativeToolTip": "BooksCatalog.cs*",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA0AAAA2AAAAAAAAAA==",
+              "ViewState": "AgIAABMAAAAAAAAAAAAMwCUAAAAnAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-15T21:02:41.48Z",
               "EditorCaption": ""
@@ -160,8 +160,8 @@
               "Title": "BooksCatalog.Designer.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BooksCatalog.Designer.cs",
               "RelativeDocumentMoniker": "BooksCatalog.Designer.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BooksCatalog.Designer.cs",
-              "RelativeToolTip": "BooksCatalog.Designer.cs",
+              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BooksCatalog.Designer.cs*",
+              "RelativeToolTip": "BooksCatalog.Designer.cs*",
               "ViewState": "AgIAABYAAAAAAAAAAAAAABYAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-15T21:09:21.305Z",
