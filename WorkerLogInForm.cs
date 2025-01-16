@@ -1,9 +1,10 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace DatabaseApp
 {
 
-    public partial class WorkerLogInForm : Forms
+    public partial class WorkerLogInForm : Form
     {
         private bool ifDirector = false;
 
@@ -19,7 +20,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(passwordTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                bool ifSuccessful = communicationHandler.WorkerLogIn(ifDirector, firstNameTextBox.Text, lastNameTextBox.Text,
+                bool ifSuccessful = Program.communicationHandler.WorkerLogIn(ifDirector, firstNameTextBox.Text, lastNameTextBox.Text,
                     passwordTextBox.Text);
 
                 if (ifSuccessful)

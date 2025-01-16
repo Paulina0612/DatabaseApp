@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class RemoveAuthor : Forms
+    public partial class RemoveAuthor : Form
     {
         public RemoveAuthor()
         {
@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(authorDataComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.RemoveAuthor(authorDataComboBox.Text);
+                Program.communicationHandler.RemoveAuthor(authorDataComboBox.Text);
                 MessageBox.Show("Author removed successfully.");
             }
         }

@@ -126,6 +126,7 @@
             this.payPenaltyButton.Size = new System.Drawing.Size(172, 31);
             this.payPenaltyButton.TabIndex = 12;
             this.payPenaltyButton.Text = "Penalty Payment";
+            this.payPenaltyButton.Click += new System.EventHandler(this.payPenaltyButton_Click_1);
             // 
             // returnBookButton
             // 

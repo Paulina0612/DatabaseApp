@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class WorkerPanel : Forms
+    public partial class WorkerPanel : Form
     {
         public WorkerPanel()
         {

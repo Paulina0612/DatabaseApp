@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ClientPanel : Forms
+    public partial class ClientPanel : Form
     {
         private int clientId;
         public ClientPanel()
@@ -22,7 +22,7 @@ namespace DatabaseApp
         {
             History historyForm = new History();
 
-            List<BookData> history = communicationHandler.GetHistory();
+            List<BookData> history = Program.communicationHandler.GetHistory();
             //TODO:Uzupelnic tabele w formatce
             historyForm.Show();
         }
@@ -32,7 +32,7 @@ namespace DatabaseApp
             BorrowedBooks borrowedBooksForm = new BorrowedBooks();
 
             //TODO:Uzupelnic tabele w formatce
-            List<BookData> history = communicationHandler.GetHistory();
+            List<BookData> history = Program.communicationHandler.GetHistory();
             borrowedBooksForm.Show();
         }
 
@@ -41,7 +41,7 @@ namespace DatabaseApp
             BooksCatalog booksCatalogForm = new BooksCatalog();
 
             //TODO:Uzupelnic tabele w formatce
-            List<BookData> history = communicationHandler.GetHistory();
+            List<BookData> history = Program.communicationHandler.GetHistory();
             booksCatalogForm.Show();
         }
     }

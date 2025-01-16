@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class RemoveBook : Forms
+    public partial class RemoveBook : Form
     {
         public RemoveBook()
         {
@@ -14,11 +14,11 @@ namespace DatabaseApp
         {
             bool ifIDNumeric = int.TryParse(bookIDTextBox.Text, out int id);
 
-            if (ifIDNumeric && string.IsNullOrEmpty(bookIDTextBox.Text) && !communicationHandler.IsBookInDatabase(id))
+            if (ifIDNumeric && string.IsNullOrEmpty(bookIDTextBox.Text) && !Program.communicationHandler.IsBookInDatabase(id))
                 Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.RemoveBook(id);
+                Program.communicationHandler.RemoveBook(id);
                 MessageBox.Show("Book succcessfully removed.");
             }
         }

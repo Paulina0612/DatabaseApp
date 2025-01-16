@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ClientRegistration : Forms
+    public partial class ClientRegistration : Form
     {
         public ClientRegistration()
         {
@@ -17,7 +17,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(emailTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.ClientRegistration(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text);
+                Program.communicationHandler.ClientRegistration(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text);
                 MessageBox.Show("Registration successful.");
             }
         }

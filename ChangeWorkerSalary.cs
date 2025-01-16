@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ChangeWorkerSalary : Forms
+    public partial class ChangeWorkerSalary : Form
     {
         public ChangeWorkerSalary()
         {
@@ -24,14 +24,14 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(newSalaryTextBox.Text) && ifSalaryNumeric) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.ChangeWorkerSalary(workerDataComboBox.Text, newSalary);
+                Program.communicationHandler.ChangeWorkerSalary(workerDataComboBox.Text, newSalary);
                 MessageBox.Show("Salary successfully changed. ");
             }
         }
 
         private void workerDataComboBox_SelectedIndexChanged(object sender, EventArgs e)
         { 
-            currentSalaryTextBox.Text = communicationHandler.GetWorkerSalary(workerDataComboBox.Text).ToString();
+            currentSalaryTextBox.Text = Program.communicationHandler.GetWorkerSalary(workerDataComboBox.Text).ToString();
         }
     }
 }

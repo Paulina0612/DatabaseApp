@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class ClientLogInForm : Forms
+    public partial class ClientLogInForm : Form
     {
         public ClientLogInForm()
         {
@@ -19,7 +19,7 @@ namespace DatabaseApp
                 Program.IncorrectDataInformation();
             else
             {
-                bool ifSuccessful = communicationHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
+                bool ifSuccessful = Program.communicationHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
 
                 if (ifSuccessful)
                 {

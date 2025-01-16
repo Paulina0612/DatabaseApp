@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class RemoveGenre : Forms
+    public partial class RemoveGenre : Form
     {
         public RemoveGenre()
         {
@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(genreNameComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.RemoveGenre(genreNameComboBox.Text);
+                Program.communicationHandler.RemoveGenre(genreNameComboBox.Text);
                 MessageBox.Show("Genre successfully removed.");
             }
         }

@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class LendBook : Forms
+    public partial class LendBook : Form
     {
         public LendBook()
         {
@@ -14,10 +14,10 @@ namespace DatabaseApp
         {
             if (string.IsNullOrEmpty(clientEmailTextBox.Text)) Program.IncorrectDataInformation();
             else if (string.IsNullOrEmpty(bookIDTextBox.Text)) Program.IncorrectDataInformation();
-            else if(!communicationHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) Program.IncorrectDataInformation();
+            else if(!Program.communicationHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.LendBook(clientEmailTextBox.Text, int.Parse(bookIDTextBox.Text));
+                Program.communicationHandler.LendBook(clientEmailTextBox.Text, int.Parse(bookIDTextBox.Text));
                 MessageBox.Show("Operation successful.");
             }
         }

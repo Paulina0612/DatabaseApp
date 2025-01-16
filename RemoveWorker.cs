@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class RemoveWorker : Forms
+    public partial class RemoveWorker : Form
     {
         public RemoveWorker()
         {
@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(workerDataComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.RemoveWorker(workerDataComboBox.Text);
+                Program.communicationHandler.RemoveWorker(workerDataComboBox.Text);
                 MessageBox.Show("Worker successfully removed.");
             }
         }

@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class BorrowedBooks : Forms
+    public partial class BorrowedBooks : Form
     {
         public BorrowedBooks()
         {
@@ -21,7 +21,7 @@ namespace DatabaseApp
         private void BorrowedBooks_Load(object sender, EventArgs e)
         {
             List<BookData> books = new List<BookData>();
-            books = communicationHandler.GetBorrowedBooks();
+            books = Program.communicationHandler.GetBorrowedBooks();
 
             foreach (BookData book in books)
             {

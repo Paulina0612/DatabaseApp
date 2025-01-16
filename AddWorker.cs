@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddWorker : Forms
+    public partial class AddWorker : Form
     {
         public AddWorker()
         {
@@ -45,7 +45,7 @@ namespace DatabaseApp
             {
                 try
                 {
-                    communicationHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                    Program.communicationHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
                         emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), managerComboBox.Text,
                         positionComboBox.Text, password);
                     MessageBox.Show("Worker successfully added.\nGenerated password is: " + password);

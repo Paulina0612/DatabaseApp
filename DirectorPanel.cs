@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class DirectorPanel : Forms
+    public partial class DirectorPanel : Form
     {
         public DirectorPanel()
         {
@@ -91,6 +92,11 @@ namespace DatabaseApp
         {
             ChangeWorkerSalary changeWorkerSalary = new ChangeWorkerSalary();
             changeWorkerSalary.Show();
+        }
+
+        private void payPenaltyButton_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

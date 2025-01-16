@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddAuthor : Forms
+    public partial class AddAuthor : Form
     {
         public AddAuthor()
         {
@@ -16,7 +16,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(lastNameTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.AddAuthor(firstNameTextBox.Text, lastNameTextBox.Text);
+                Program.communicationHandler.AddAuthor(firstNameTextBox.Text, lastNameTextBox.Text);
                 MessageBox.Show("Author successfully added. ");
             }
         }

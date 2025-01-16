@@ -25,7 +25,7 @@ namespace DatabaseApp
 
         public SQLCommunicationHandler()
         {
-
+             
         }
 
         public enum UserType
@@ -60,7 +60,7 @@ namespace DatabaseApp
                 }
 
                 // Tworzymy nowe połączenie w zależności od typu użytkownika
-                string connectionString = string.Empty;
+                string connectionString;
 
                 switch (currentUserType)
                 {
@@ -353,6 +353,7 @@ namespace DatabaseApp
                 {
                     currentUserType = UserType.Pracownik;
                     InitializeConnection();
+                    MessageBox.Show(currentUserType.ToString());
 
                 }
                 currentUserType = UserType.Kierownik;

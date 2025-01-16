@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class History : Forms
+    public partial class History : Form
     {
         public History()
         {

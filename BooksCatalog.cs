@@ -5,13 +5,13 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class BooksCatalog : Forms
+    public partial class BooksCatalog : Form
     {
         public BooksCatalog()
         {
             InitializeComponent();
             List<String> genres = new List<String>();
-            genres = communicationHandler.GetGenres();
+            genres = Program.communicationHandler.GetGenres();
             foreach (String genre in genres) {
                 MessageBox.Show(genre);
                 genreComboBox.Items.Add(genre);
@@ -21,7 +21,7 @@ namespace DatabaseApp
         private void BooksCatalog_Load(object sender, EventArgs e)
         {
             List<BookData> books = new List<BookData>();
-            books = communicationHandler.GetBooksCatalog(genreComboBox.Text);
+            books = Program.communicationHandler.GetBooksCatalog(genreComboBox.Text);
             
             foreach (BookData book in books)
             {

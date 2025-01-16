@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddGenre : Forms
+    public partial class AddGenre : Form
     {
         public AddGenre()
         {
@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(genreNameTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.AddGenre(genreNameTextBox.Text);
+                Program.communicationHandler.AddGenre(genreNameTextBox.Text);
                 MessageBox.Show("Genre successfully added.");
             }
         }

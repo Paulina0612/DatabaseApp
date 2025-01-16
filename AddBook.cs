@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class AddBook : Forms
+    public partial class AddBook : Form
     {
         public AddBook()
         {
@@ -21,7 +21,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(genreComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                communicationHandler.AddBook(titleTextBox.Text, authorDataComboBox.Text, ISBNTextBox.Text, genreComboBox.Text);
+                Program.communicationHandler.AddBook(titleTextBox.Text, authorDataComboBox.Text, ISBNTextBox.Text, genreComboBox.Text);
             }
         }
 

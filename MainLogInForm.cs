@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Windows.Forms;
 
 namespace DatabaseApp
 {
-    public partial class MainLogInForm : Forms
+    public partial class MainLogInForm : Form
     {
         public MainLogInForm()
         {

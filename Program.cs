@@ -9,6 +9,7 @@ namespace DatabaseApp
     
     public class Program
     {
+        public static SQLCommunicationHandler communicationHandler = new SQLCommunicationHandler();
         static void Main()
         {
             Application.EnableVisualStyles();
