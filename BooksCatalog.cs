@@ -10,11 +10,12 @@ namespace DatabaseApp
         public BooksCatalog()
         {
             InitializeComponent();
-
             List<String> genres = new List<String>();
             genres = communicationHandler.GetGenres();
-            foreach (String genre in genres) 
+            foreach (String genre in genres) {
+                MessageBox.Show(genre);
                 genreComboBox.Items.Add(genre);
+            }
         }
 
         private void BooksCatalog_Load(object sender, EventArgs e)

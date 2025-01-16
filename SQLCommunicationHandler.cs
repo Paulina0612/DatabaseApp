@@ -270,7 +270,6 @@ namespace DatabaseApp
                         InitializeConnection("Klient", "klient_password"); // Tworzymy nowe połączenie
 
                         MessageBox.Show("Zalogowano jako Klient.");
-                        LoggedWorkerID = GetClientID(email);
                         return true;
                     }
                     else
@@ -546,17 +545,15 @@ namespace DatabaseApp
             try
             {
                 string query = @"
-                SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, false AS ifAvailable
-                FROM Wypozyczenia w
-                JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
-                JOIN Autor a ON k.AutorID = a.ID
-                JOIN Gatunki g ON k.GatunekID = g.ID            
-                JOIN Klienci kl ON w.KlientID = kl.ID
-                WHERE w.KlientID = @KlientID AND w.ID NOT IN (SELECT Wypozyczenie_ID FROM Zwroty)";
+            SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, false AS ifAvailable
+            FROM Wypozyczenia w
+            JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
+            JOIN Autor a ON k.AutorID = a.ID
+            JOIN Gatunki g ON k.GatunekID = g.ID
+            WHERE w.Data_spodziewanego_zwrotu IS NULL";
 
                 using (MySqlCommand command = new MySqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@KlientID", LoggedWorkerID.ToString()?? (object)DBNull.Value);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
