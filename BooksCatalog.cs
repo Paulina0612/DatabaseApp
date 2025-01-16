@@ -1,11 +1,6 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DatabaseApp
@@ -15,6 +10,26 @@ namespace DatabaseApp
         public BooksCatalog()
         {
             InitializeComponent();
+            List<String> genres = new List<String>();
+            foreach (String genre in genres) {
+                MessageBox.Show(genre);
+                genreComboBox.Items.Add(genre);
+            }
+        }
+
+        private void BooksCatalog_Load(object sender, EventArgs e)
+        {
+            List<BookData> books = new List<BookData>();
+            books = communicationHandler.GetBooksCatalog(genreComboBox.Text);
+            
+            foreach (BookData book in books)
+            {
+                try
+                {
+                    dataGridView1.Rows.Add(book.ID, book.title, book.authorFirstName + " " + book.authorLastName, book.genreName, book.ISBN, book.ifAvailable);
+                }
+                catch(MySqlException ex) { MessageBox.Show(ex.ToString()); }
+            }
         }
     }
 }
