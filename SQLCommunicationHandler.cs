@@ -1,8 +1,10 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics.Eventing.Reader;
+using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -23,22 +25,58 @@ namespace DatabaseApp
 
         public SQLCommunicationHandler()
         {
-            //InitializeConnection("Pracownik", "pracownik_password");
+
         }
 
+        public enum UserType
+        {
+            None,
+            Klient,
+            Pracownik,
+            Kierownik
+        }
+
+        public UserType currentUserType = UserType.None; // flaga 
+        public UserType oldUserType = UserType.None;
+
         // Metoda do inicjalizacji połączenia z określonym użytkownikiem
-        private void InitializeConnection(string userId, string password)
+        private void InitializeConnection()
         {
             try
             {
-                // Zamknięcie starego połączenia, jeżeli istnieje
+                // Zamknięcie starego połączenia, jeżeli istnieje i użytkownik się zmienił
                 if (connection != null && connection.State == System.Data.ConnectionState.Open)
                 {
-                    connection.Close();
+                    if (oldUserType != currentUserType)
+                    {
+                        connection.Close(); // Zamykamy stare połączenie
+                        oldUserType = currentUserType; // Aktualizujemy typ użytkownika
+                    }
+                    else
+                    {
+                        // Jeżeli użytkownik się nie zmienił, używamy istniejącego połączenia
+                        return;
+                    }
                 }
 
-                // Tworzymy nowe połączenie z użytkownikiem'
-                string connectionString = $"Server=localhost;Database=Biblioteka;User Id={userId};Password={password};";
+                // Tworzymy nowe połączenie w zależności od typu użytkownika
+                string connectionString = string.Empty;
+
+                switch (currentUserType)
+                {
+                    case UserType.Klient:
+                        connectionString = $"Server=localhost;Database=Biblioteka;User Id=Klient;Password=klient_password;";
+                        break;
+                    case UserType.Pracownik:
+                        connectionString = $"Server=localhost;Database=Biblioteka;User Id=Pracownik;Password=pracownik_password;";
+                        break;
+                    case UserType.Kierownik:
+                        connectionString = $"Server=localhost;Database=Biblioteka;User Id=Kierownik;Password=kierownik_password;";
+                        break;
+                    default:
+                        throw new InvalidOperationException("Nieprawidlowy typ uzytkownika");
+                }
+
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
             }
@@ -49,42 +87,45 @@ namespace DatabaseApp
         }
 
 
+
         // Adding records  
         public void AddBook(string title, string authorData, string ISBN, string genreName)
         {
             try
             {
+                InitializeConnection();
                 int authorID = GetAuthorID(authorData);
                 int genreID = GetGenreID(genreName);
 
                 string query = "INSERT INTO Ksiazki (Tytul, AutorID, GatunekID, ISBN) VALUES (@Title, @AuthorID, @GenreID, @ISBN)";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Title", title);
                     command.Parameters.AddWithValue("@AuthorID", authorID);
                     command.Parameters.AddWithValue("@GenreID", genreID);
                     command.Parameters.AddWithValue("@ISBN", ISBN);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Book successfully added. ");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show("Failed to add book. ");
+                MessageBox.Show($"Blad dodania ksiazki. {ex.Message}");
             }
         }
         public void AddAuthor(string firstName, string lastName)
         {
             try
             {
+                MessageBox.Show($"User type set to: {currentUserType}");// ---------------------
+                InitializeConnection();
                 string query = "INSERT INTO Autor (Imie, Nazwisko) VALUES (@FirstName, @LastName)";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@FirstName", firstName);
                     command.Parameters.AddWithValue("@LastName", lastName);
                     command.ExecuteNonQuery();
-                }
-
+                
                 MessageBox.Show("Autor został dodany.");
             }
             catch (MySqlException ex)
@@ -96,12 +137,13 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 string query = "INSERT INTO Gatunki (Nazwa_gatunku) VALUES (@Name)";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Name", name);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Gatunek zostal dodany.");
             }
             catch (MySqlException ex)
@@ -114,17 +156,14 @@ namespace DatabaseApp
         {
             try
             {
-                if (connection == null || connection.State != System.Data.ConnectionState.Open)
-                {
-                    InitializeConnection("Kierownik", "kierownik_password"); // Kierownik ma uprawnienia do dodawania pracowników
-                }
+                InitializeConnection();
                 int managerID = GetWorkerID(managerData);
                 int positionID = GetPositionID(positionName);
 
                 string query = "INSERT INTO Pracownik (Imie, Nazwisko, Numer_Telefonu, Adres_e_mail, PESEL, Wyplata, Kierownik_ID, StanowiskoID, Haslo)" +
                     "VALUES (@FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, @PositionID, @Password)";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@FirstName", firstName);
                     command.Parameters.AddWithValue("@LastName", lastName);
                     command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
@@ -135,7 +174,7 @@ namespace DatabaseApp
                     command.Parameters.AddWithValue("@PositionID", 1);
                     command.Parameters.AddWithValue("@Password", password);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Pracownik zostal dodany");
             }
             catch (MySqlException ex)
@@ -146,13 +185,14 @@ namespace DatabaseApp
 
         public void ClientRegistration(string firstName, string lastName, string email)
         {
+            InitializeConnection();
             float balance = 0;
             string cardNumber = string.Empty;  // Zmienna na numer karty, początkowo pusta
             try
             {
                 string procedureName = "DodajKlienta";
-                using (MySqlCommand command = new MySqlCommand(procedureName, connection))
-                {
+                MySqlCommand command = new MySqlCommand(procedureName, connection);
+                
                     command.CommandType = System.Data.CommandType.StoredProcedure;
 
                     // Generowanie prostego numeru karty (po prostu inkrementujemy liczbę)
@@ -170,7 +210,7 @@ namespace DatabaseApp
 
                     // Wykonanie procedury
                     command.ExecuteNonQuery();
-                }
+                
 
                 MessageBox.Show("Klient został pomyślnie dodany.");
 
@@ -202,11 +242,12 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 string query = "SELECT IFNULL(MAX(CAST(Numer_karty AS UNSIGNED)), 0) FROM Klienci";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     return Convert.ToInt32(command.ExecuteScalar());
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -229,15 +270,16 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 int clientID = GetClientID(clientEmail);
                 string query = "CALL DodajWypozyczenie(@ClientID, @BookID, @WorkerID, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY))";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ClientID", clientID);
                     command.Parameters.AddWithValue("@BookID", bookID);
                     command.Parameters.AddWithValue("@WorkerID", LoggedWorkerID);
                     command.ExecuteNonQuery();
-                }
+                
 
                 MessageBox.Show("Wypozyczenie zostalo dodane.");
             }
@@ -254,24 +296,24 @@ namespace DatabaseApp
         {
             try
             {
-                // Zapytanie o użytkownika
+                // Nowe połączenie jako 'Klient'
+                currentUserType = UserType.Klient;
+                InitializeConnection(); // Tworzymy nowe połączenie
+                currentUserType = UserType.Klient;
                 string query = "SELECT COUNT(*) FROM Klienci WHERE Adres_e_mail = @Email AND Numer_karty = @CardNumber";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Email", email);
                     command.Parameters.AddWithValue("@CardNumber", cardNumber);
 
                     // Sprawdzamy, czy użytkownik istnieje
                     if (Convert.ToInt32(command.ExecuteScalar()) > 0)
                     {
-                        // Zamykanie poprzedniego połączenia, jeśli jesteśmy już połączeni jako Kierownik
-                        if (connection.State == System.Data.ConnectionState.Open)
-                        {
-                            connection.Close(); // Zamykamy połączenie 'Kierownik'
-                        }
-
-                        // Nowe połączenie jako 'Klient'
-                        InitializeConnection("Klient", "klient_password"); // Tworzymy nowe połączenie
+                        //// Zamykanie poprzedniego połączenia, jeśli jesteśmy już połączeni jako Kierownik
+                        //if (connection.State == System.Data.ConnectionState.Open)
+                        //{
+                        //    connection.Close(); // Zamykamy połączenie 'Kierownik'
+                        //}
 
                         MessageBox.Show("Zalogowano jako Klient.");
                         LoggedWorkerID = GetClientID(email);
@@ -282,7 +324,7 @@ namespace DatabaseApp
                         MessageBox.Show("Błędny email lub numer karty.");
                         return false;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -296,43 +338,47 @@ namespace DatabaseApp
 
         public bool WorkerLogIn(bool ifDirector, string firstName, string lastName, string password)
         {
+            MySqlCommand command = null;
+
             try
             {
                 // Inicjalizacja połączenia w zależności od typu logowania
                 if (ifDirector)
                 {
-                    InitializeConnection("Kierownik", "kierownik_password");
+                    currentUserType = UserType.Kierownik;
+                    InitializeConnection();
+
                 }
                 else
                 {
-                    InitializeConnection("Pracownik", "pracownik_password");
-                }
+                    currentUserType = UserType.Pracownik;
+                    InitializeConnection();
 
-                // Zapytanie SQL do logowania
+                }
+                currentUserType = UserType.Kierownik;
+
                 string query = ifDirector ?
                     "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password AND Kierownik_ID IS NULL" :
                     "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
+                command = new MySqlCommand(query, connection);
+                command.Parameters.AddWithValue("@FirstName", firstName);
+                command.Parameters.AddWithValue("@LastName", lastName);
+                command.Parameters.AddWithValue("@Password", password);
+
+                object result = command.ExecuteScalar();
+
+                if (result != null)
                 {
-                    command.Parameters.AddWithValue("@FirstName", firstName);
-                    command.Parameters.AddWithValue("@LastName", lastName);
-                    command.Parameters.AddWithValue("@Password", password);
+                    LoggedWorkerID = Convert.ToInt32(result);
 
-                    object result = command.ExecuteScalar();
-
-                    if (result != null)
-                    {
-                        LoggedWorkerID = Convert.ToInt32(result);
-
-                        MessageBox.Show(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
-                        return true;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Błędne dane logowania.");
-                        return false;
-                    }
+                    MessageBox.Show(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
+                    return true;
+                }
+                else
+                {
+                    MessageBox.Show("Błędne dane logowania.");
+                    return false;
                 }
             }
             catch (MySqlException ex)
@@ -340,7 +386,16 @@ namespace DatabaseApp
                 MessageBox.Show($"Błąd logowania pracownika: {ex.Message}");
                 return false;
             }
+            finally
+            {
+                // Ręczne zwalnianie zasobów
+                if (command != null)
+                {
+                    command.Dispose();
+                }
+            }
         }
+
 
 
 
@@ -351,12 +406,13 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 string query = "DELETE FROM Ksiazki WHERE ID = @KsiazkiID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@KsiazkiID", bookID);
                     command.ExecuteNonQuery();
-                }
+                
 
                 MessageBox.Show("Ksiazka została usunieta.");
             }
@@ -371,12 +427,13 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 string query = "DELETE FROM Gatunki WHERE Nazwa_gatunku = @Nazwa_gatunku";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Nazwa_gatunku", name);
                     command.ExecuteNonQuery();
-                }
+                
 
                 MessageBox.Show("Gatunek zostal usuniety.");
             }
@@ -390,12 +447,13 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 string query = "DELETE FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Data", data);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Autor zostal usuniety.");
             }
             catch (MySqlException ex)
@@ -415,12 +473,13 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 string query = "DELETE FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Data", data);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Pracownik zostal usuniety.");
             }
             catch (MySqlException ex)
@@ -437,15 +496,16 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 int clientID = GetClientID(email);
                 string query = "CALL ZwrocKsiazke(@ClientID, @BookID, @IfPenaltyPayed)";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ClientID", clientID);
                     command.Parameters.AddWithValue("@BookID", bookID);
                     command.Parameters.AddWithValue("@IfPenaltyPayed", ifPenaltyPayed);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Ksiazka została zwrocona.");
             }
             catch (MySqlException ex)
@@ -459,14 +519,15 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 int workerID = GetWorkerID(data);
                 string query = "UPDATE Pracownik SET Wyplata = @NewSalary WHERE ID = @WorkerID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@NewSalary", newSalary);
                     command.Parameters.AddWithValue("@WorkerID", workerID);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Wynagrodzenie pracownika zostało zaktualizowane.");
             }
             catch (MySqlException ex)
@@ -479,13 +540,14 @@ namespace DatabaseApp
         {
             try
             {
+                InitializeConnection();
                 int clientID = GetClientID(email);
                 string query = "UPDATE Klienci SET Naleznosc = 0 WHERE ID = @ClientID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ClientID", clientID);
                     command.ExecuteNonQuery();
-                }
+                
                 MessageBox.Show("Platnosc za karę została zrealizowana.");
             }
             catch (MySqlException ex)
@@ -504,6 +566,7 @@ namespace DatabaseApp
 
             try
             {
+                InitializeConnection();
                 string query = @"
         SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, 
                CASE WHEN w.Data_spodziewanego_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
@@ -514,8 +577,8 @@ namespace DatabaseApp
         JOIN Gatunki g ON k.GatunekID = g.ID
         WHERE c.ID = @ClientId";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ClientId", LoggedWorkerID);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
@@ -535,7 +598,7 @@ namespace DatabaseApp
                             history.Add(book);
                         }
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -551,6 +614,7 @@ namespace DatabaseApp
 
             try
             {
+                InitializeConnection();
                 string query = @"
                 SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, false AS ifAvailable
                 FROM Wypozyczenia w
@@ -560,8 +624,8 @@ namespace DatabaseApp
                 JOIN Klienci kl ON w.KlientID = kl.ID
                 WHERE w.KlientID = @KlientID AND w.ID NOT IN (SELECT Wypozyczenie_ID FROM Zwroty)";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@KlientID", LoggedWorkerID);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -580,7 +644,7 @@ namespace DatabaseApp
                             borrowedBooks.Add(book);
                         }
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -596,6 +660,7 @@ namespace DatabaseApp
 
             try
             {
+                InitializeConnection();
                     string query = @"
                     SELECT kk.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, kk.Stan_magazynowy_ksiazki,
                     CASE WHEN w.Katalog_ksiazekID IS NULL THEN 1 ELSE 0 END AS ifAvailable
@@ -606,8 +671,8 @@ namespace DatabaseApp
                     JOIN biblioteka.Gatunki g ON k.GatunekID = g.ID
                     WHERE (g.Nazwa_gatunku = @Genre)";
 
-                    using (MySqlCommand command = new MySqlCommand(query, connection))
-                    {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                    
                         command.Parameters.AddWithValue("@Genre", genre ?? (object)DBNull.Value);
 
                         using (MySqlDataReader reader = command.ExecuteReader())
@@ -627,7 +692,7 @@ namespace DatabaseApp
                                 catalog.Add(book);
                             }
                         }
-                    }
+                    
                 
             }
             catch (MySqlException ex)
@@ -644,17 +709,18 @@ namespace DatabaseApp
 
             try
             {
+                //InitializeConnection();
                 string query = @"
                     SELECT Nazwa_gatunku FROM gatunki";
 
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())
                             genres.Add(reader.GetString("Nazwa_gatunku"));
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -669,9 +735,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT ID FROM Gatunki WHERE Nazwa_gatunku = @GenreName";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@GenreName", genreName);
                     object result = command.ExecuteScalar();
                     if (result != null)
@@ -683,7 +750,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono gatunku");
                         return 0;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -695,13 +762,14 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 if (connection == null || connection.State != System.Data.ConnectionState.Open)
                 {
-                    InitializeConnection("Kierownik", "kierownik_password");
+                    InitializeConnection();
                 }
                 string query = "SELECT ID FROM Stanowisko WHERE Nazwa_stanowiska = @Name";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Name", name);
                     object result = command.ExecuteScalar();
                     if (result != null)
@@ -713,7 +781,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono ID stanowiska");
                         return 0;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -726,9 +794,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT ID FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Data", data);
                     object result = command.ExecuteScalar();
                     if(result != null)
@@ -740,7 +809,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono ID autora");
                         return 0;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -753,9 +822,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT ID FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Data", data);
                     object result = command.ExecuteScalar();
                     if (result != null)
@@ -767,7 +837,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono ID pracownika");
                         return 0;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -779,9 +849,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT ID FROM Wypozyczenia WHERE KlienciID = @KlientID AND Katalog_ksiazekID = @KsiazkaID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@KlientID", clientID);
                     command.Parameters.AddWithValue("@KsiazkaID", bookID);
                     object result = command.ExecuteScalar();
@@ -794,7 +865,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono wypozyczenia dla podanych danych");
                         return -1;
                     }
-                }
+                
             }
             catch(MySqlException ex)
             {
@@ -806,9 +877,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT ID FROM Klienci WHERE Adres_e_mail = @Email";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@Email", email);
                     object result = command.ExecuteScalar();
                     if (result != null)
@@ -820,7 +892,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono ID klienta");
                         return 0;
                     }
-                }
+                
             }
             catch(MySqlException ex)
             {
@@ -832,10 +904,11 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 int ID = GetWorkerID(data);
                 string query = "SELECT SALARY FROM Pracownik WHERE ID == @ID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ID", ID);
                     object result = command.ExecuteScalar();
                     if(result != DBNull.Value)
@@ -847,7 +920,7 @@ namespace DatabaseApp
                         MessageBox.Show("Nie znaleziono pracownika z podanym ID");
                         return 0;
                     }
-                }
+                
             }
             catch(MySqlException ex)
             {
@@ -859,9 +932,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT Stan_magazynowy_ksiazki FROM Katalog_ksiazek WHERE KsiazkiID = @KsiazkiID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@KsiazkiID", ID);
                     object result = command.ExecuteScalar();
                     if (result != null && result.ToString() == "dostepna")
@@ -872,7 +946,7 @@ namespace DatabaseApp
                     {
                         return false;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -884,9 +958,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT COUNT(*) FROM Klienci WHERE ID = @ID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ID", ID);
                     object result = command.ExecuteScalar();
                     if(result != null && Convert.ToInt32(result) > 0)
@@ -897,7 +972,7 @@ namespace DatabaseApp
                     {
                         return false;
                     }
-                }
+                
             }
             catch(MySqlException ex)
             {
@@ -909,9 +984,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT  COUNT(*) FROM Ksiazki WHERE ID = @ID";
-                using (MySqlCommand command = new MySqlCommand(query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                
                     command.Parameters.AddWithValue("@ID", ID);
                     object result = command.ExecuteScalar();
                     if(result != null && Convert.ToInt32(result) > 0)
@@ -922,7 +998,7 @@ namespace DatabaseApp
                     {
                         return false;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
@@ -934,9 +1010,10 @@ namespace DatabaseApp
         {
             try
             {
+                //InitializeConnection();
                 string query = "SELECT COUNT(*) FROM Wypozyczenia WHERE KlienciID = @KlientID AND Katalog_ksiazekID = @KsiazkaID ";
-                using (MySqlCommand command = new MySqlCommand(@query, connection))
-                {
+                MySqlCommand command = new MySqlCommand(@query, connection);
+                
                     command.Parameters.AddWithValue("@KlientID", clientID);
                     command.Parameters.AddWithValue("@KsiazkaID", bookID);
                     object result = command.ExecuteScalar();
@@ -948,7 +1025,7 @@ namespace DatabaseApp
                     {
                         return false;
                     }
-                }
+                
             }
             catch (MySqlException ex)
             {
