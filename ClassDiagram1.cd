@@ -1,0 +1,223 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="DatabaseApp.AddAuthor">
+    <Position X="11" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABAWQAAAAACACAAAACAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddAuthor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.AddBook">
+    <Position X="13.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACRAAAAAAADBACACAAiCAAAAAQAAAAAAAAA=</HashCode>
+      <FileName>AddBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.AddGenre">
+    <Position X="24.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAAAAABACQAAAAAAACAACACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>AddGenre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.AddWorker">
+    <Position X="33.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAABAWQgAAAADACAIAACAAAAgBAAAAAgQRAIAAQ=</HashCode>
+      <FileName>AddWorker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.BooksCatalog">
+    <Position X="40.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASBAgEgAgAKAAAACAQgAAAAAAQAAAACAAAA=</HashCode>
+      <FileName>BooksCatalog.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.BorrowedBooks">
+    <Position X="49.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAgEAAgAKAAAACABAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>BorrowedBooks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.ChangeWorkerSalary">
+    <Position X="4" Y="2" Width="2" />
+    <TypeIdentifier>
+      <HashCode>SAAAIAABACQQAAAAAACAAAACAAAgAACAACAAAAAAAAA=</HashCode>
+      <FileName>ChangeWorkerSalary.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.ClientLogInForm">
+    <Position X="15.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QCAAAAAAACAAAAEABACAEAACAAAAAAAAAAAAAAACAAA=</HashCode>
+      <FileName>ClientLogInForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.ClientPanel">
+    <Position X="26.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAEAAAAACAAAACAAgIAAAAgAAEAAAAgAA=</HashCode>
+      <FileName>ClientPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.ClientRegistration">
+    <Position X="35.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACAAAAAgASAAAABADACAAAADAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ClientRegistration.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.DirectorPanel">
+    <Position X="42.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICAAIAECADAAAJBACECABABCxQAAIQQCIAYAgAQCIoQ=</HashCode>
+      <FileName>DirectorPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.History">
+    <Position X="51.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAASAAgEAAgAKAAAACAAgAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>History.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.LendBook">
+    <Position X="8.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABASQIAAAAAACAAAACAAgAAAAAAAhAAAABAAA=</HashCode>
+      <FileName>LendBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.MainLogInForm">
+    <Position X="17.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAEAACAAAIDAgAIAAABAAAAAAAAAAA=</HashCode>
+      <FileName>MainLogInForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.PenaltyPayment">
+    <Position X="29" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACQIAAAAAACAAAACAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>PenaltyPayment.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.Program">
+    <Position X="62.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.RemoveAuthor">
+    <Position X="44.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACQAABAAAADAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>RemoveAuthor.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.RemoveBook">
+    <Position X="53.75" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACQAAAAAAACAAAACAAAAAABAAAAAAAABAAA=</HashCode>
+      <FileName>RemoveBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.RemoveGenre">
+    <Position X="6.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACQAAAAAAACAAAACAAAAgABAAAAAAAAAAAA=</HashCode>
+      <FileName>RemoveGenre.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.RemoveWorker">
+    <Position X="20" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAABACQAAAAAAACAAAACAAAAAACAACAAAAAAAAA=</HashCode>
+      <FileName>RemoveWorker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.ReturnBook">
+    <Position X="38" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAADACQIAAAAgACAEAACAAAAAAAAAAhAAAABAAA=</HashCode>
+      <FileName>ReturnBook.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.SearchingClient">
+    <Position X="47" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACEAAAAAACAAAAAABACABAACAAAIAAAAEAAgAAAAAAA=</HashCode>
+      <FileName>SearchingClient.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.SQLCommunicationHandler">
+    <Position X="65.75" Y="4.25" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="DatabaseApp.SQLCommunicationHandler.UserType" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>SQLCommunicationHandler.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>QSKBQAAAoAgUIAAKAiABAIAEEEgAECABADQMJACAAgA=</HashCode>
+      <FileName>SQLCommunicationHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.WorkerLogInForm">
+    <Position X="22.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BEAAAAAAAGAAAAEACCCAAAACCAAAgAAAAAAQAAACCAA=</HashCode>
+      <FileName>WorkerLogInForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.WorkerPanel">
+    <Position X="31.25" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ICAAIAECALAAAIBAAECABABCxAAAAQQCAAQAgAACIoA=</HashCode>
+      <FileName>WorkerPanel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.Properties.Resources">
+    <Position X="64" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAABEAAAAQAAAAAAAAAAAAAAAIA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DatabaseApp.Properties.Settings">
+    <Position X="60" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="System.Windows.Forms.Form" Collapsed="true">
+    <Position X="27.25" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="System.Windows.Forms.Form.ControlCollection" Collapsed="true">
+        <TypeIdentifier />
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Object" Collapsed="true">
+    <Position X="64" Y="7.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="System.Configuration.ApplicationSettingsBase" Collapsed="true">
+    <Position X="60" Y="3.5" Width="1.5" />
+    <TypeIdentifier />
+    <Lollipop Position="0.2" />
+  </Class>
+  <Struct Name="DatabaseApp.BookData">
+    <Position X="58.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQQAEgQAAAAAAAAAAAAAAAAAAAAAAAggAAAA=</HashCode>
+      <FileName>BookData.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
