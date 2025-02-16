@@ -15,3 +15,16 @@
 /obj/Release/DesignTimeResolveAssemblyReferences.cache
 /History.cs
 /History.Designer.cs
+/packages/xunit.extensibility.execution.2.9.3/_content
+/ClientLogInFormTest.cs
+/packages/xunit.extensibility.execution.2.9.3/.signature.p7s
+/packages/xunit.extensibility.execution.2.9.3/xunit.extensibility.execution.2.9.3.nupkg
+/packages/xunit.extensibility.execution.2.9.3/lib/netstandard1.1/xunit.execution.dotnet.xml
+/packages/xunit.extensibility.execution.2.9.3/lib/netstandard1.1
+/packages/xunit.extensibility.execution.2.9.3/lib/net452
+/packages/xunit.extensibility.core.2.9.3/_content
+/packages/xunit.extensibility.core.2.9.3/.signature.p7s
+/.vs/DatabaseApp
+/bin/Release
+/obj/Release
+/packages
