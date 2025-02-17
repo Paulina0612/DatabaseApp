@@ -10,16 +10,16 @@ namespace DatabaseApp
         public BooksCatalog()
         {
             InitializeComponent();
-            List<String> genres = new List<String>();
-            genres = Program.communicationHandler.GetGenres();
-            foreach (String genre in genres) {
-                MessageBox.Show(genre);
-                genreComboBox.Items.Add(genre);
-            }
-        }
+            //List<String> genres = new List<String>();
+            //genres = Program.communicationHandler.GetGenres();
+            //foreach (String genre in genres) {
+            //    MessageBox.Show(genre);
+            //    genreComboBox.Items.Add(genre);
+            //}
+        //}
 
-        private void BooksCatalog_Load(object sender, EventArgs e)
-        {
+        //private void BooksCatalog_Load(object sender, EventArgs e)
+        //{
             List<BookData> books = new List<BookData>();
             books = Program.communicationHandler.GetBooksCatalog(genreComboBox.Text);
             
@@ -35,7 +35,7 @@ namespace DatabaseApp
 
         private void genreComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            BooksCatalog_Load(sender, e);
+            //BooksCatalog_Load(sender, e);
         }
     }
 }

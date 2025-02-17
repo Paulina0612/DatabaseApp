@@ -138,7 +138,7 @@ namespace DatabaseApp
             try
             {
                 InitializeConnection();
-                string query = "INSERT INTO Gatunki (Nazwa_gatunku) VALUES (@Name)";
+                string query = "INSERT INTO Gatunki (ID, Nazwa_gatunku) VALUES (0, @Name)"; //TODO: Ustawic automatyczne inkrementowanie ID
                 MySqlCommand command = new MySqlCommand(query, connection);
                 
                     command.Parameters.AddWithValue("@Name", name);

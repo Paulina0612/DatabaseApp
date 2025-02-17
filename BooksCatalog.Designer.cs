@@ -128,7 +128,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "BooksCatalog";
             this.Text = "BooksCatalog";
-            this.Load += new System.EventHandler(this.BooksCatalog_Load);
+            //this.Load += new System.EventHandler(this.BooksCatalog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

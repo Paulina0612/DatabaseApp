@@ -93,10 +93,5 @@ namespace DatabaseApp
             ChangeWorkerSalary changeWorkerSalary = new ChangeWorkerSalary();
             changeWorkerSalary.Show();
         }
-
-        private void payPenaltyButton_Click_1(object sender, EventArgs e)
-        {
-
-        }
     }
 }

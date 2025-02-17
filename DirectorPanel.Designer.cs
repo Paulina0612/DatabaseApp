@@ -82,6 +82,7 @@
             this.addGenreButton.TabIndex = 21;
             this.addGenreButton.Text = "Add Genre";
             this.addGenreButton.UseVisualStyleBackColor = true;
+            this.addGenreButton.Click += new System.EventHandler(this.addGenreButton_Click);
             // 
             // removeBookButton
             // 
@@ -126,7 +127,7 @@
             this.payPenaltyButton.Size = new System.Drawing.Size(172, 31);
             this.payPenaltyButton.TabIndex = 12;
             this.payPenaltyButton.Text = "Penalty Payment";
-            this.payPenaltyButton.Click += new System.EventHandler(this.payPenaltyButton_Click_1);
+            //this.payPenaltyButton.Click += new System.EventHandler(this.payPenaltyButton_Click_1);
             // 
             // returnBookButton
             // 
