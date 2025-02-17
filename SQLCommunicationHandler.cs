@@ -21,7 +21,7 @@ namespace DatabaseApp
     {
         private MySqlConnection connection;
 
-        public static int LoggedWorkerID = 0; // zmienna globalna ustawiana przez logującego się pracownika
+        private static int LoggedUserID = 0; // zmienna globalna ustawiana przez logującego się uzytkownika
 
         public SQLCommunicationHandler()
         {
@@ -36,8 +36,8 @@ namespace DatabaseApp
             Kierownik
         }
 
-        public UserType currentUserType = UserType.None; // flaga 
-        public UserType oldUserType = UserType.None;
+        private UserType currentUserType = UserType.None; // flaga 
+        private UserType oldUserType = UserType.None;
 
         // Metoda do inicjalizacji połączenia z określonym użytkownikiem
         private void InitializeConnection()
@@ -277,7 +277,7 @@ namespace DatabaseApp
                 
                     command.Parameters.AddWithValue("@ClientID", clientID);
                     command.Parameters.AddWithValue("@BookID", bookID);
-                    command.Parameters.AddWithValue("@WorkerID", LoggedWorkerID);
+                    command.Parameters.AddWithValue("@WorkerID", LoggedUserID);
                     command.ExecuteNonQuery();
                 
 
@@ -316,7 +316,7 @@ namespace DatabaseApp
                         //}
 
                         MessageBox.Show("Zalogowano jako Klient.");
-                        LoggedWorkerID = GetClientID(email);
+                        LoggedUserID = GetClientID(email);
                         return true;
                     }
                     else
@@ -336,30 +336,33 @@ namespace DatabaseApp
 
 
 
-        public bool WorkerLogIn(bool ifDirector, string firstName, string lastName, string password)
+        public bool WorkerLogIn(string firstName, string lastName, string password)
         {
             MySqlCommand command = null;
 
             try
             {
-                // Inicjalizacja połączenia w zależności od typu logowania
-                if (ifDirector)
-                {
+                // Inicjalizacja połączenia jako 'Pracownik'
+                currentUserType = UserType.Pracownik;
+                InitializeConnection();
+
+                // Sprawdzanie, czy użytkownik istnieje i czy jest pracownikiem czy kierownikiem
+                string getPositionID =
+                   "SELECT StanowiskoID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
+
+                command = new MySqlCommand(getPositionID, connection);
+                command.Parameters.AddWithValue("@FirstName", firstName);
+                command.Parameters.AddWithValue("@LastName", lastName);
+                command.Parameters.AddWithValue("@Password", password);
+                
+                int positionID = Convert.ToInt32(command.ExecuteScalar());
+                if (positionID == 1)
                     currentUserType = UserType.Kierownik;
-                    InitializeConnection();
-
-                }
                 else
-                {
                     currentUserType = UserType.Pracownik;
-                    InitializeConnection();
-                    MessageBox.Show(currentUserType.ToString());
 
-                }
-                currentUserType = UserType.Kierownik;
-
-                string query = ifDirector ?
-                    "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password AND Kierownik_ID IS NULL" :
+                // Pobieranie ID zalogowanego użytkownika
+                string query = 
                     "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
 
                 command = new MySqlCommand(query, connection);
@@ -367,34 +370,41 @@ namespace DatabaseApp
                 command.Parameters.AddWithValue("@LastName", lastName);
                 command.Parameters.AddWithValue("@Password", password);
 
-                object result = command.ExecuteScalar();
 
+                object result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    LoggedWorkerID = Convert.ToInt32(result);
-
-                    MessageBox.Show(ifDirector ? "Zalogowano jako Kierownik." : "Zalogowano jako Pracownik.");
+                    // Jeżeli użytkownik istnieje, zaloguj go
+                    LoggedUserID = Convert.ToInt32(result);
                     return true;
                 }
                 else
                 {
-                    MessageBox.Show("Błędne dane logowania.");
+                    // Jeżeli użytkownik nie istnieje, poinformuj o błędnych danych
+                    Program.IncorrectDataInformation();
                     return false;
                 }
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Błąd logowania pracownika: {ex.Message}");
+                // Jeżeli wystąpi błąd, poinformuj o tym użytkownika
+                MessageBox.Show($"Error when logging in:\n {ex.Message}");
                 return false;
             }
             finally
             {
                 // Ręczne zwalnianie zasobów
                 if (command != null)
-                {
                     command.Dispose();
-                }
             }
+        }
+
+        public bool IfDirector()
+        {
+            if(currentUserType == UserType.Kierownik)
+                return true;
+            else 
+                return false;
         }
 
 
@@ -580,7 +590,7 @@ namespace DatabaseApp
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 
-                    command.Parameters.AddWithValue("@ClientId", LoggedWorkerID);
+                    command.Parameters.AddWithValue("@ClientId", LoggedUserID);
 
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
@@ -627,7 +637,7 @@ namespace DatabaseApp
 
                 MySqlCommand command = new MySqlCommand(query, connection);
                 
-                    command.Parameters.AddWithValue("@KlientID", LoggedWorkerID);
+                    command.Parameters.AddWithValue("@KlientID", LoggedUserID);
                     using (MySqlDataReader reader = command.ExecuteReader())
                     {
                         while (reader.Read())

@@ -43,11 +43,12 @@ namespace DatabaseApp
             this.removeGenreButton = new System.Windows.Forms.Button();
             this.removeAuthorButton = new System.Windows.Forms.Button();
             this.addAuthorButton = new System.Windows.Forms.Button();
+            this.welcomeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // searchClientButton
             // 
-            this.searchClientButton.Location = new System.Drawing.Point(34, 62);
+            this.searchClientButton.Location = new System.Drawing.Point(35, 93);
             this.searchClientButton.Name = "searchClientButton";
             this.searchClientButton.Size = new System.Drawing.Size(172, 31);
             this.searchClientButton.TabIndex = 0;
@@ -57,7 +58,7 @@ namespace DatabaseApp
             // 
             // payPenaltyButton
             // 
-            this.payPenaltyButton.Location = new System.Drawing.Point(34, 99);
+            this.payPenaltyButton.Location = new System.Drawing.Point(35, 130);
             this.payPenaltyButton.Name = "payPenaltyButton";
             this.payPenaltyButton.Size = new System.Drawing.Size(172, 31);
             this.payPenaltyButton.TabIndex = 0;
@@ -66,7 +67,7 @@ namespace DatabaseApp
             // 
             // searchForBooksButton
             // 
-            this.searchForBooksButton.Location = new System.Drawing.Point(238, 62);
+            this.searchForBooksButton.Location = new System.Drawing.Point(239, 93);
             this.searchForBooksButton.Name = "searchForBooksButton";
             this.searchForBooksButton.Size = new System.Drawing.Size(172, 31);
             this.searchForBooksButton.TabIndex = 1;
@@ -76,7 +77,7 @@ namespace DatabaseApp
             // 
             // lendBookButton
             // 
-            this.lendBookButton.Location = new System.Drawing.Point(238, 99);
+            this.lendBookButton.Location = new System.Drawing.Point(239, 130);
             this.lendBookButton.Name = "lendBookButton";
             this.lendBookButton.Size = new System.Drawing.Size(172, 31);
             this.lendBookButton.TabIndex = 2;
@@ -86,7 +87,7 @@ namespace DatabaseApp
             // 
             // returnBookButton
             // 
-            this.returnBookButton.Location = new System.Drawing.Point(238, 136);
+            this.returnBookButton.Location = new System.Drawing.Point(239, 167);
             this.returnBookButton.Name = "returnBookButton";
             this.returnBookButton.Size = new System.Drawing.Size(172, 31);
             this.returnBookButton.TabIndex = 3;
@@ -97,7 +98,7 @@ namespace DatabaseApp
             // manageClientsLabel
             // 
             this.manageClientsLabel.AutoSize = true;
-            this.manageClientsLabel.Location = new System.Drawing.Point(61, 27);
+            this.manageClientsLabel.Location = new System.Drawing.Point(62, 58);
             this.manageClientsLabel.Name = "manageClientsLabel";
             this.manageClientsLabel.Size = new System.Drawing.Size(119, 20);
             this.manageClientsLabel.TabIndex = 4;
@@ -106,7 +107,7 @@ namespace DatabaseApp
             // manageBooksLabel
             // 
             this.manageBooksLabel.AutoSize = true;
-            this.manageBooksLabel.Location = new System.Drawing.Point(264, 27);
+            this.manageBooksLabel.Location = new System.Drawing.Point(265, 58);
             this.manageBooksLabel.Name = "manageBooksLabel";
             this.manageBooksLabel.Size = new System.Drawing.Size(116, 20);
             this.manageBooksLabel.TabIndex = 5;
@@ -114,7 +115,7 @@ namespace DatabaseApp
             // 
             // addBookButton
             // 
-            this.addBookButton.Location = new System.Drawing.Point(238, 173);
+            this.addBookButton.Location = new System.Drawing.Point(239, 204);
             this.addBookButton.Name = "addBookButton";
             this.addBookButton.Size = new System.Drawing.Size(172, 31);
             this.addBookButton.TabIndex = 6;
@@ -124,7 +125,7 @@ namespace DatabaseApp
             // 
             // removeBookButton
             // 
-            this.removeBookButton.Location = new System.Drawing.Point(238, 210);
+            this.removeBookButton.Location = new System.Drawing.Point(239, 241);
             this.removeBookButton.Name = "removeBookButton";
             this.removeBookButton.Size = new System.Drawing.Size(172, 31);
             this.removeBookButton.TabIndex = 7;
@@ -134,7 +135,7 @@ namespace DatabaseApp
             // 
             // addGenreButton
             // 
-            this.addGenreButton.Location = new System.Drawing.Point(238, 247);
+            this.addGenreButton.Location = new System.Drawing.Point(239, 278);
             this.addGenreButton.Name = "addGenreButton";
             this.addGenreButton.Size = new System.Drawing.Size(172, 31);
             this.addGenreButton.TabIndex = 8;
@@ -144,7 +145,7 @@ namespace DatabaseApp
             // 
             // removeGenreButton
             // 
-            this.removeGenreButton.Location = new System.Drawing.Point(238, 284);
+            this.removeGenreButton.Location = new System.Drawing.Point(239, 315);
             this.removeGenreButton.Name = "removeGenreButton";
             this.removeGenreButton.Size = new System.Drawing.Size(172, 31);
             this.removeGenreButton.TabIndex = 9;
@@ -154,7 +155,7 @@ namespace DatabaseApp
             // 
             // removeAuthorButton
             // 
-            this.removeAuthorButton.Location = new System.Drawing.Point(238, 358);
+            this.removeAuthorButton.Location = new System.Drawing.Point(239, 389);
             this.removeAuthorButton.Name = "removeAuthorButton";
             this.removeAuthorButton.Size = new System.Drawing.Size(172, 31);
             this.removeAuthorButton.TabIndex = 11;
@@ -164,7 +165,7 @@ namespace DatabaseApp
             // 
             // addAuthorButton
             // 
-            this.addAuthorButton.Location = new System.Drawing.Point(238, 321);
+            this.addAuthorButton.Location = new System.Drawing.Point(239, 352);
             this.addAuthorButton.Name = "addAuthorButton";
             this.addAuthorButton.Size = new System.Drawing.Size(172, 31);
             this.addAuthorButton.TabIndex = 10;
@@ -172,11 +173,21 @@ namespace DatabaseApp
             this.addAuthorButton.UseVisualStyleBackColor = true;
             this.addAuthorButton.Click += new System.EventHandler(this.addAuthorButton_Click);
             // 
+            // welcomeLabel
+            // 
+            this.welcomeLabel.AutoSize = true;
+            this.welcomeLabel.Location = new System.Drawing.Point(31, 22);
+            this.welcomeLabel.Name = "welcomeLabel";
+            this.welcomeLabel.Size = new System.Drawing.Size(119, 20);
+            this.welcomeLabel.TabIndex = 12;
+            this.welcomeLabel.Text = "Manage Clients";
+            // 
             // WorkerPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 416);
+            this.ClientSize = new System.Drawing.Size(460, 443);
+            this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.removeAuthorButton);
             this.Controls.Add(this.addAuthorButton);
             this.Controls.Add(this.removeGenreButton);
@@ -204,6 +215,11 @@ namespace DatabaseApp
 
         #endregion
 
+        public void SetWelcomeLabelText(string text)
+        {
+            welcomeLabel.Text = text;
+        }
+
         private System.Windows.Forms.Button searchClientButton;
         private System.Windows.Forms.Button payPenaltyButton;
         private System.Windows.Forms.Button searchForBooksButton;
@@ -217,5 +233,6 @@ namespace DatabaseApp
         private System.Windows.Forms.Button removeGenreButton;
         private System.Windows.Forms.Button removeAuthorButton;
         private System.Windows.Forms.Button addAuthorButton;
+        private System.Windows.Forms.Label welcomeLabel;
     }
 }

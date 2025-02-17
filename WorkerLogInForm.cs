@@ -20,30 +20,27 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(passwordTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                bool ifSuccessful = Program.communicationHandler.WorkerLogIn(ifDirector, firstNameTextBox.Text, lastNameTextBox.Text,
+                bool ifSuccessful = Program.communicationHandler.WorkerLogIn( firstNameTextBox.Text, lastNameTextBox.Text,
                     passwordTextBox.Text);
 
                 if (ifSuccessful)
                 {
-                    if (ifDirector)
+                    if (Program.communicationHandler.IfDirector())
                     {
                         DirectorPanel directorPanel = new DirectorPanel();
+                        directorPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");
                         directorPanel.Show();
                     }
                     else
                     {
                         WorkerPanel workerPanel = new WorkerPanel();
+                        workerPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text  + " " + lastNameTextBox.Text + "!");
                         workerPanel.Show();
                     }
                 }
-                else Program.IncorrectDataInformation();
             }
 
         } //TODO: Dodac szyfrowanie
 
-        private void directorCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            ifDirector = directorCheckBox.Checked;
-        }
     }
 }
