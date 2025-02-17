@@ -16,6 +16,7 @@ namespace DatabaseApp
             else if (Program.communicationHandler.IsClientInDatabase(Program.communicationHandler.GetClientID(emailTextBox.Text))) 
                 MessageBox.Show("Client is registered in database.");
             else MessageBox.Show("Client is not registered in database.");
+            // TODO: Wyswietlenie informacji o kliencie
         }
     }
 }

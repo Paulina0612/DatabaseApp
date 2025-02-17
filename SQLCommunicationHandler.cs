@@ -388,7 +388,7 @@ namespace DatabaseApp
             catch (MySqlException ex)
             {
                 // Jeżeli wystąpi błąd, poinformuj o tym użytkownika
-                MessageBox.Show($"Error when logging in:\n {ex.Message}");
+                ErrorOccured(ex.Message);
                 return false;
             }
             finally
@@ -888,29 +888,24 @@ namespace DatabaseApp
         {
             try
             {
-                //InitializeConnection();
                 string query = "SELECT ID FROM Klienci WHERE Adres_e_mail = @Email";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 
-                    command.Parameters.AddWithValue("@Email", email);
-                    object result = command.ExecuteScalar();
-                    if (result != null)
-                    {
-                        return Convert.ToInt32(result);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Nie znaleziono ID klienta");
-                        return 0;
-                    }
+                command.Parameters.AddWithValue("@Email", email);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                    return Convert.ToInt32(result);
+                else
+                    return -1;
                 
             }
             catch(MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania ID klienta {ex.Message}");
+                ErrorOccured(ex.Message);
                 return -1;
             }
         }
+
         public float GetWorkerSalary(string data)
         {
             try
@@ -969,25 +964,19 @@ namespace DatabaseApp
         {
             try
             {
-                //InitializeConnection();
                 string query = "SELECT COUNT(*) FROM Klienci WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 
-                    command.Parameters.AddWithValue("@ID", ID);
-                    object result = command.ExecuteScalar();
-                    if(result != null && Convert.ToInt32(result) > 0)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                
+                command.Parameters.AddWithValue("@ID", ID);
+                object result = command.ExecuteScalar();
+                if(result != null && Convert.ToInt32(result) > 0)
+                    return true;
+                else
+                    return false;
             }
             catch(MySqlException ex)
             {
-                MessageBox.Show($"Blad sprawdzania czy klient jest w bazie {ex.Message}");
+                MessageBox.Show($"Error occured: {ex.Message}");
                 return false;
             }
         }
@@ -1043,6 +1032,11 @@ namespace DatabaseApp
                 MessageBox.Show($"Blad sprawdzania czy ksiazka jest wypozyczona {ex.Message}");
                 return false;
             }
+        }
+
+        private void ErrorOccured(string message)
+        {
+            MessageBox.Show($"Error occured: {message}");
         }
     }
 }
