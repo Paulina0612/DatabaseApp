@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(genreNameTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.AddGenre(genreNameTextBox.Text);
+                Program.communicationHandler.genresHandler.AddGenre(genreNameTextBox.Text);
                 MessageBox.Show("Genre successfully added.");
             }
         }

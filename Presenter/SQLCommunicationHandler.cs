@@ -10,6 +10,7 @@ using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DatabaseApp.Presenter;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Asn1.X509;
@@ -19,13 +20,17 @@ namespace DatabaseApp
 {
     public class SQLCommunicationHandler
     {
-        private MySqlConnection connection;
+        public MySqlConnection connection;
 
         private static int LoggedUserID = 0; // zmienna globalna ustawiana przez logującego się uzytkownika
 
+        public BooksHandler booksHandler;
+        public GenresHandler genresHandler;
+
         public SQLCommunicationHandler()
         {
-             
+            booksHandler = new BooksHandler();
+            genresHandler = new GenresHandler();
         }
 
         public enum UserType
@@ -40,7 +45,7 @@ namespace DatabaseApp
         private UserType oldUserType = UserType.None;
 
         // Metoda do inicjalizacji połączenia z określonym użytkownikiem
-        private void InitializeConnection()
+        public void InitializeConnection()
         {
             try
             {
@@ -89,30 +94,7 @@ namespace DatabaseApp
 
 
         // Adding records  
-        public void AddBook(string title, string authorData, string ISBN, string genreName)
-        {
-            try
-            {
-                InitializeConnection();
-                int authorID = GetAuthorID(authorData);
-                int genreID = GetGenreID(genreName);
-
-                string query = "INSERT INTO Ksiazki (Tytul, AutorID, GatunekID, ISBN) VALUES (@Title, @AuthorID, @GenreID, @ISBN)";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                
-                    command.Parameters.AddWithValue("@Title", title);
-                    command.Parameters.AddWithValue("@AuthorID", authorID);
-                    command.Parameters.AddWithValue("@GenreID", genreID);
-                    command.Parameters.AddWithValue("@ISBN", ISBN);
-                    command.ExecuteNonQuery();
-                
-                MessageBox.Show("Book successfully added. ");
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show($"Blad dodania ksiazki. {ex.Message}");
-            }
-        }
+        
         public void AddAuthor(string firstName, string lastName)
         {
             try
@@ -133,24 +115,7 @@ namespace DatabaseApp
                 MessageBox.Show($"Blad dodawania autora: {ex.Message}");
             }
         }
-        public void AddGenre(string name)
-        {
-            try
-            {
-                InitializeConnection();
-                string query = "INSERT INTO Gatunki (ID, Nazwa_gatunku) VALUES (0, @Name)"; //TODO: Ustawic automatyczne inkrementowanie ID
-                MySqlCommand command = new MySqlCommand(query, connection);
-                
-                    command.Parameters.AddWithValue("@Name", name);
-                    command.ExecuteNonQuery();
-                
-                MessageBox.Show("Gatunek zostal dodany.");
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show($"Blad dodawania gatunku: {ex.Message}");
-            }
-        }
+        
 
         public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, string managerData, string positionName, string password)
         {

@@ -21,7 +21,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(genreComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.AddBook(titleTextBox.Text, authorDataComboBox.Text, ISBNTextBox.Text, genreComboBox.Text);
+                Program.communicationHandler.booksHandler.AddBook(titleTextBox.Text, authorDataComboBox.Text, ISBNTextBox.Text, genreComboBox.Text);
             }
         }
 
