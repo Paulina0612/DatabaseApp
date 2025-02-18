@@ -16,7 +16,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(lastNameTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.AddAuthor(firstNameTextBox.Text, lastNameTextBox.Text);
+                Program.communicationHandler.authorsHandler.AddAuthor(firstNameTextBox.Text, lastNameTextBox.Text);
                 MessageBox.Show("Author successfully added. ");
             }
         }

@@ -21,7 +21,7 @@ namespace DatabaseApp
         private void BorrowedBooks_Load(object sender, EventArgs e)
         {
             List<BookData> books = new List<BookData>();
-            books = Program.communicationHandler.GetBorrowedBooks();
+            books = Program.communicationHandler.booksHandler.GetBorrowedBooks();
 
             foreach (BookData book in books)
             {

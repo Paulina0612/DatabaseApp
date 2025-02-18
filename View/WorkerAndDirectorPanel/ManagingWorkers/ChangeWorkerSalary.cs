@@ -24,14 +24,14 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(newSalaryTextBox.Text) && ifSalaryNumeric) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.ChangeWorkerSalary(workerDataComboBox.Text, newSalary);
+                Program.communicationHandler.workersHandler.ChangeWorkerSalary(workerDataComboBox.Text, newSalary);
                 MessageBox.Show("Salary successfully changed. ");
             }
         }
 
         private void workerDataComboBox_SelectedIndexChanged(object sender, EventArgs e)
         { 
-            currentSalaryTextBox.Text = Program.communicationHandler.GetWorkerSalary(workerDataComboBox.Text).ToString();
+            currentSalaryTextBox.Text = Program.communicationHandler.workersHandler.GetWorkerSalary(workerDataComboBox.Text).ToString();
         }
     }
 }

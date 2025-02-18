@@ -21,7 +21,7 @@ namespace DatabaseApp
         //private void BooksCatalog_Load(object sender, EventArgs e)
         //{
             List<BookData> books = new List<BookData>();
-            books = Program.communicationHandler.GetBooksCatalog(genreComboBox.Text);
+            books = Program.communicationHandler.booksHandler.GetBooksCatalog(genreComboBox.Text);
             
             foreach (BookData book in books)
             {

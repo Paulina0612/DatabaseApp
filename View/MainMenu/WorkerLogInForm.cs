@@ -20,12 +20,12 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(passwordTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                bool ifSuccessful = Program.communicationHandler.WorkerLogIn( firstNameTextBox.Text, lastNameTextBox.Text,
+                bool ifSuccessful = Program.communicationHandler.workersHandler.WorkerLogIn( firstNameTextBox.Text, lastNameTextBox.Text,
                     passwordTextBox.Text);
 
                 if (ifSuccessful)
                 {
-                    if (Program.communicationHandler.IfDirector())
+                    if (Program.communicationHandler.workersHandler.IfDirector())
                     {
                         DirectorPanel directorPanel = new DirectorPanel();
                         directorPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");

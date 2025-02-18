@@ -22,7 +22,7 @@ namespace DatabaseApp
         {
             History historyForm = new History();
 
-            List<BookData> history = Program.communicationHandler.GetHistory();
+            List<BookData> history = Program.communicationHandler.booksHandler.GetHistory();
             //TODO:Uzupelnic tabele w formatce
             historyForm.Show();
         }
@@ -32,7 +32,7 @@ namespace DatabaseApp
             BorrowedBooks borrowedBooksForm = new BorrowedBooks();
 
             //TODO:Uzupelnic tabele w formatce
-            List<BookData> history = Program.communicationHandler.GetHistory();
+            List<BookData> history = Program.communicationHandler.booksHandler.GetHistory();
             borrowedBooksForm.Show();
         }
 
@@ -41,7 +41,7 @@ namespace DatabaseApp
             BooksCatalog booksCatalogForm = new BooksCatalog();
 
             //TODO:Uzupelnic tabele w formatce
-            List<BookData> history = Program.communicationHandler.GetHistory();
+            List<BookData> history = Program.communicationHandler.booksHandler.GetHistory();
             booksCatalogForm.Show();
         }
     }

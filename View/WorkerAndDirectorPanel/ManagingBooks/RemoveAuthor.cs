@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(authorDataComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.RemoveAuthor(authorDataComboBox.Text);
+                Program.communicationHandler.authorsHandler.RemoveAuthor(authorDataComboBox.Text);
                 MessageBox.Show("Author removed successfully.");
             }
         }

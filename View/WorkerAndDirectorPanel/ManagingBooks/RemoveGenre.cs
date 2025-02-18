@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(genreNameComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.RemoveGenre(genreNameComboBox.Text);
+                Program.communicationHandler.genresHandler.RemoveGenre(genreNameComboBox.Text);
                 MessageBox.Show("Genre successfully removed.");
             }
         }

@@ -14,10 +14,10 @@ namespace DatabaseApp
         {
             if (string.IsNullOrEmpty(clientEmailTextBox.Text)) Program.IncorrectDataInformation();
             else if (string.IsNullOrEmpty(bookIDTextBox.Text)) Program.IncorrectDataInformation();
-            else if(!Program.communicationHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) Program.IncorrectDataInformation();
+            else if(!Program.communicationHandler.booksHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.LendBook(clientEmailTextBox.Text, int.Parse(bookIDTextBox.Text));
+                Program.communicationHandler.booksHandler.LendBook(clientEmailTextBox.Text, int.Parse(bookIDTextBox.Text));
                 MessageBox.Show("Operation successful.");
             }
         }

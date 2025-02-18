@@ -56,6 +56,7 @@
             this.removeAuthorButton.TabIndex = 24;
             this.removeAuthorButton.Text = "Remove Author";
             this.removeAuthorButton.UseVisualStyleBackColor = true;
+            this.removeAuthorButton.Click += new System.EventHandler(this.removeAuthorButton_Click);
             // 
             // addAuthorButton
             // 
@@ -65,6 +66,7 @@
             this.addAuthorButton.TabIndex = 23;
             this.addAuthorButton.Text = "Add Author";
             this.addAuthorButton.UseVisualStyleBackColor = true;
+            this.addAuthorButton.Click += new System.EventHandler(this.addAuthorButton_Click);
             // 
             // removeGenreButton
             // 
@@ -74,6 +76,7 @@
             this.removeGenreButton.TabIndex = 22;
             this.removeGenreButton.Text = "Remove Genre";
             this.removeGenreButton.UseVisualStyleBackColor = true;
+            this.removeGenreButton.Click += new System.EventHandler(this.removeGenreButton_Click);
             // 
             // addGenreButton
             // 
@@ -93,6 +96,7 @@
             this.removeBookButton.TabIndex = 20;
             this.removeBookButton.Text = "Remove Book";
             this.removeBookButton.UseVisualStyleBackColor = true;
+            this.removeBookButton.Click += new System.EventHandler(this.removeBookButton_Click);
             // 
             // addBookButton
             // 
@@ -102,6 +106,7 @@
             this.addBookButton.TabIndex = 19;
             this.addBookButton.Text = "Add Book";
             this.addBookButton.UseVisualStyleBackColor = true;
+            this.addBookButton.Click += new System.EventHandler(this.addBookButton_Click);
             // 
             // manageBooksLabel
             // 
@@ -128,6 +133,7 @@
             this.payPenaltyButton.Size = new System.Drawing.Size(172, 31);
             this.payPenaltyButton.TabIndex = 12;
             this.payPenaltyButton.Text = "Penalty Payment";
+            this.payPenaltyButton.Click += new System.EventHandler(this.payPenaltyButton_Click);
             // 
             // returnBookButton
             // 
@@ -137,6 +143,7 @@
             this.returnBookButton.TabIndex = 16;
             this.returnBookButton.Text = "Return Book";
             this.returnBookButton.UseVisualStyleBackColor = true;
+            this.returnBookButton.Click += new System.EventHandler(this.returnBookButton_Click);
             // 
             // lendBookButton
             // 
@@ -146,6 +153,7 @@
             this.lendBookButton.TabIndex = 15;
             this.lendBookButton.Text = "Lend Book";
             this.lendBookButton.UseVisualStyleBackColor = true;
+            this.lendBookButton.Click += new System.EventHandler(this.lendBookButton_Click);
             // 
             // searchForBooksButton
             // 
@@ -155,6 +163,7 @@
             this.searchForBooksButton.TabIndex = 14;
             this.searchForBooksButton.Text = "Search For Books";
             this.searchForBooksButton.UseVisualStyleBackColor = true;
+            this.searchForBooksButton.Click += new System.EventHandler(this.searchForBooksButton_Click);
             // 
             // searchClientButton
             // 

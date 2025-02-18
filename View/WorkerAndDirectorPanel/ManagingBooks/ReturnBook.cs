@@ -15,16 +15,16 @@ namespace DatabaseApp
         private void commitButton_Click(object sender, EventArgs e)
         {
             bool ifBookIDNumeric = int.TryParse(bookIDTextBox.Text, out int bookID);
-            int clientID = Program.communicationHandler.GetClientID(clientEmailTextBox.Text);
+            int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmailTextBox.Text);
 
             if (string.IsNullOrEmpty(clientEmailTextBox.Text) &&
-                Program.communicationHandler.IsClientInDatabase(clientID))
+                Program.communicationHandler.clientsHandler.IsClientInDatabase(clientID))
                 Program.IncorrectDataInformation();
-            else if (!ifBookIDNumeric && !Program.communicationHandler.IsBookBorrowedByClient(clientID, bookID))
+            else if (!ifBookIDNumeric && !Program.communicationHandler.booksHandler.IsBookBorrowedByClient(clientID, bookID))
                 Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.ReturnBook(clientEmailTextBox.Text, bookID, ifPenaltyPayed);
+                Program.communicationHandler.booksHandler.ReturnBook(clientEmailTextBox.Text, bookID, ifPenaltyPayed);
                 MessageBox.Show("Book returned.");
             }
         }

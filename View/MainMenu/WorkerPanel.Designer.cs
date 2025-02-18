@@ -73,7 +73,7 @@ namespace DatabaseApp
             this.searchForBooksButton.TabIndex = 1;
             this.searchForBooksButton.Text = "Search For Books";
             this.searchForBooksButton.UseVisualStyleBackColor = true;
-            this.searchForBooksButton.Click += new System.EventHandler(this.searchForBooksButton_Click_1);
+            this.searchForBooksButton.Click += new System.EventHandler(this.searchForBooksButton_Click);
             // 
             // lendBookButton
             // 
@@ -206,11 +206,6 @@ namespace DatabaseApp
             this.ResumeLayout(false);
             this.PerformLayout();
 
-        }
-
-        private void searchForBooksButton_Click_1(object sender, EventArgs e)
-        {
-            throw new NotImplementedException();
         }
 
         #endregion

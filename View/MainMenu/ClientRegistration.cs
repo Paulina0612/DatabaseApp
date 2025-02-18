@@ -17,7 +17,7 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(emailTextBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.ClientRegistration(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text);
+                Program.communicationHandler.clientsHandler.ClientRegistration(firstNameTextBox.Text, lastNameTextBox.Text, emailTextBox.Text);
                 MessageBox.Show("Registration successful.");
             }
         }

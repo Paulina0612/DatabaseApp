@@ -15,7 +15,7 @@ namespace DatabaseApp
             if (string.IsNullOrEmpty(workerDataComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.RemoveWorker(workerDataComboBox.Text);
+                Program.communicationHandler.workersHandler.RemoveWorker(workerDataComboBox.Text);
                 MessageBox.Show("Worker successfully removed.");
             }
         }

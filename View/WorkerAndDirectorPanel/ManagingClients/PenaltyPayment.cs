@@ -13,11 +13,11 @@ namespace DatabaseApp
         private void commitButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(clientEmailTextBox.Text) && 
-                Program.communicationHandler.IsClientInDatabase(Program.communicationHandler.GetClientID(clientEmailTextBox.Text))) 
+                Program.communicationHandler.clientsHandler.IsClientInDatabase(Program.communicationHandler.clientsHandler.GetClientID(clientEmailTextBox.Text))) 
                 Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.PenaltyPayment(clientEmailTextBox.Text);
+                Program.communicationHandler.clientsHandler.PenaltyPayment(clientEmailTextBox.Text);
                 MessageBox.Show("Operation successful.");
             }
         }

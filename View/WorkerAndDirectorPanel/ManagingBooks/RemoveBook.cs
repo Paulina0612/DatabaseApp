@@ -14,11 +14,11 @@ namespace DatabaseApp
         {
             bool ifIDNumeric = int.TryParse(bookIDTextBox.Text, out int id);
 
-            if (ifIDNumeric && string.IsNullOrEmpty(bookIDTextBox.Text) && !Program.communicationHandler.IsBookInDatabase(id))
+            if (ifIDNumeric && string.IsNullOrEmpty(bookIDTextBox.Text) && !Program.communicationHandler.booksHandler.IsBookInDatabase(id))
                 Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.RemoveBook(id);
+                Program.communicationHandler.booksHandler.RemoveBook(id);
                 MessageBox.Show("Book succcessfully removed.");
             }
         }

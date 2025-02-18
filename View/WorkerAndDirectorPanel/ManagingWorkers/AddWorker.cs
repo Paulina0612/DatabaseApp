@@ -45,7 +45,7 @@ namespace DatabaseApp
             {
                 try
                 {
-                    Program.communicationHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                    Program.communicationHandler.workersHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
                         emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), managerComboBox.Text,
                         positionComboBox.Text, password);
                     MessageBox.Show("Worker successfully added.\nGenerated password is: " + password);

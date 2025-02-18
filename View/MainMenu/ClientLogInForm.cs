@@ -19,7 +19,7 @@ namespace DatabaseApp
                 Program.IncorrectDataInformation();
             else
             {
-                bool ifSuccessful = Program.communicationHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
+                bool ifSuccessful = Program.communicationHandler.clientsHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
 
                 if (ifSuccessful)
                 {
