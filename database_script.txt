@@ -1,0 +1,346 @@
+﻿CREATE DATABASE Biblioteka;
+USE Biblioteka;
+
+
+CREATE TABLE Pracownik (
+    ID INT(10) PRIMARY KEY,
+    Imie VARCHAR(20),
+    Nazwisko VARCHAR(20),
+    Wyplata FLOAT(10, 2),
+    PESEL VARCHAR(11) UNIQUE,
+    Numer_telefonu VARCHAR(9),
+    Adres_e_mail VARCHAR(20),
+    Kierownik_ID INT(10) NULL,
+    StanowiskoID INT(10),
+    Haslo VARCHAR(20)
+);
+
+CREATE TABLE Stanowisko (
+    ID INT(10) PRIMARY KEY,
+    Nazwa_stanowiska VARCHAR(10)
+);
+
+CREATE TABLE Katalog_ksiazek (
+	ID INT(10) PRIMARY KEY,
+    KsiazkiID INT(10),
+    Stan_magazynowy_ksiazki VARCHAR(10)
+);
+
+CREATE TABLE Klienci (
+    ID INT(10) PRIMARY KEY,
+    Imie VARCHAR(20),
+    Nazwisko VARCHAR(20),
+    Adres_e_mail VARCHAR(50),
+    Naleznosc FLOAT(10, 2),
+    Numer_karty VARCHAR(7)
+);
+
+CREATE TABLE Wypozyczenia (
+    ID INT(10) PRIMARY KEY,
+    KlientID INT(10),
+    Katalog_ksiazekID INT(10),
+    PracownikID INT(10),
+    Data_wypozyczenia DATE,
+    Data_spodziewanego_zwrotu DATE
+);
+
+CREATE TABLE Zwroty (
+    ID INT(10) PRIMARY KEY,
+    Wypozyczenie_ID INT(10),
+    Data DATE,
+    Kara FLOAT(10, 2) NULL,
+    PracownikID INT(10)
+);
+
+CREATE TABLE Autor (
+    ID INT(10) PRIMARY KEY,
+    Imie VARCHAR(20),
+    Nazwisko VARCHAR(20)
+);
+
+CREATE TABLE Gatunki (
+    ID INT(10) PRIMARY KEY,
+    Nazwa_gatunku VARCHAR(50)
+);
+
+CREATE TABLE Ksiazki (
+    ID INT(10) PRIMARY KEY,
+    Tytul VARCHAR(100) UNIQUE,
+    AutorID INT(10),
+    GatunekID INT(10),
+    ISBN VARCHAR(13) UNIQUE
+);
+
+ALTER TABLE Biblioteka.Pracownik
+    ADD CONSTRAINT FK_Pracownik_Stanowisko
+    FOREIGN KEY (StanowiskoID) REFERENCES Biblioteka.Stanowisko(ID);
+
+ALTER TABLE Biblioteka.Wypozyczenia
+    ADD CONSTRAINT FK_Wypozyczenia_Klient
+    FOREIGN KEY (KlientID) REFERENCES Biblioteka.Klienci(ID),
+    ADD CONSTRAINT FK_Wypozyczenia_Katalog_ksiazek
+    FOREIGN KEY (Katalog_ksiazekID) REFERENCES Biblioteka.Katalog_ksiazek(ID),
+    ADD CONSTRAINT FK_Wypozyczenia_Pracownik
+    FOREIGN KEY (PracownikID) REFERENCES Biblioteka.Pracownik(ID);
+
+ALTER TABLE Biblioteka.Zwroty
+    ADD CONSTRAINT FK_Zwroty_Wypozyczenia
+    FOREIGN KEY (Wypozyczenie_ID) REFERENCES Biblioteka.Wypozyczenia(ID),
+    ADD CONSTRAINT FK_Zwroty_Pracownik
+    FOREIGN KEY (PracownikID) REFERENCES Biblioteka.Pracownik(ID);
+
+ALTER TABLE Biblioteka.Ksiazki
+    ADD CONSTRAINT FK_Ksiazki_Autor
+    FOREIGN KEY (AutorID) REFERENCES Biblioteka.Autor(ID),
+    ADD CONSTRAINT FK_Ksiazki_Gatunek
+    FOREIGN KEY (GatunekID) REFERENCES Biblioteka.Gatunki(ID);
+   
+alter table Biblioteka.katalog_ksiazek 
+	add constraint FK_Katalog_ksiazek_ksiazki
+	foreign key (KsiazkiID) references Biblioteka.Ksiazki(ID);
+
+
+
+alter table Biblioteka.Pracownik
+	add constraint FK_Pracownik_Stanowisko_zachowanie
+	foreign key (StanowiskoID) references Biblioteka.Stanowisko(ID)
+	on delete set null on update cascade;
+	
+alter table Biblioteka.Wypozyczenia
+	add constraint FK_Wypozyczenia_Klient_zachowanie
+	foreign key (KlientID) references Biblioteka.Klienci(ID)
+	on delete cascade on update cascade,
+	add constraint FK_Wypozyczenia_Katalog_ksiazek_zachowanie
+	foreign key (Katalog_ksiazekID) references Biblioteka.Katalog_ksiazek(ID)
+	on delete set null on update cascade,
+	add constraint FK_Wypozyczenia_Pracownik_zachowanie
+	foreign key (PracownikID) references Biblioteka.Pracownik(ID)
+	on delete set null on update cascade;
+	
+alter table Biblioteka.Zwroty
+	add constraint FK_Zwroty_Wypozyczenia_zachowanie
+	foreign key (Wypozyczenie_ID) references Biblioteka.Wypozyczenia(ID)
+	on delete cascade on update cascade,
+	add constraint FK_Zwroty_Pracownik_zachowanie
+	foreign key (PracownikID) references Biblioteka.Pracownik(ID)
+	on delete set null on update cascade;
+
+alter table Biblioteka.Ksiazki
+	add constraint FK_Ksiazki_Autor_zachowanie
+	foreign key (AutorID) references Biblioteka.Autor(ID)
+	on delete set null on update cascade,
+	add constraint FK_Ksiazki_Gatunek_zachowanie
+	foreign key (GatunekID) references Biblioteka.Gatunki(ID)
+	on delete set null on update cascade;
+
+alter table Biblioteka.Katalog_ksiazek
+	add constraint FK_Katalog_ksiazek_Ksiazki_zachowanie
+	foreign key (KsiazkiID) references Biblioteka.Ksiazki(ID)
+	on delete cascade on update cascade;
+
+
+
+delimiter //
+create procedure DodajKlienta (
+    in p_Imie varchar(20),
+    in p_Nazwisko varchar(20),
+    in p_AdresEmail varchar(50),
+    in p_Naleznosc float(10, 2),
+    in p_NumerKarty varchar(7)
+)
+begin
+    insert into Biblioteka.Klienci (Imie, Nazwisko, Adres_e_mail, Naleznosc, Numer_karty)
+    values (p_Imie, p_Nazwisko, p_AdresEmail, p_Naleznosc, p_NumerKarty);
+end //
+delimiter ;
+
+delimiter //
+create procedure AktualizujPracownika (
+	in p_ID int(10),
+	in p_Imie varchar(20),
+    in p_Nazwisko varchar(20),
+    in p_Wyplata float(10, 2),
+    in p_Pesel varchar(11),
+    in p_NumerTelefonu varchar(9),
+    in p_AdresEmail varchar(20),
+    in p_KierownikID int(10),
+    in p_StanowiskoID int(10),
+    in p_Haslo varchar(20)
+)
+begin
+	update Pracownik 
+	set Imie = p_Imie,
+		Nazwisko = p_Nazwisko,
+		Wyplata = p_Wyplata,
+		PESEL = p_Pesel,
+		Numer_Telefonu = p_NumerTelefonu,
+		Adres_e_mail = p_AdresEmail,
+    	Kierownik_ID = p_KierownikID,
+    	StanowiskoID = p_StanowiskoID,
+        Haslo = p_Haslo
+    where ID = p_ID;
+end //
+delimiter ;
+
+delimiter //
+create function PobierzKsiazkiAutora(p_AutorID int(10))
+returns text
+deterministic
+begin
+	declare result text default " ";
+	select group_concat(Tytul separator ', ')
+	into result
+	from ksiazki
+	where AutorID = p_AutorID;
+	
+	return result;
+end//
+delimiter ;
+
+
+delimiter //
+create function SprawdzDostepnoscKsiazki(p_KsiazkiID int(10))
+returns varchar(10)
+deterministic
+begin
+    declare stan varchar(10);
+   	set stan = " ";
+    select stan_magazynowy_ksiazki into stan
+    from katalog_ksiazek
+    where ksiazkiID = p_ksiazkiID;
+
+    if stan = "tak" then
+        return stan;
+    else
+        return "nie";
+    end if;
+end //
+delimiter ;
+
+delimiter //
+create procedure DodajWypozyczenie (
+    in p_KlientID int(10),
+    in p_KsiazkiID int(10),
+    in p_PracownikID int(10),
+    in p_DataWypozyczenia date,
+    in p_DataZwrotu date
+)
+begin
+    declare stan varchar(10);
+    -- sprawdzenie dostępności książki
+    select stan_magazynowy_ksiazki into stan
+    from katalog_ksiazek
+    where KsiazkiID = p_KsiazkiID;
+
+    if stan = 'dostępna' then
+        -- dodanie wypożyczenia
+        insert into wypozyczenia (KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu)
+        values (p_KlientID, p_KsiazkiID, p_PracownikID, p_DataWypozyczenia, p_DataZwrotu);
+
+        -- aktualizacja stanu magazynowego
+        update katalog_ksiazek
+        set stan_magazynowy_ksiazki = 'niedostępna'
+        where KsiazkiID = p_KsiazkiID;
+    else
+        signal sqlstate '45000'
+        set message_text = 'książka jest obecnie niedostępna';
+    end if;
+end //
+delimiter ;
+
+delimiter //
+create function PobierzWypozyczeniaKlienta(p_KlientID int(10))
+returns text
+deterministic
+begin
+    declare result text default '';
+    select group_concat(tytul separator ', ')
+    into result
+    from wypozyczenia
+    join katalog_ksiazek on wypozyczenia.Katalog_ksiazekID = katalog_ksiazek.ID 
+    join ksiazki on ksiazki.ID = katalog_ksiazek.KsiazkiID
+    where wypozyczenia.klientID = p_klientID;
+
+    return result;
+end //
+delimiter ;
+
+delimiter //
+create procedure NaliczKareZaOpoznienie (
+    in p_WypozyczenieID int(10),
+    in p_StawKakary float(10, 2)
+)
+begin
+    declare dzien_opoznienia int(10);
+    declare data_spodziewana date;
+    declare data_zwrotu date;
+    declare kara float(10, 2);
+
+    -- pobranie dat zwrotu i spodziewanego zwrotu
+    select data_spodziewanego_zwrotu, data
+    into data_spodziewana, data_zwrotu
+    from wypozyczenia
+    join zwroty on wypozyczenia.ID = zwroty.wypozyczenie_ID
+    where wypozyczenia.ID = p_wypozyczenieID;
+
+    -- obliczenie liczby dni opóźnienia
+    set dzien_opoznienia = datediff(data_zwrotu, data_spodziewana);
+
+    if dzien_opoznienia > 0 then
+        set kara = Dzien_Opoznienia * p_StawkaKary;
+
+        -- aktualizacja kary w tabeli zwroty
+        update zwroty
+        set kara = kara
+        where wypozyczenie_ID = p_WypozyczenieID;
+    end if;
+end //
+delimiter ;
+
+
+create user 'Klient'@'%' identified with caching_sha2_password by 'klient_password';
+create user 'Pracownik'@'%' identified with caching_sha2_password by 'pracownik_password';
+create user 'Kierownik'@'%' identified with caching_sha2_password by 'kierownik_password';
+
+grant select on Biblioteka.autor to 'Klient'@'%';
+grant select on Biblioteka.gatunki to 'Klient'@'%';
+grant select on Biblioteka.katalog_ksiazek to 'Klient'@'%';
+grant select on Biblioteka.ksiazki to 'Klient'@'%';
+grant select, insert on Biblioteka.klienci to 'Klient'@'%';
+grant select on Biblioteka.wypozyczenia to 'Klient'@'%';
+grant select on Biblioteka.zwroty to 'Klient'@'%';
+
+grant select, insert, delete on Biblioteka.autor to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select, insert, delete on Biblioteka.gatunki to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select, insert, delete, update on Biblioteka.katalog_ksiazek to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select, insert, delete, update on Biblioteka.klienci to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select, insert, delete on Biblioteka.ksiazki to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select on Biblioteka.pracownik to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select, insert on Biblioteka.wypozyczenia to 'Pracownik'@'%', 'Kierownik'@'%';
+grant select, insert on Biblioteka.zwroty to 'Pracownik'@'%', 'Kierownik'@'%';
+
+grant insert, delete, update on Biblioteka.pracownik to 'Kierownik'@'%';
+grant select, insert, delete on Biblioteka.stanowisko to 'Kierownik'@'%';
+
+GRANT EXECUTE ON PROCEDURE Biblioteka.DodajKlienta TO 'Kierownik'@'%';
+GRANT EXECUTE ON PROCEDURE Biblioteka.DodajKlienta TO 'Pracownik'@'%';
+GRANT EXECUTE ON PROCEDURE Biblioteka.AKtualizujPracownika TO 'Kierownik'@'%';
+GRANT EXECUTE ON PROCEDURE Biblioteka.DodajWypozyczenie TO 'Pracownik'@'%';
+GRANT EXECUTE ON PROCEDURE Biblioteka.DodajWypozyczenie TO 'Kierownik'@'%';
+GRANT EXECUTE ON PROCEDURE Biblioteka.NaliczKareZaOpoznienie TO 'Kierownik'@'%';
+GRANT EXECUTE ON PROCEDURE Biblioteka.NaliczKareZaOpoznienie TO 'Pracownik'@'%';
+
+GRANT EXECUTE ON FUNCTION Biblioteka.PobierzKsiazkiAutora TO 'Pracownik'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.PobierzKsiazkiAutora TO 'Kierownik'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.PobierzKsiazkiAutora TO 'Klient'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.PobierzWypozyczeniaKlienta TO 'Pracownik'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.PobierzWypozyczeniaKlienta TO 'Kierownik'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.PobierzWypozyczeniaKlienta TO 'Klient'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.SprawdzDostepnoscKsiazki TO 'Pracownik'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.SprawdzDostepnoscKsiazki TO 'Kierownik'@'%';
+GRANT EXECUTE ON FUNCTION Biblioteka.SprawdzDostepnoscKsiazki TO 'Klient'@'%';
+
+flush privileges;
+
+
+
