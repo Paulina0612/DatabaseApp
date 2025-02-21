@@ -40,15 +40,15 @@ namespace DatabaseApp.Presenter
                 command.ExecuteNonQuery();
 
 
-                MessageBox.Show("Klient został pomyślnie dodany.");
+                MessageBox.Show("Client hsa been succesfully added.");
 
                 // Wyświetlenie zamaskowanego numeru karty
                 string maskedCard = MaskCardNumber(cardNumber);
-                MessageBox.Show($"Numer karty klienta: {maskedCard}");
+                MessageBox.Show($"Client's card number: {maskedCard}");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad podczas dodawania klienta: {ex.Message}");
+                MessageBox.Show($"Error adding the client: {ex.Message}");
             }
         }
 
@@ -79,7 +79,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania ostatniego numeru karty {ex.Message}");
+                MessageBox.Show($"Error retrieving the card's last number. {ex.Message}");
                 return -1;
             }
 
@@ -124,14 +124,14 @@ namespace DatabaseApp.Presenter
                 }
                 else
                 {
-                    MessageBox.Show("Błędny email lub numer karty.");
+                    MessageBox.Show("Wrong e-mail or card number.");
                     return false;
                 }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Błąd logowania klienta: {ex.Message}");
+                MessageBox.Show($"Error logging in the customer: {ex.Message}");
                 return false;
             }
         }
@@ -149,11 +149,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@ClientID", clientID);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Platnosc za karę została zrealizowana.");
+                MessageBox.Show("The payment for the fine has been processed:.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad podczas realizacji platnosci za kare: {ex.Message}");
+                MessageBox.Show($"Error processing the payment for the fine: {ex.Message}");
             }
         }
 
@@ -196,7 +196,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error occured: {ex.Message}");
+                MessageBox.Show($"Error checking client's presence in the database: {ex.Message}");
                 return false;
             }
         }

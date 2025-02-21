@@ -31,7 +31,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad dodania ksiazki. {ex.Message}");
+                MessageBox.Show($"Error adding the book: {ex.Message}");
             }
         }
 
@@ -50,11 +50,11 @@ namespace DatabaseApp.Presenter
                 command.ExecuteNonQuery();
 
 
-                MessageBox.Show("Wypozyczenie zostalo dodane.");
+                MessageBox.Show("Loan has been added.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad wypozyczenia ksiazki: {ex.Message}");
+                MessageBox.Show($"Error lending the book: {ex.Message}");
             }
         }
 
@@ -72,11 +72,11 @@ namespace DatabaseApp.Presenter
                 command.ExecuteNonQuery();
 
 
-                MessageBox.Show("Ksiazka została usunieta.");
+                MessageBox.Show("Book has been removed.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad usuwania ksiazki: {ex.Message}");
+                MessageBox.Show($"Error removing the book: {ex.Message}");
             }
 
         }
@@ -96,11 +96,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@IfPenaltyPayed", ifPenaltyPayed);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Ksiazka została zwrocona.");
+                MessageBox.Show("Book has been returned.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad zwracania ksiazki: {ex.Message}");
+                MessageBox.Show($"Error returning the book: {ex.Message}");
             }
 
         }
@@ -149,7 +149,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania historii: {ex.Message}");
+                MessageBox.Show($"Error retrieving history: {ex.Message}");
             }
 
             return history;
@@ -196,7 +196,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania wypozyczonych ksiazek: {ex.Message}");
+                MessageBox.Show($"Error retrieving borrowed books: {ex.Message}");
             }
 
             return borrowedBooks;
@@ -246,7 +246,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                //MessageBox.Show($"Error fetching books catalog: {ex.Message}");
+                MessageBox.Show($"Error fetching books catalog: {ex.Message}");
             }
 
             return catalog;
@@ -275,7 +275,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad sprawdzania dostepnosci ksiazki{ex.Message}");
+                MessageBox.Show($"Error checking book's avaibility. {ex.Message}");
                 return false;
             }
         }
@@ -303,7 +303,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad sprawdzania dostepnosci ksiazki {ex.Message}");
+                MessageBox.Show($"Error checking book's avaibility in the database. {ex.Message}");
                 return false;
             }
         }
@@ -332,7 +332,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad sprawdzania czy ksiazka jest wypozyczona {ex.Message}");
+                MessageBox.Show($"Error checking book's borrowed status. {ex.Message}");
                 return false;
             }
         }

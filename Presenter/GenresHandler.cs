@@ -21,11 +21,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@Name", name);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Gatunek zostal dodany.");
+                MessageBox.Show("Genre has been added.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad dodawania gatunku: {ex.Message}");
+                MessageBox.Show($"Error adding genre: {ex.Message}");
             }
         }
 
@@ -41,11 +41,11 @@ namespace DatabaseApp.Presenter
                 command.ExecuteNonQuery();
 
 
-                MessageBox.Show("Gatunek zostal usuniety.");
+                MessageBox.Show("Genre has been deleted.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad usuwania gatunku: {ex.Message}");
+                MessageBox.Show($"Error deleting the genre: {ex.Message}");
             }
         }
 
@@ -94,14 +94,14 @@ namespace DatabaseApp.Presenter
                 }
                 else
                 {
-                    MessageBox.Show("Nie znaleziono gatunku");
+                    MessageBox.Show("The genre has not been found.");
                     return 0;
                 }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania ID gatunku {ex.Message}");
+                MessageBox.Show($"Error retrieving genre's ID {ex.Message}");
                 return -1;
             }
         }

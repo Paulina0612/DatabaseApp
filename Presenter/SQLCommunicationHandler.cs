@@ -85,7 +85,7 @@ namespace DatabaseApp
                         connectionString = $"Server=localhost;Database=Biblioteka;User Id=Kierownik;Password=kierownik_password;";
                         break;
                     default:
-                        throw new InvalidOperationException("Nieprawidlowy typ uzytkownika");
+                        throw new InvalidOperationException("Invalid user type");
                 }
 
                 connection = new MySqlConnection(connectionString);
@@ -118,14 +118,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        MessageBox.Show("Nie znaleziono ID stanowiska");
+                        MessageBox.Show("The position's ID has not been found.");
                         return 0;
                     }
                 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania ID stanowiska {ex.Message}");
+                MessageBox.Show($"Error retrieving the position's ID {ex.Message}");
                 return -1;
             }
 
@@ -148,14 +148,14 @@ namespace DatabaseApp
                     }
                     else
                     {
-                        MessageBox.Show("Nie znaleziono wypozyczenia dla podanych danych");
+                        MessageBox.Show("No borrowing found for the provided data.");
                         return -1;
                     }
                 
             }
             catch(MySqlException ex)
             {
-                MessageBox.Show($"Blad sprawdzania ID wypozyczenia {ex.Message}");
+                MessageBox.Show($"Error checking the borrowing ID: {ex.Message}");
                 return 0;
             }
         }

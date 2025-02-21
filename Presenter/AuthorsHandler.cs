@@ -14,7 +14,7 @@ namespace DatabaseApp.Presenter
         {
             try
             {
-                MessageBox.Show($"User type set to: {Program.communicationHandler.currentUserType}");// ---------------------
+                MessageBox.Show($"User type set to: {Program.communicationHandler.currentUserType}");
                 Program.communicationHandler.InitializeConnection();
                 string query = "INSERT INTO Autor (Imie, Nazwisko) VALUES (@FirstName, @LastName)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
@@ -23,11 +23,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@LastName", lastName);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Autor został dodany.");
+                MessageBox.Show("Author has been added.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad dodawania autora: {ex.Message}");
+                MessageBox.Show($"Error adding the author: {ex.Message}");
             }
         }
 
@@ -42,17 +42,17 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@Data", data);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Autor zostal usuniety.");
+                MessageBox.Show("Author has been removed.");
             }
             catch (MySqlException ex)
             {
                 if (ex.Number == 1451)
                 {
-                    MessageBox.Show("Aby usunac autora najpierw nalezy usunac wszystkie jego ksiazki.");
+                    MessageBox.Show("To remove the author, you must first delete all their books.");
                 }
                 else
                 {
-                    MessageBox.Show($"Blad usuwania autora: {ex.Message}");
+                    MessageBox.Show($"Error removing the author: {ex.Message}");
                 }
             }
         }
@@ -73,14 +73,14 @@ namespace DatabaseApp.Presenter
                 }
                 else
                 {
-                    MessageBox.Show("Nie znaleziono ID autora");
+                    MessageBox.Show("Author's ID has not been found.");
                     return 0;
                 }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania ID autora {ex.Message}");
+                MessageBox.Show($"Error retrieving author's ID: {ex.Message}");
                 return -1;
             }
 

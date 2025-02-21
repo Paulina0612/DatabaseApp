@@ -34,11 +34,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@Password", password);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Pracownik zostal dodany");
+                MessageBox.Show("Employee has been added.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad dodawania pracownika: {ex.Message}");
+                MessageBox.Show($"Error adding the employee: {ex.Message}");
             }
         }
 
@@ -127,11 +127,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@Data", data);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Pracownik zostal usuniety.");
+                MessageBox.Show("Employee has been removed.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad usuwania pracownika: {ex.Message}");
+                MessageBox.Show($"Error removing the employee: {ex.Message}");
             }
         }
 
@@ -149,11 +149,11 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@WorkerID", workerID);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Wynagrodzenie pracownika zostało zaktualizowane.");
+                MessageBox.Show("Employee's salary has been updated.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad zmiany wynagrodzenia pracownika: {ex.Message}");
+                MessageBox.Show($"Error updating employee's salary: {ex.Message}");
             }
         }
 
@@ -173,14 +173,14 @@ namespace DatabaseApp.Presenter
                 }
                 else
                 {
-                    MessageBox.Show("Nie znaleziono ID pracownika");
+                    MessageBox.Show("Employee's ID has not been found.");
                     return 0;
                 }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania ID pracownika {ex.Message}");
+                MessageBox.Show($"Error retrieving employee's ID: {ex.Message}");
                 return -1;
             }
         }
@@ -203,14 +203,14 @@ namespace DatabaseApp.Presenter
                 }
                 else
                 {
-                    MessageBox.Show("Nie znaleziono pracownika z podanym ID");
+                    MessageBox.Show("No employee found with the provided ID");
                     return 0;
                 }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Blad pobierania wyplaty pracownika: {ex.Message}");
+                MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
                 return 0;
             }
         }

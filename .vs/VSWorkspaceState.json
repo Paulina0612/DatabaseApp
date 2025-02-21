@@ -1,6 +1,8 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\Presenter"
   ],
+  "SelectedNode": "\\Presenter\\WorkersHandler.cs",
   "PreviewInSolutionExplorer": false
 }
