@@ -131,7 +131,7 @@ namespace DatabaseApp
 
         }
         
-        public int GetLendID(int clientID, int bookID)
+        public int GetLendID(int clientID, int bookID) // --------------------------------------------- Nie wywołujemy tego nigdzie
         {
             try
             {

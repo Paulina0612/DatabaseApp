@@ -25,5 +25,9 @@ namespace DatabaseApp
             }
         }
 
+        private void authorDataComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

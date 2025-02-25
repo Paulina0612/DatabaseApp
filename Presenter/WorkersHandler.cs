@@ -7,6 +7,12 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DatabaseApp.SQLCommunicationHandler;
 
+//-----------------------------------------------------------------------------------------------
+
+// TODO: Nie działa wypożyczanie książek: Po wpisaniu danych wyrzuca incorrect data
+
+//-----------------------------------------------------------------------------------------------
+
 namespace DatabaseApp.Presenter
 {
     public class WorkersHandler
@@ -157,32 +163,60 @@ namespace DatabaseApp.Presenter
             }
         }
 
-        public int GetWorkerID(string data)
+        //public int GetWorkerID(string data)
+        //{
+        //    try
+        //    {
+        //        //InitializeConnection();
+        //        string query = "SELECT ID FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
+        //        MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+        //        command.Parameters.AddWithValue("@Data", data);
+        //        object result = command.ExecuteScalar();
+        //        if (result != null)
+        //        {
+        //            return Convert.ToInt32(result);
+        //        }
+        //        else
+        //        {
+        //            MessageBox.Show("Employee's ID has not been found.");
+        //            return 0;
+        //        }
+
+        //    }
+        //    catch (MySqlException ex)
+        //    {
+        //        MessageBox.Show($"Error retrieving employee's ID: {ex.Message}");
+        //        return -1;
+        //    }
+        //}
+
+        public int GetWorkerID(string managerData)
         {
-            try
+            int workerID = -1;
+            // Zakładamy, że managerData ma format "Imię Nazwisko"
+            string[] parts = managerData.Split(' ');
+            if (parts.Length < 2)
             {
-                //InitializeConnection();
-                string query = "SELECT ID FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
-
-                command.Parameters.AddWithValue("@Data", data);
-                object result = command.ExecuteScalar();
-                if (result != null)
-                {
-                    return Convert.ToInt32(result);
-                }
-                else
-                {
-                    MessageBox.Show("Employee's ID has not been found.");
-                    return 0;
-                }
-
+                MessageBox.Show("Niepoprawny format danych managera.");
+                return workerID;
             }
-            catch (MySqlException ex)
+            string firstName = parts[0];
+            string lastName = parts[1];
+
+            string query = "SELECT PracownikID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName";
+            MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+            command.Parameters.AddWithValue("@FirstName", firstName);
+            command.Parameters.AddWithValue("@LastName", lastName);
+
+            using (MySqlDataReader reader = command.ExecuteReader())
             {
-                MessageBox.Show($"Error retrieving employee's ID: {ex.Message}");
-                return -1;
+                if (reader.Read())
+                {
+                    workerID = reader.GetInt32("PracownikID");
+                }
             }
+            return workerID;
         }
 
 

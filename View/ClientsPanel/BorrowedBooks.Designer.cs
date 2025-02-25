@@ -46,10 +46,11 @@
             this.Author,
             this.Genre,
             this.ISBN});
-            this.dataGridView2.Location = new System.Drawing.Point(35, 35);
+            this.dataGridView2.Location = new System.Drawing.Point(23, 23);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersWidth = 62;
-            this.dataGridView2.Size = new System.Drawing.Size(812, 365);
+            this.dataGridView2.Size = new System.Drawing.Size(541, 237);
             this.dataGridView2.TabIndex = 1;
             // 
             // ID
@@ -91,10 +92,11 @@
             // 
             // BorrowedBooks
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 450);
+            this.ClientSize = new System.Drawing.Size(596, 292);
             this.Controls.Add(this.dataGridView2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "BorrowedBooks";
             this.Text = "BorrowedBooks";
             this.Load += new System.EventHandler(this.BorrowedBooks_Load);

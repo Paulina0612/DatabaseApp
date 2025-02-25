@@ -6,6 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+//-----------------------------------------------------------------------------------------------
+
+// TODO: Nie działa wypożyczanie książek: BooksCatalog pokazuje już nie pustą tabelę, ale dziwnie ją wyświetla, a przy próbie wypożyczenia książki wyrzuca incorrect data
+
+//-----------------------------------------------------------------------------------------------
+
 namespace DatabaseApp.Presenter
 {
     public class BooksHandler 
@@ -164,13 +170,16 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
                 string query = @"
-                SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, false AS ifAvailable
-                FROM Wypozyczenia w
-                JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
+                SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
+                CASE 
+                     WHEN w.ID IN (SELECT Wypozyczenie_ID FROM Zwroty) THEN true 
+                        ELSE false 
+                    END AS ifAvailable
+                FROM Ksiazki k
                 JOIN Autor a ON k.AutorID = a.ID
-                JOIN Gatunki g ON k.GatunekID = g.ID            
-                JOIN Klienci kl ON w.KlientID = kl.ID
-                WHERE w.KlientID = @KlientID AND w.ID NOT IN (SELECT Wypozyczenie_ID FROM Zwroty)";
+                JOIN Gatunki g ON k.GatunekID = g.ID
+                LEFT JOIN Wypozyczenia w ON k.ID = w.Katalog_ksiazekID
+                WHERE w.KlientID = @KlientID OR w.ID IS NULL";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -203,29 +212,30 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public List<BookData> GetBooksCatalog(string genre)
+        public List<BookData> GetBooksCatalog(string genreFilter)
         {
-            List<BookData> catalog = new List<BookData>();
+            string query = @"
+        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
+               CASE 
+                   WHEN w.ID IS NULL THEN true 
+                   WHEN w.ID IN (SELECT Wypozyczenie_ID FROM Zwroty) THEN true 
+                   ELSE false 
+               END AS ifAvailable
+        FROM Ksiazki k
+        JOIN Autor a ON k.AutorID = a.ID
+        JOIN Gatunki g ON k.GatunekID = g.ID
+        LEFT JOIN Wypozyczenia w ON k.ID = w.Katalog_ksiazekID
+        WHERE (@GenreFilter IS NULL OR g.Nazwa_gatunku LIKE @GenreFilter)";
 
             try
             {
-                Program.communicationHandler.InitializeConnection();
-                string query = @"
-                    SELECT kk.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, kk.Stan_magazynowy_ksiazki,
-                    CASE WHEN w.Katalog_ksiazekID IS NULL THEN 1 ELSE 0 END AS ifAvailable
-                    FROM biblioteka.Katalog_ksiazek kk
-                    JOIN biblioteka.Ksiazki k ON kk.KsiazkiID = k.ID 
-                    LEFT JOIN biblioteka.Wypozyczenia w ON kk.ID = w.Katalog_ksiazekID AND w.Data_spodziewanego_zwrotu IS NULL
-                    JOIN biblioteka.Autor a ON k.AutorID = a.ID
-                    JOIN biblioteka.Gatunki g ON k.GatunekID = g.ID
-                    WHERE (g.Nazwa_gatunku = @Genre)";
-
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
-
-                command.Parameters.AddWithValue("@Genre", genre ?? (object)DBNull.Value);
+                command.Parameters.AddWithValue("@GenreFilter", $"%{genreFilter}%");
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
+                    List<BookData> books = new List<BookData>();
+
                     while (reader.Read())
                     {
                         BookData book = new BookData
@@ -238,18 +248,17 @@ namespace DatabaseApp.Presenter
                             ISBN = reader.GetString("ISBN"),
                             ifAvailable = reader.GetBoolean("ifAvailable")
                         };
-                        catalog.Add(book);
+
+                        books.Add(book);
                     }
+
+                    return books;
                 }
-
-
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Error fetching books catalog: {ex.Message}");
+                throw new Exception($"Błąd podczas pobierania katalogu książek: {ex.Message}", ex);
             }
-
-            return catalog;
         }
 
 
