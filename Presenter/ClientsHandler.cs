@@ -1,4 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI.Common;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -180,25 +182,43 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public bool IsClientInDatabase(int ID)
+        public ClientData GetClientData(int ID)
         {
+            bool clientExists = false;
+            ClientData client = new ClientData();
             try
             {
-                string query = "SELECT COUNT(*) FROM Klienci WHERE ID = @ID";
+                string query = "SELECT * FROM Klienci WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", ID);
-                object result = command.ExecuteScalar();
-                if (result != null && Convert.ToInt32(result) > 0)
-                    return true;
-                else
-                    return false;
+
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        client = new ClientData
+                        {
+                            ID = reader.GetInt32("ID"),
+                            firstName = reader.GetString("Imie"),
+                            lastName = reader.GetString("Nazwisko"),
+                            email = reader.GetString("Adres_e_mail"),
+                            penalty = reader.GetFloat("Naleznosc")
+                        };
+                        
+                    }
+                }
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error checking client's presence in the database: {ex.Message}");
-                return false;
+                clientExists = false;
+                
             }
+            return client;
+
         }
+
     }
 }

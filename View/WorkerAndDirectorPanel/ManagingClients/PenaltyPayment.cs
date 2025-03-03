@@ -13,7 +13,7 @@ namespace DatabaseApp
         private void commitButton_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(clientEmailTextBox.Text) && 
-                Program.communicationHandler.clientsHandler.IsClientInDatabase(Program.communicationHandler.clientsHandler.GetClientID(clientEmailTextBox.Text))) 
+                Program.communicationHandler.clientsHandler.GetClientData(Program.communicationHandler.clientsHandler.GetClientID(clientEmailTextBox.Text)).getEmail() != null) 
                 Program.IncorrectDataInformation();
             else
             {

@@ -18,7 +18,7 @@ namespace DatabaseApp
             int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmailTextBox.Text);
 
             if (string.IsNullOrEmpty(clientEmailTextBox.Text) &&
-                Program.communicationHandler.clientsHandler.IsClientInDatabase(clientID))
+                (Program.communicationHandler.clientsHandler.GetClientData(clientID).getEmail() != null))
                 Program.IncorrectDataInformation();
             else if (!ifBookIDNumeric && !Program.communicationHandler.booksHandler.IsBookBorrowedByClient(clientID, bookID))
                 Program.IncorrectDataInformation();
