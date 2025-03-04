@@ -64,5 +64,6 @@ namespace DatabaseApp
         {
             BooksCatalog_Load(sender, e); // Aktualizuj katalog po zmianie gatunku
         }
+
     }
 }

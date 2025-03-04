@@ -104,6 +104,7 @@
     <Compile Include="Presenter\ClientsHandler.cs" />
     <Compile Include="Presenter\GenresHandler.cs" />
     <Compile Include="Presenter\WorkersHandler.cs" />
+    <Compile Include="ComboBoxItem.cs" />
     <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddAuthor.cs">
       <SubType>Form</SubType>
     </Compile>

@@ -2,14 +2,40 @@
 using System.Web;
 using System.Text;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace DatabaseApp
 {
     public partial class AddWorker : Form
     {
+        private List<ComboBoxItem> positions;
+        private List<ComboBoxItem> managers;
+
         public AddWorker()
         {
             InitializeComponent();
+            LoadPositions();
+            LoadManagers();
+        }
+
+        private void LoadPositions()
+        {
+            positionComboBox.Items.Clear();
+            positions = Program.communicationHandler.workersHandler.GetPositions();
+            foreach (ComboBoxItem position in positions)
+            {
+                positionComboBox.Items.Add(position.ID + position.Text);
+            }
+        }
+
+        private void LoadManagers()
+        {
+            managerComboBox.Items.Clear();
+            managers = Program.communicationHandler.workersHandler.GetManagers();
+            foreach (ComboBoxItem manager in managers)
+            {
+                managerComboBox.Items.Add(manager.ID + manager.Text);
+            }
         }
 
         private void commitButton_Click(object sender, EventArgs e)
@@ -46,8 +72,8 @@ namespace DatabaseApp
                 try
                 {
                     Program.communicationHandler.workersHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
-                        emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), managerComboBox.Text,
-                        positionComboBox.Text, password);
+                        emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), ComboBoxItem.GetIDByText(managerComboBox.Text),
+                        ComboBoxItem.GetIDByText(positionComboBox.Text), password);
                     MessageBox.Show("Worker successfully added.\nGenerated password is: " + password);
                 }
                 catch(Exception ex)

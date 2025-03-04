@@ -1,7 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
+using MySqlX.XDevAPI;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,18 +20,17 @@ namespace DatabaseApp.Presenter
 {
     public class WorkersHandler
     {
-        public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, string managerData, string positionName, string password)
+        public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, int managerID, int positionID, string password)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                int managerID = Program.communicationHandler.workersHandler.GetWorkerID(managerData);
-                int positionID = Program.communicationHandler.GetPositionID(positionName);
 
-                string query = "INSERT INTO Pracownik (Imie, Nazwisko, Numer_Telefonu, Adres_e_mail, PESEL, Wyplata, Kierownik_ID, StanowiskoID, Haslo)" +
-                    "VALUES (@FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, @PositionID, @Password)";
+                string query = "INSERT INTO Pracownik (ID, Imie, Nazwisko, Numer_Telefonu, Adres_e_mail, PESEL, Wyplata, Kierownik_ID, StanowiskoID, Haslo)" +
+                    "VALUES (@ID, @FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, @PositionID, @Password)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
+                command.Parameters.AddWithValue("@ID", GetNextWorkerID());
                 command.Parameters.AddWithValue("@FirstName", firstName);
                 command.Parameters.AddWithValue("@LastName", lastName);
                 command.Parameters.AddWithValue("@PhoneNumber", phoneNumber);
@@ -36,7 +38,7 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@PESEL", PESEL);
                 command.Parameters.AddWithValue("@Salary", salary);
                 command.Parameters.AddWithValue("@ManagerID", managerID);
-                command.Parameters.AddWithValue("@PositionID", 1);
+                command.Parameters.AddWithValue("@PositionID", positionID);
                 command.Parameters.AddWithValue("@Password", password);
                 command.ExecuteNonQuery();
 
@@ -48,6 +50,31 @@ namespace DatabaseApp.Presenter
             }
         }
 
+        private int GetNextWorkerID()
+        {
+            try
+            {
+                //InitializeConnection();
+                string query = "SELECT MAX(ID) FROM Pracownik";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                object result = command.ExecuteScalar();
+
+                if (result != null)
+                {
+                    return Convert.ToInt32(result) + 1;
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error checking the borrowing ID: {ex.Message}");
+                return 0;
+            }
+        }
 
         public bool WorkerLogIn(string firstName, string lastName, string password)
         {
@@ -247,6 +274,51 @@ namespace DatabaseApp.Presenter
                 MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
                 return 0;
             }
+        }
+
+        public List<ComboBoxItem> GetPositions()
+        {
+            List<ComboBoxItem> positions = new List<ComboBoxItem>();
+
+            try
+            {
+                string query = "SELECT * FROM Stanowisko";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
+                        positions.Add(new ComboBoxItem { ID = reader.GetInt32("ID"), Text = reader.GetString("Nazwa_stanowiska") });
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
+            }
+
+            return positions;
+        }
+
+        public List<ComboBoxItem> GetManagers()
+        {
+            List<ComboBoxItem> managers = new List<ComboBoxItem>();
+
+            try
+            {
+                string query = "SELECT ID, Imie, Nazwisko FROM Pracownik";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                    while (reader.Read())
+                        managers.Add(new ComboBoxItem { ID = reader.GetInt32("ID"), Text = String.Concat(reader.GetString("Imie"), " ", 
+                            reader.GetString("Nazwisko")) });
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
+            }
+
+            return managers;
         }
     }
 }
