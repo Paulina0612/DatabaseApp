@@ -57,19 +57,19 @@
             // 
             this.emailTextBox.Location = new System.Drawing.Point(161, 41);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(344, 26);
+            this.emailTextBox.Size = new System.Drawing.Size(434, 26);
             this.emailTextBox.TabIndex = 2;
             // 
             // cardNumberTextBox
             // 
             this.cardNumberTextBox.Location = new System.Drawing.Point(161, 73);
             this.cardNumberTextBox.Name = "cardNumberTextBox";
-            this.cardNumberTextBox.Size = new System.Drawing.Size(344, 26);
+            this.cardNumberTextBox.Size = new System.Drawing.Size(434, 26);
             this.cardNumberTextBox.TabIndex = 3;
             // 
             // logInButton
             // 
-            this.logInButton.Location = new System.Drawing.Point(342, 105);
+            this.logInButton.Location = new System.Drawing.Point(432, 105);
             this.logInButton.Name = "logInButton";
             this.logInButton.Size = new System.Drawing.Size(163, 39);
             this.logInButton.TabIndex = 4;
@@ -79,7 +79,7 @@
             // 
             // ClientLogInForm
             // 
-            this.ClientSize = new System.Drawing.Size(558, 182);
+            this.ClientSize = new System.Drawing.Size(645, 168);
             this.Controls.Add(this.logInButton);
             this.Controls.Add(this.cardNumberTextBox);
             this.Controls.Add(this.emailTextBox);

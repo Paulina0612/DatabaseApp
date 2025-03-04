@@ -17,8 +17,9 @@ namespace DatabaseApp
                 Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.clientsHandler.PenaltyPayment(clientEmailTextBox.Text);
-                MessageBox.Show("Operation successful.");
+                bool ifSuccess = Program.communicationHandler.clientsHandler.PenaltyPayment(clientEmailTextBox.Text);
+                if (ifSuccess) MessageBox.Show("Operation successful.");
+                else MessageBox.Show("Operation failed.");
             }
         }
     }

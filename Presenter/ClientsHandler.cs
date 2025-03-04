@@ -139,24 +139,33 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public void PenaltyPayment(string email)
+        public bool PenaltyPayment(string email)
         {
+            bool ifSuccess = false;
             try
             {
                 Program.communicationHandler.InitializeConnection();
                 int clientID = Program.communicationHandler.clientsHandler.GetClientID(email);
+
+                if (clientID == -1) return ifSuccess;
+
+                // TODO: Sprawdzenie, czy klient ma jakąś należność
+
                 string query = "UPDATE Klienci SET Naleznosc = 0 WHERE ID = @ClientID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ClientID", clientID);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("The payment for the fine has been processed:.");
+                ifSuccess = true;
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error processing the payment for the fine: {ex.Message}");
+                ifSuccess = false;
             }
+
+            return ifSuccess;
         }
 
         public int GetClientID(string email)
