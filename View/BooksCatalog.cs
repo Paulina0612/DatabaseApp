@@ -18,6 +18,7 @@ namespace DatabaseApp
         {
             genreComboBox.Items.Clear();
             List<String> genres = Program.communicationHandler.genresHandler.GetGenres();
+            genreComboBox.Items.Add("Show All");
             foreach (String genre in genres)
             {
                 genreComboBox.Items.Add(genre);
@@ -29,7 +30,10 @@ namespace DatabaseApp
             List<BookData> books = new List<BookData>();
             try
             {
-                books = Program.communicationHandler.booksHandler.GetBooksCatalog(genreComboBox.Text);
+                if (genreComboBox.Text == "Show All")
+                    books = Program.communicationHandler.booksHandler.GetBooksCatalog(null);
+                else
+                    books = Program.communicationHandler.booksHandler.GetBooksCatalog(genreComboBox.Text);
 
                 Console.WriteLine($"Pobrano {books.Count} książek");
 
@@ -64,6 +68,5 @@ namespace DatabaseApp
         {
             BooksCatalog_Load(sender, e); // Aktualizuj katalog po zmianie gatunku
         }
-
     }
 }
