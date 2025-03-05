@@ -232,18 +232,18 @@ begin
     from katalog_ksiazek
     where KsiazkiID = p_KsiazkiID;
 
-    if stan = 'dostępna' then
+    if stan = 'AVAILABLE' then
         -- dodanie wypożyczenia
         insert into wypozyczenia (KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu)
         values (p_KlientID, p_KsiazkiID, p_PracownikID, p_DataWypozyczenia, p_DataZwrotu);
 
         -- aktualizacja stanu magazynowego
         update katalog_ksiazek
-        set stan_magazynowy_ksiazki = 'niedostępna'
+        set stan_magazynowy_ksiazki = 'UNAVAILABLE'
         where KsiazkiID = p_KsiazkiID;
     else
         signal sqlstate '45000'
-        set message_text = 'książka jest obecnie niedostępna';
+        set message_text = 'Book is unavailable';
     end if;
 end //
 delimiter ;
@@ -321,6 +321,7 @@ grant select, insert on Biblioteka.zwroty to 'Pracownik'@'%', 'Kierownik'@'%';
 
 grant insert, delete, update on Biblioteka.pracownik to 'Kierownik'@'%';
 grant select, insert, delete on Biblioteka.stanowisko to 'Kierownik'@'%';
+grant select on Biblioteka.stanowisko to 'Pracownik'@'%';
 
 GRANT EXECUTE ON PROCEDURE Biblioteka.DodajKlienta TO 'Kierownik'@'%';
 GRANT EXECUTE ON PROCEDURE Biblioteka.DodajKlienta TO 'Pracownik'@'%';

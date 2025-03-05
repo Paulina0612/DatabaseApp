@@ -194,6 +194,7 @@ namespace DatabaseApp.Presenter
         // Returning data
         public List<BookData> GetHistory()
         {
+            // TODO: Poprawić zapytanie na katalog książek
             List<BookData> history = new List<BookData>();
 
             try
@@ -242,6 +243,7 @@ namespace DatabaseApp.Presenter
 
         public List<BookData> GetBorrowedBooks()
         {
+            // TODO: Poprawić zapytanie na katalog książek
             List<BookData> borrowedBooks = new List<BookData>();
 
             try
@@ -397,12 +399,12 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
             try
             {
                 //InitializeConnection();
-                string query = "SELECT Stan_magazynowy_ksiazki FROM Katalog_ksiazek WHERE KsiazkiID = @KsiazkiID";
+                string query = "SELECT Stan_magazynowy_ksiazki FROM Katalog_ksiazek WHERE ID = @KsiazkiID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@KsiazkiID", ID);
                 object result = command.ExecuteScalar();
-                if (result != null && result.ToString() == "dostepna")
+                if (result != null && result.ToString() == "AVAILABLE")
                 {
                     return true;
                 }

@@ -3,44 +3,16 @@
   "WorkspaceRootPath": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\addbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\addbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\addbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\addbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\titlescatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\titlescatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\titlescatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\titlescatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\titlescatalog.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\titlescatalog.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\bookscatalog.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\bookscatalog.designer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\bookscatalog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\presenter\\bookshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\presenter\\bookshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:presenter\\bookshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\bookdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:bookdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\lendbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\lendbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingbooks\\lendbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingbooks\\lendbook.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -50,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 10,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Bookmark",
@@ -62,130 +34,41 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "BooksCatalog.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\BooksCatalog.Designer.cs",
-              "RelativeDocumentMoniker": "View\\BooksCatalog.Designer.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\BooksCatalog.Designer.cs",
-              "RelativeToolTip": "View\\BooksCatalog.Designer.cs",
-              "ViewState": "AgIAAHgAAAAAAAAAAAAWwIIAAABHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:59:29.04Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "BooksCatalog.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\BooksCatalog.cs",
-              "RelativeDocumentMoniker": "View\\BooksCatalog.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\BooksCatalog.cs",
-              "RelativeToolTip": "View\\BooksCatalog.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:59:13.74Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "TitlesCatalog.Designer.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.Designer.cs",
-              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.Designer.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.Designer.cs",
-              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.Designer.cs",
-              "ViewState": "AgIAADAAAAAAAAAAAAAWwEcAAAAtAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:57:27.34Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TitlesCatalog.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs",
-              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs",
-              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs",
-              "ViewState": "AgIAAD0AAAAAAAAAAAAowCkAAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:57:18.941Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "TitlesCatalog.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs",
-              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs [Design]",
-              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\TitlesCatalog.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:56:50.452Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "BooksCatalog.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\BooksCatalog.cs",
-              "RelativeDocumentMoniker": "View\\BooksCatalog.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\BooksCatalog.cs [Design]",
-              "RelativeToolTip": "View\\BooksCatalog.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:55:20.408Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "BookData.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BookData.cs",
-              "RelativeDocumentMoniker": "BookData.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\BookData.cs",
-              "RelativeToolTip": "BookData.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:47:16.06Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AddBook.cs [Design]",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs",
-              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs [Design]",
-              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs [Design]",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T19:18:21.819Z",
-              "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AddBook.cs",
-              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs",
-              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs",
-              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\AddBook.cs",
-              "ViewState": "AgIAAEkAAAAAAAAAAAAMwFYAAAAhAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T18:20:06.669Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
               "Title": "BooksHandler.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\Presenter\\BooksHandler.cs",
               "RelativeDocumentMoniker": "Presenter\\BooksHandler.cs",
               "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\Presenter\\BooksHandler.cs",
               "RelativeToolTip": "Presenter\\BooksHandler.cs",
-              "ViewState": "AgIAAFABAAAAAAAAAAAswGABAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAHsAAAAAAAAAAAAowJYBAABFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-05T07:57:34.18Z",
+              "WhenOpened": "2025-03-05T20:05:52.573Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "LendBook.cs",
+              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs",
+              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs",
+              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs",
+              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAA7wA4AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T20:05:29.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "LendBook.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs",
+              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs",
+              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs [Design]",
+              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingBooks\\LendBook.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T20:05:27.207Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
