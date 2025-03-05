@@ -35,103 +35,137 @@
             this.titleTextBox = new System.Windows.Forms.TextBox();
             this.ISBNTextBox = new System.Windows.Forms.TextBox();
             this.genreComboBox = new System.Windows.Forms.ComboBox();
-            this.commitButton = new System.Windows.Forms.Button();
+            this.addNewTitleButton = new System.Windows.Forms.Button();
             this.authorDataComboBox = new System.Windows.Forms.ComboBox();
+            this.addNewCopyButton = new System.Windows.Forms.Button();
+            this.bookIDLabel = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.catalogButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleLabel
             // 
             this.titleLabel.AutoSize = true;
-            this.titleLabel.Location = new System.Drawing.Point(18, 27);
-            this.titleLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.titleLabel.Location = new System.Drawing.Point(27, 42);
             this.titleLabel.Name = "titleLabel";
-            this.titleLabel.Size = new System.Drawing.Size(27, 13);
+            this.titleLabel.Size = new System.Drawing.Size(38, 20);
             this.titleLabel.TabIndex = 0;
             this.titleLabel.Text = "Title";
             // 
             // authorLabel
             // 
             this.authorLabel.AutoSize = true;
-            this.authorLabel.Location = new System.Drawing.Point(18, 48);
-            this.authorLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.authorLabel.Location = new System.Drawing.Point(27, 74);
             this.authorLabel.Name = "authorLabel";
-            this.authorLabel.Size = new System.Drawing.Size(62, 13);
+            this.authorLabel.Size = new System.Drawing.Size(93, 20);
             this.authorLabel.TabIndex = 2;
             this.authorLabel.Text = "Author data";
             // 
             // ISBNLabel
             // 
             this.ISBNLabel.AutoSize = true;
-            this.ISBNLabel.Location = new System.Drawing.Point(18, 69);
-            this.ISBNLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.ISBNLabel.Location = new System.Drawing.Point(27, 106);
             this.ISBNLabel.Name = "ISBNLabel";
-            this.ISBNLabel.Size = new System.Drawing.Size(32, 13);
+            this.ISBNLabel.Size = new System.Drawing.Size(47, 20);
             this.ISBNLabel.TabIndex = 3;
             this.ISBNLabel.Text = "ISBN";
             // 
             // genreLabel
             // 
             this.genreLabel.AutoSize = true;
-            this.genreLabel.Location = new System.Drawing.Point(18, 91);
-            this.genreLabel.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.genreLabel.Location = new System.Drawing.Point(27, 140);
             this.genreLabel.Name = "genreLabel";
-            this.genreLabel.Size = new System.Drawing.Size(36, 13);
+            this.genreLabel.Size = new System.Drawing.Size(54, 20);
             this.genreLabel.TabIndex = 4;
             this.genreLabel.Text = "Genre";
             // 
             // titleTextBox
             // 
-            this.titleTextBox.Location = new System.Drawing.Point(89, 23);
-            this.titleTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.titleTextBox.Location = new System.Drawing.Point(134, 35);
             this.titleTextBox.Name = "titleTextBox";
-            this.titleTextBox.Size = new System.Drawing.Size(257, 20);
+            this.titleTextBox.Size = new System.Drawing.Size(384, 26);
             this.titleTextBox.TabIndex = 5;
             // 
             // ISBNTextBox
             // 
-            this.ISBNTextBox.Location = new System.Drawing.Point(89, 65);
-            this.ISBNTextBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.ISBNTextBox.Location = new System.Drawing.Point(134, 100);
             this.ISBNTextBox.Name = "ISBNTextBox";
-            this.ISBNTextBox.Size = new System.Drawing.Size(257, 20);
+            this.ISBNTextBox.Size = new System.Drawing.Size(384, 26);
             this.ISBNTextBox.TabIndex = 7;
             // 
             // genreComboBox
             // 
             this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(89, 86);
-            this.genreComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.genreComboBox.Location = new System.Drawing.Point(134, 132);
             this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(257, 21);
+            this.genreComboBox.Size = new System.Drawing.Size(384, 28);
             this.genreComboBox.TabIndex = 8;
             // 
-            // commitButton
+            // addNewTitleButton
             // 
-            this.commitButton.Location = new System.Drawing.Point(238, 108);
-            this.commitButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.commitButton.Name = "commitButton";
-            this.commitButton.Size = new System.Drawing.Size(106, 20);
-            this.commitButton.TabIndex = 9;
-            this.commitButton.Text = "Commit";
-            this.commitButton.UseVisualStyleBackColor = true;
-            this.commitButton.Click += new System.EventHandler(this.commitButton_Click);
+            this.addNewTitleButton.Location = new System.Drawing.Point(332, 166);
+            this.addNewTitleButton.Name = "addNewTitleButton";
+            this.addNewTitleButton.Size = new System.Drawing.Size(184, 39);
+            this.addNewTitleButton.TabIndex = 9;
+            this.addNewTitleButton.Text = "Add New Title";
+            this.addNewTitleButton.UseVisualStyleBackColor = true;
+            this.addNewTitleButton.Click += new System.EventHandler(this.addNewTitleButton_Click);
             // 
             // authorDataComboBox
             // 
             this.authorDataComboBox.FormattingEnabled = true;
-            this.authorDataComboBox.Location = new System.Drawing.Point(89, 43);
-            this.authorDataComboBox.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.authorDataComboBox.Location = new System.Drawing.Point(134, 66);
             this.authorDataComboBox.Name = "authorDataComboBox";
-            this.authorDataComboBox.Size = new System.Drawing.Size(257, 21);
+            this.authorDataComboBox.Size = new System.Drawing.Size(384, 28);
             this.authorDataComboBox.TabIndex = 10;
-            this.authorDataComboBox.SelectedIndexChanged += new System.EventHandler(this.authorDataComboBox_SelectedIndexChanged);
+            // 
+            // addNewCopyButton
+            // 
+            this.addNewCopyButton.Location = new System.Drawing.Point(332, 243);
+            this.addNewCopyButton.Name = "addNewCopyButton";
+            this.addNewCopyButton.Size = new System.Drawing.Size(184, 37);
+            this.addNewCopyButton.TabIndex = 13;
+            this.addNewCopyButton.Text = "Add New Copy";
+            this.addNewCopyButton.UseVisualStyleBackColor = true;
+            this.addNewCopyButton.Click += new System.EventHandler(this.addNewCopyButton_Click);
+            // 
+            // bookIDLabel
+            // 
+            this.bookIDLabel.AutoSize = true;
+            this.bookIDLabel.Location = new System.Drawing.Point(27, 217);
+            this.bookIDLabel.Name = "bookIDLabel";
+            this.bookIDLabel.Size = new System.Drawing.Size(67, 20);
+            this.bookIDLabel.TabIndex = 11;
+            this.bookIDLabel.Text = "Book ID";
+            // 
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(134, 211);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(384, 26);
+            this.textBox1.TabIndex = 14;
+            // 
+            // catalogButton
+            // 
+            this.catalogButton.Location = new System.Drawing.Point(134, 243);
+            this.catalogButton.Name = "catalogButton";
+            this.catalogButton.Size = new System.Drawing.Size(192, 37);
+            this.catalogButton.TabIndex = 15;
+            this.catalogButton.Text = "Catalog";
+            this.catalogButton.UseVisualStyleBackColor = true;
+            this.catalogButton.Click += new System.EventHandler(this.catalogButton_Click);
             // 
             // AddBook
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(371, 148);
+            this.ClientSize = new System.Drawing.Size(556, 296);
+            this.Controls.Add(this.catalogButton);
+            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.addNewCopyButton);
+            this.Controls.Add(this.bookIDLabel);
             this.Controls.Add(this.authorDataComboBox);
-            this.Controls.Add(this.commitButton);
+            this.Controls.Add(this.addNewTitleButton);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.ISBNTextBox);
             this.Controls.Add(this.titleTextBox);
@@ -139,7 +173,6 @@
             this.Controls.Add(this.ISBNLabel);
             this.Controls.Add(this.authorLabel);
             this.Controls.Add(this.titleLabel);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AddBook";
             this.Text = "AddBook";
             this.ResumeLayout(false);
@@ -156,7 +189,11 @@
         private System.Windows.Forms.TextBox titleTextBox;
         private System.Windows.Forms.TextBox ISBNTextBox;
         private System.Windows.Forms.ComboBox genreComboBox;
-        private System.Windows.Forms.Button commitButton;
+        private System.Windows.Forms.Button addNewTitleButton;
         private System.Windows.Forms.ComboBox authorDataComboBox;
+        private System.Windows.Forms.Button addNewCopyButton;
+        private System.Windows.Forms.Label bookIDLabel;
+        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.Button catalogButton;
     }
 }

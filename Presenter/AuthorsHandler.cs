@@ -85,5 +85,38 @@ namespace DatabaseApp.Presenter
             }
 
         }
+
+        public List<ComboBoxItem> GetAuthors()
+        {
+            List<ComboBoxItem> authors = new List<ComboBoxItem>();
+
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT * FROM autor";
+
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        ComboBoxItem book = new ComboBoxItem
+                        {
+                            ID = reader.GetInt32("ID"),
+                            Text = reader.GetString("Imie") + reader.GetString("Nazwisko")
+                        };
+                        authors.Add(book);
+                    }
+                }
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error retrieving history: {ex.Message}");
+            }
+
+            return authors;
+        }
     }
 }

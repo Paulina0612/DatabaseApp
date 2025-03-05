@@ -1,16 +1,42 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace DatabaseApp
 {
     public partial class AddBook : Form
     {
+        private List<ComboBoxItem> authors;
+        private List<ComboBoxItem> genres;
+
         public AddBook()
         {
             InitializeComponent();
+            LoadAuthors();
+            LoadGenres();
         }
 
-        private void commitButton_Click(object sender, EventArgs e)
+        private void LoadAuthors()
+        {
+            authorDataComboBox.Items.Clear();
+            authors = Program.communicationHandler.authorsHandler.GetAuthors();
+            foreach (ComboBoxItem author in authors)
+            {
+                authorDataComboBox.Items.Add(author.ID + " " + author.Text);
+            }
+        }
+
+        private void LoadGenres()
+        {
+            genreComboBox.Items.Clear();
+            genres = Program.communicationHandler.genresHandler.GetGenres();
+            foreach (ComboBoxItem genre in genres)
+            {
+                genreComboBox.Items.Add(genre.ID + " " + genre.Text);
+            }
+        }
+
+        private void addNewTitleButton_Click(object sender, EventArgs e)
         {
             bool ifISBNNumeric = int.TryParse(ISBNTextBox.Text, out int n);
             
@@ -25,7 +51,13 @@ namespace DatabaseApp
             }
         }
 
-        private void authorDataComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void catalogButton_Click(object sender, EventArgs e)
+        {
+            BooksCatalog catalog = new BooksCatalog();
+            catalog.Show();
+        }
+
+        private void addNewCopyButton_Click(object sender, EventArgs e)
         {
 
         }

@@ -212,7 +212,7 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public List<BookData> GetBooksCatalog(string genreFilter)
+        public List<BookData> GetBooksCatalog(int genreFilter)
         {
             string query = @"
         SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
@@ -225,12 +225,19 @@ namespace DatabaseApp.Presenter
         JOIN Autor a ON k.AutorID = a.ID
         JOIN Gatunki g ON k.GatunekID = g.ID
         LEFT JOIN Wypozyczenia w ON k.ID = w.Katalog_ksiazekID
-        WHERE (@GenreFilter IS NULL OR g.Nazwa_gatunku LIKE @GenreFilter)";
+        WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
 
             try
             {
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
-                command.Parameters.AddWithValue("@GenreFilter", $"%{genreFilter}%");
+                if (genreFilter == -1)
+                {
+                    command.Parameters.AddWithValue("@GenreFilter", null);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@GenreFilter", genreFilter);
+                }
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {

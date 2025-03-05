@@ -17,11 +17,11 @@ namespace DatabaseApp
         private void LoadGenres()
         {
             genreComboBox.Items.Clear();
-            List<String> genres = Program.communicationHandler.genresHandler.GetGenres();
+            List<ComboBoxItem> genres = Program.communicationHandler.genresHandler.GetGenres();
             genreComboBox.Items.Add("Show All");
-            foreach (String genre in genres)
+            foreach (ComboBoxItem genre in genres)
             {
-                genreComboBox.Items.Add(genre);
+                genreComboBox.Items.Add(genre.ID + " " + genre.Text);
             }
         }
 
@@ -30,10 +30,10 @@ namespace DatabaseApp
             List<BookData> books = new List<BookData>();
             try
             {
-                if (genreComboBox.Text == "Show All")
-                    books = Program.communicationHandler.booksHandler.GetBooksCatalog(null);
+                if (genreComboBox.Text == "Show All" || String.IsNullOrEmpty(genreComboBox.Text))
+                    books = Program.communicationHandler.booksHandler.GetBooksCatalog(-1);
                 else
-                    books = Program.communicationHandler.booksHandler.GetBooksCatalog(genreComboBox.Text);
+                    books = Program.communicationHandler.booksHandler.GetBooksCatalog(ComboBoxItem.GetIDByText(genreComboBox.Text));
 
                 Console.WriteLine($"Pobrano {books.Count} książek");
 

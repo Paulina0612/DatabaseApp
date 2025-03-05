@@ -50,22 +50,28 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public List<String> GetGenres()
+        public List<ComboBoxItem> GetGenres()
         {
-            List<String> genres = new List<String>();
+            List<ComboBoxItem> genres = new List<ComboBoxItem>();
 
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = @"
-                    SELECT Nazwa_gatunku FROM gatunki";
+                string query = "SELECT * FROM gatunki";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
-                        genres.Add(reader.GetString("Nazwa_gatunku"));
+                    {
+                        ComboBoxItem genre = new ComboBoxItem
+                        {
+                            ID = reader.GetInt32("ID"), 
+                            Text = reader.GetString("Nazwa_gatunku")
+                        };
+                        genres.Add(genre);
+                    }
                 }
 
             }
