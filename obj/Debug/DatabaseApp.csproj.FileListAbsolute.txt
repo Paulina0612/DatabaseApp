@@ -193,3 +193,4 @@ C:\Users\aorlo\Source\Repos\Paulina0612\DatabaseApp\obj\Debug\DatabaseApp.csproj
 C:\Users\aorlo\source\repos\Paulina0612\DatabaseApp\obj\Debug\Database.46312C09.Up2Date
 C:\Users\aorlo\Source\Repos\Paulina0612\DatabaseApp\obj\Debug\DatabaseApp.exe
 C:\Users\aorlo\Source\Repos\Paulina0612\DatabaseApp\obj\Debug\DatabaseApp.pdb
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.View.WorkerAndDirectorPanel.ManagingBooks.TitlesCatalog.resources

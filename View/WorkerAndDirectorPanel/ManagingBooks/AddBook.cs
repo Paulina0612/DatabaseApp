@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseApp.View.WorkerAndDirectorPanel.ManagingBooks;
+using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -82,7 +83,8 @@ namespace DatabaseApp
 
         private void titlesCatalogButton_Click(object sender, EventArgs e)
         {
-
+            TitlesCatalog titlesCatalog = new TitlesCatalog();
+            titlesCatalog.Show();
         }
     }
 }

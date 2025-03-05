@@ -342,6 +342,56 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
         }
 
 
+        public List<BookData> GetTitlesCatalog(int genreFilter)
+        {
+            string query = @"
+        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
+FROM biblioteka.ksiazki k 
+JOIN biblioteka.autor a ON k.AutorID = a.ID
+JOIN biblioteka.gatunki g ON k.GatunekID = g.ID
+WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
+
+            try
+            {
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                if (genreFilter == -1)
+                {
+                    command.Parameters.AddWithValue("@GenreFilter", null);
+                }
+                else
+                {
+                    command.Parameters.AddWithValue("@GenreFilter", genreFilter);
+                }
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    List<BookData> books = new List<BookData>();
+
+                    while (reader.Read())
+                    {
+                        BookData book = new BookData
+                        {
+                            ID = reader.GetInt32("ID"),
+                            title = reader.GetString("Tytul"),
+                            authorFirstName = reader.GetString("Imie"),
+                            authorLastName = reader.GetString("Nazwisko"),
+                            genreName = reader.GetString("Nazwa_gatunku"),
+                            ISBN = reader.GetString("ISBN")
+                        };
+
+                        books.Add(book);
+                    }
+
+                    return books;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Błąd podczas pobierania katalogu książek: {ex.Message}", ex);
+            }
+        }
+
+
         public bool IsBookAvailable(int ID)
         {
             try

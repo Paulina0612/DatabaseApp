@@ -1,6 +1,6 @@
-﻿namespace DatabaseApp
+﻿namespace DatabaseApp.View.WorkerAndDirectorPanel.ManagingBooks
 {
-    partial class BooksCatalog
+    partial class TitlesCatalog
     {
         /// <summary>
         /// Required designer variable.
@@ -28,17 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.genreLabel = new System.Windows.Forms.Label();
+            this.genreComboBox = new System.Windows.Forms.ComboBox();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Title = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Author = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Genre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ISBN = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.availability = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.genreComboBox = new System.Windows.Forms.ComboBox();
-            this.genreLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // genreLabel
+            // 
+            this.genreLabel.AutoSize = true;
+            this.genreLabel.Location = new System.Drawing.Point(29, 32);
+            this.genreLabel.Name = "genreLabel";
+            this.genreLabel.Size = new System.Drawing.Size(54, 20);
+            this.genreLabel.TabIndex = 22;
+            this.genreLabel.Text = "Genre";
+            // 
+            // genreComboBox
+            // 
+            this.genreComboBox.FormattingEnabled = true;
+            this.genreComboBox.Location = new System.Drawing.Point(124, 24);
+            this.genreComboBox.Name = "genreComboBox";
+            this.genreComboBox.Size = new System.Drawing.Size(283, 28);
+            this.genreComboBox.TabIndex = 21;
             // 
             // dataGridView1
             // 
@@ -48,13 +64,12 @@
             this.Title,
             this.Author,
             this.Genre,
-            this.ISBN,
-            this.availability});
-            this.dataGridView1.Location = new System.Drawing.Point(37, 72);
+            this.ISBN});
+            this.dataGridView1.Location = new System.Drawing.Point(23, 78);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.Size = new System.Drawing.Size(1083, 441);
-            this.dataGridView1.TabIndex = 0;
+            this.dataGridView1.Size = new System.Drawing.Size(917, 441);
+            this.dataGridView1.TabIndex = 20;
             // 
             // ID
             // 
@@ -93,42 +108,17 @@
             this.ISBN.Name = "ISBN";
             this.ISBN.Width = 150;
             // 
-            // availability
-            // 
-            this.availability.HeaderText = "Availability";
-            this.availability.MinimumWidth = 8;
-            this.availability.Name = "availability";
-            this.availability.Width = 150;
-            // 
-            // genreComboBox
-            // 
-            this.genreComboBox.FormattingEnabled = true;
-            this.genreComboBox.Location = new System.Drawing.Point(138, 18);
-            this.genreComboBox.Name = "genreComboBox";
-            this.genreComboBox.Size = new System.Drawing.Size(283, 28);
-            this.genreComboBox.TabIndex = 18;
-            this.genreComboBox.SelectedIndexChanged += new System.EventHandler(this.genreComboBox_SelectedIndexChanged);
-            // 
-            // genreLabel
-            // 
-            this.genreLabel.AutoSize = true;
-            this.genreLabel.Location = new System.Drawing.Point(43, 26);
-            this.genreLabel.Name = "genreLabel";
-            this.genreLabel.Size = new System.Drawing.Size(54, 20);
-            this.genreLabel.TabIndex = 19;
-            this.genreLabel.Text = "Genre";
-            // 
-            // BooksCatalog
+            // TitlesCatalog
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1146, 530);
+            this.ClientSize = new System.Drawing.Size(977, 557);
             this.Controls.Add(this.genreLabel);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "BooksCatalog";
-            this.Text = "BooksCatalog";
-            this.Load += new System.EventHandler(this.BooksCatalog_Load);
+            this.Name = "TitlesCatalog";
+            this.Text = "Form1";
+            this.Load += new System.EventHandler(this.TitlesCatalog_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -137,14 +127,13 @@
 
         #endregion
 
+        private System.Windows.Forms.Label genreLabel;
+        private System.Windows.Forms.ComboBox genreComboBox;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.DataGridViewTextBoxColumn ID;
         private System.Windows.Forms.DataGridViewTextBoxColumn Title;
         private System.Windows.Forms.DataGridViewTextBoxColumn Author;
         private System.Windows.Forms.DataGridViewTextBoxColumn Genre;
         private System.Windows.Forms.DataGridViewTextBoxColumn ISBN;
-        private System.Windows.Forms.ComboBox genreComboBox;
-        private System.Windows.Forms.Label genreLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn availability;
     }
 }

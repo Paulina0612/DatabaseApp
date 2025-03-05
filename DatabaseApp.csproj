@@ -136,6 +136,12 @@
     <Compile Include="View\ClientsPanel\BorrowedBooks.Designer.cs">
       <DependentUpon>BorrowedBooks.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\TitlesCatalog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\TitlesCatalog.Designer.cs">
+      <DependentUpon>TitlesCatalog.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -261,6 +267,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\ClientsPanel\BorrowedBooks.resx">
       <DependentUpon>BorrowedBooks.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\TitlesCatalog.resx">
+      <DependentUpon>TitlesCatalog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.resx">
       <DependentUpon>ChangeWorkerSalary.cs</DependentUpon>
