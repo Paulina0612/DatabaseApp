@@ -71,10 +71,13 @@ namespace DatabaseApp
             {
                 try
                 {
-                    Program.communicationHandler.workersHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
+                    bool ifSuccess = Program.communicationHandler.workersHandler.AddWorker(firstNameTextBox.Text, lastNameTextBox.Text, phoneNumberTextBox.Text,
                         emailTextBox.Text, PESELTextBox.Text, float.Parse(salaryTextBox.Text), ComboBoxItem.GetIDByText(managerComboBox.Text),
                         ComboBoxItem.GetIDByText(positionComboBox.Text), password);
-                    MessageBox.Show("Worker successfully added.\nGenerated password is: " + password);
+                    if (ifSuccess)
+                        MessageBox.Show("Worker successfully added.\nGenerated password is: " + password);
+                    else
+                        MessageBox.Show("Adding worker failed.");
                 }
                 catch(Exception ex)
                 {

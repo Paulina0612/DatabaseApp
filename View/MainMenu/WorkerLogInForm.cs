@@ -6,8 +6,6 @@ namespace DatabaseApp
 
     public partial class WorkerLogInForm : Form
     {
-        private bool ifDirector = false;
-
         public WorkerLogInForm()
         {
             InitializeComponent();

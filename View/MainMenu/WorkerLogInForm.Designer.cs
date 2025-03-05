@@ -69,6 +69,7 @@
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.Size = new System.Drawing.Size(344, 26);
             this.passwordTextBox.TabIndex = 11;
+            this.passwordTextBox.PasswordChar = '*';
             // 
             // lastNameTextBox
             // 

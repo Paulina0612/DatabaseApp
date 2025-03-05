@@ -20,7 +20,7 @@ namespace DatabaseApp.Presenter
 {
     public class WorkersHandler
     {
-        public void AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, int managerID, int positionID, string password)
+        public bool AddWorker(string firstName, string lastName, string phoneNumber, string email, string PESEL, float salary, int managerID, int positionID, string password)
         {
             try
             {
@@ -42,11 +42,13 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@Password", password);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Employee has been added.");
+                return true;
+
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error adding the employee: {ex.Message}");
+                return false;
             }
         }
 
