@@ -151,22 +151,23 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public void RemoveWorker(string data)
+        public bool RemoveWorker(int id)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "DELETE FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
+                string query = "DELETE FROM Pracownik WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@Data", data);
+                command.Parameters.AddWithValue("@ID", id);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Employee has been removed.");
+                return true;
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error removing the employee: {ex.Message}");
+                return false;
             }
         }
 
@@ -300,7 +301,7 @@ namespace DatabaseApp.Presenter
             return positions;
         }
 
-        public List<ComboBoxItem> GetManagers()
+        public List<ComboBoxItem> GetAllWorkersData()
         {
             List<ComboBoxItem> managers = new List<ComboBoxItem>();
 

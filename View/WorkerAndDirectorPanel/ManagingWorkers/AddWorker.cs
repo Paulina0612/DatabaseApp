@@ -24,17 +24,17 @@ namespace DatabaseApp
             positions = Program.communicationHandler.workersHandler.GetPositions();
             foreach (ComboBoxItem position in positions)
             {
-                positionComboBox.Items.Add(position.ID + position.Text);
+                positionComboBox.Items.Add(position.ID + " " + position.Text);
             }
         }
 
         private void LoadManagers()
         {
             managerComboBox.Items.Clear();
-            managers = Program.communicationHandler.workersHandler.GetManagers();
+            managers = Program.communicationHandler.workersHandler.GetAllWorkersData();
             foreach (ComboBoxItem manager in managers)
             {
-                managerComboBox.Items.Add(manager.ID + manager.Text);
+                managerComboBox.Items.Add(manager.ID + " " + manager.Text);
             }
         }
 
