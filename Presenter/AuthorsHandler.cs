@@ -104,7 +104,7 @@ namespace DatabaseApp.Presenter
                         ComboBoxItem book = new ComboBoxItem
                         {
                             ID = reader.GetInt32("ID"),
-                            Text = reader.GetString("Imie") + reader.GetString("Nazwisko")
+                            Text = reader.GetString("Imie") + " " + reader.GetString("Nazwisko")
                         };
                         authors.Add(book);
                     }

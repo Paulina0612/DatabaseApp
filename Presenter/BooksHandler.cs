@@ -16,28 +16,107 @@ namespace DatabaseApp.Presenter
 {
     public class BooksHandler 
     {
-        public void AddBook(string title, string authorData, string ISBN, string genreName)
+        public bool AddNewTitle(string title, int authorID, string ISBN, int genreID)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                int authorID = Program.communicationHandler.authorsHandler.GetAuthorID(authorData);
-                int genreID = Program.communicationHandler.genresHandler.GetGenreID(genreName);
 
-                string query = "INSERT INTO Ksiazki (Tytul, AutorID, GatunekID, ISBN) VALUES (@Title, @AuthorID, @GenreID, @ISBN)";
+                string query = @"INSERT INTO Ksiazki (ID, Tytul, AutorID, GatunekID, ISBN) 
+                                    VALUES (@ID, @Title, @AuthorID, @GenreID, @ISBN)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
+                command.Parameters.AddWithValue("@ID", GetNextBookTitleId());
                 command.Parameters.AddWithValue("@Title", title);
                 command.Parameters.AddWithValue("@AuthorID", authorID);
                 command.Parameters.AddWithValue("@GenreID", genreID);
                 command.Parameters.AddWithValue("@ISBN", ISBN);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Book successfully added. ");
+                return true;
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error adding the book: {ex.Message}");
+                return false;
+            }
+        }
+
+        private int GetNextBookTitleId()
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT MAX(ID) FROM Ksiazki";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result) + 1;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error getting the next book ID: {ex.Message}");
+                return -1;
+            }
+        }
+
+        public bool AddNewCopy(int id)
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+
+                string query = @"INSERT INTO Katalog_ksiazek (ID, KsiazkiID, Stan_magazynowy_ksiazki) 
+                                    VALUES (@ID, @BookID, @State)";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                string state = "AVAILABLE";
+                command.Parameters.AddWithValue("@ID", GetNextCopyId());
+                command.Parameters.AddWithValue("@BookID", id);
+                command.Parameters.AddWithValue("@State", state);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error adding the book: {ex.Message}");
+                return false;
+            }
+        }
+
+        private int GetNextCopyId()
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT MAX(ID) FROM Katalog_ksiazek";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    int id;
+
+                    try { id = Convert.ToInt32(result) + 1; }
+                    catch (Exception) { id = 1; }
+
+                    return id;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error getting the next copy ID: {ex.Message}");
+                return -1;
             }
         }
 
@@ -121,8 +200,7 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
                 string query = @"
-        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, 
-               CASE WHEN w.Data_spodziewanego_zwrotu IS NULL THEN false ELSE true END AS ifAvailable
+        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
         FROM Wypozyczenia w
         JOIN Klienci c ON w.KlientID = c.ID
         JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
@@ -215,17 +293,12 @@ namespace DatabaseApp.Presenter
         public List<BookData> GetBooksCatalog(int genreFilter)
         {
             string query = @"
-        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
-               CASE 
-                   WHEN w.ID IS NULL THEN true 
-                   WHEN w.ID IN (SELECT Wypozyczenie_ID FROM Zwroty) THEN true 
-                   ELSE false 
-               END AS ifAvailable
-        FROM Ksiazki k
-        JOIN Autor a ON k.AutorID = a.ID
-        JOIN Gatunki g ON k.GatunekID = g.ID
-        LEFT JOIN Wypozyczenia w ON k.ID = w.Katalog_ksiazekID
-        WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
+        SELECT kk.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, kk.Stan_magazynowy_ksiazki
+FROM biblioteka.katalog_ksiazek kk 
+join biblioteka.ksiazki k on kk.KsiazkiID = k.ID 
+JOIN biblioteka.autor a ON k.AutorID = a.ID
+JOIN biblioteka.gatunki g ON k.GatunekID = g.ID
+WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
 
             try
             {
@@ -253,7 +326,7 @@ namespace DatabaseApp.Presenter
                             authorLastName = reader.GetString("Nazwisko"),
                             genreName = reader.GetString("Nazwa_gatunku"),
                             ISBN = reader.GetString("ISBN"),
-                            ifAvailable = reader.GetBoolean("ifAvailable")
+                            ifAvailable = reader.GetString("Stan_magazynowy_ksiazki") == "AVAILABLE" ? true : false
                         };
 
                         books.Add(book);

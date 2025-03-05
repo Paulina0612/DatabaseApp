@@ -47,7 +47,14 @@ namespace DatabaseApp
             else if (string.IsNullOrEmpty(genreComboBox.Text)) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.booksHandler.AddBook(titleTextBox.Text, authorDataComboBox.Text, ISBNTextBox.Text, genreComboBox.Text);
+                bool ifSuccess = Program.communicationHandler.booksHandler.AddNewTitle(titleTextBox.Text, 
+                    ComboBoxItem.GetIDByText(authorDataComboBox.Text), ISBNTextBox.Text, 
+                    ComboBoxItem.GetIDByText(genreComboBox.Text));
+
+                if (ifSuccess)
+                    MessageBox.Show("Title added successfully.");
+                else
+                    MessageBox.Show("Title not added.");
             }
         }
 
@@ -58,6 +65,22 @@ namespace DatabaseApp
         }
 
         private void addNewCopyButton_Click(object sender, EventArgs e)
+        {
+            bool ifIDNumeric = int.TryParse(bookIDTextBox.Text, out int n);
+
+            if (string.IsNullOrEmpty(bookIDTextBox.Text) && !ifIDNumeric) Program.IncorrectDataInformation();
+            else
+            {
+                bool ifSuccess = Program.communicationHandler.booksHandler.AddNewCopy(ComboBoxItem.GetIDByText(bookIDTextBox.Text));
+
+                if (ifSuccess)
+                    MessageBox.Show("Copy added successfully.");
+                else
+                    MessageBox.Show("Copy not added.");
+            }
+        }
+
+        private void titlesCatalogButton_Click(object sender, EventArgs e)
         {
 
         }

@@ -39,8 +39,9 @@
             this.authorDataComboBox = new System.Windows.Forms.ComboBox();
             this.addNewCopyButton = new System.Windows.Forms.Button();
             this.bookIDLabel = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.bookIDTextBox = new System.Windows.Forms.TextBox();
             this.catalogButton = new System.Windows.Forms.Button();
+            this.titlesCatalogButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -138,12 +139,12 @@
             this.bookIDLabel.TabIndex = 11;
             this.bookIDLabel.Text = "Book ID";
             // 
-            // textBox1
+            // bookIDTextBox
             // 
-            this.textBox1.Location = new System.Drawing.Point(134, 211);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(384, 26);
-            this.textBox1.TabIndex = 14;
+            this.bookIDTextBox.Location = new System.Drawing.Point(134, 211);
+            this.bookIDTextBox.Name = "bookIDTextBox";
+            this.bookIDTextBox.Size = new System.Drawing.Size(384, 26);
+            this.bookIDTextBox.TabIndex = 14;
             // 
             // catalogButton
             // 
@@ -155,13 +156,24 @@
             this.catalogButton.UseVisualStyleBackColor = true;
             this.catalogButton.Click += new System.EventHandler(this.catalogButton_Click);
             // 
+            // titlesCatalogButton
+            // 
+            this.titlesCatalogButton.Location = new System.Drawing.Point(134, 167);
+            this.titlesCatalogButton.Name = "titlesCatalogButton";
+            this.titlesCatalogButton.Size = new System.Drawing.Size(192, 37);
+            this.titlesCatalogButton.TabIndex = 16;
+            this.titlesCatalogButton.Text = "Titles Catalog";
+            this.titlesCatalogButton.UseVisualStyleBackColor = true;
+            this.titlesCatalogButton.Click += new System.EventHandler(this.titlesCatalogButton_Click);
+            // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(556, 296);
+            this.Controls.Add(this.titlesCatalogButton);
             this.Controls.Add(this.catalogButton);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.bookIDTextBox);
             this.Controls.Add(this.addNewCopyButton);
             this.Controls.Add(this.bookIDLabel);
             this.Controls.Add(this.authorDataComboBox);
@@ -193,7 +205,8 @@
         private System.Windows.Forms.ComboBox authorDataComboBox;
         private System.Windows.Forms.Button addNewCopyButton;
         private System.Windows.Forms.Label bookIDLabel;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox bookIDTextBox;
         private System.Windows.Forms.Button catalogButton;
+        private System.Windows.Forms.Button titlesCatalogButton;
     }
 }
