@@ -3,16 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingworkers\\addworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingworkers\\addworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingworkers\\changeworkersalary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingworkers\\changeworkersalary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingworkers\\changeworkersalary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingworkers\\changeworkersalary.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\presenter\\workershandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:presenter\\workershandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingworkers\\removeworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingworkers\\removeworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingworkers\\addworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|solutionrelative:view\\workeranddirectorpanel\\managingworkers\\addworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C472269B-CC51-4E11-8EDA-F253957F0CD0}|DatabaseApp.csproj|c:\\users\\paula\\desktop\\studia\\informatyka\\rok_3\\semestr_5\\bazy danych\\databaseapp\\view\\workeranddirectorpanel\\managingworkers\\removeworker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -30,7 +38,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 4,
           "Children": [
             {
               "$type": "Bookmark",
@@ -38,33 +46,58 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
+              "Title": "ChangeWorkerSalary.cs",
+              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs",
+              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs",
+              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs*",
+              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACwAAABEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T07:34:19.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ChangeWorkerSalary.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs",
+              "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs",
+              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs [Design]*",
+              "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\ChangeWorkerSalary.cs [Design]*",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-03-05T07:34:17.044Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "WorkersHandler.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\Presenter\\WorkersHandler.cs",
               "RelativeDocumentMoniker": "Presenter\\WorkersHandler.cs",
-              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\Presenter\\WorkersHandler.cs*",
-              "RelativeToolTip": "Presenter\\WorkersHandler.cs*",
-              "ViewState": "AgIAAJcAAAAAAAAAAAAkwKkAAAAdAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\Presenter\\WorkersHandler.cs",
+              "RelativeToolTip": "Presenter\\WorkersHandler.cs",
+              "ViewState": "AgIAALkAAAAAAAAAAAAAwL8AAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-05T07:25:28.411Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
               "Title": "AddWorker.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\AddWorker.cs",
               "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\AddWorker.cs",
               "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\AddWorker.cs",
               "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\AddWorker.cs",
-              "ViewState": "AgIAAEAAAAAAAAAAAAAkwEoAAACNAAAAAAAAAA==",
+              "ViewState": "AgIAAEMAAAAAAAAAAAAkwEYAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-05T07:22:29.329Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "AddWorker.cs [Design]",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\AddWorker.cs",
               "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\AddWorker.cs",
@@ -76,20 +109,20 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "RemoveWorker.cs",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\RemoveWorker.cs",
               "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\RemoveWorker.cs",
               "ToolTip": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\RemoveWorker.cs",
               "RelativeToolTip": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\RemoveWorker.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwCMAAABEAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-05T07:22:05.81Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 5,
               "Title": "RemoveWorker.cs [Design]",
               "DocumentMoniker": "C:\\Users\\paula\\Desktop\\studia\\Informatyka\\rok_3\\semestr_5\\Bazy danych\\DatabaseApp\\View\\WorkerAndDirectorPanel\\ManagingWorkers\\RemoveWorker.cs",
               "RelativeDocumentMoniker": "View\\WorkerAndDirectorPanel\\ManagingWorkers\\RemoveWorker.cs",

@@ -172,94 +172,35 @@ namespace DatabaseApp.Presenter
         }
 
 
-        public void ChangeWorkerSalary(string data, float newSalary)
+        public bool ChangeWorkerSalary(int id, float newSalary)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                int workerID = Program.communicationHandler.workersHandler.GetWorkerID(data);
                 string query = "UPDATE Pracownik SET Wyplata = @NewSalary WHERE ID = @WorkerID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@NewSalary", newSalary);
-                command.Parameters.AddWithValue("@WorkerID", workerID);
+                command.Parameters.AddWithValue("@WorkerID", id);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Employee's salary has been updated.");
+                return true;
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error updating employee's salary: {ex.Message}");
+                return false;
             }
         }
 
-        //public int GetWorkerID(string data)
-        //{
-        //    try
-        //    {
-        //        //InitializeConnection();
-        //        string query = "SELECT ID FROM Pracownik WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-        //        MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
-
-        //        command.Parameters.AddWithValue("@Data", data);
-        //        object result = command.ExecuteScalar();
-        //        if (result != null)
-        //        {
-        //            return Convert.ToInt32(result);
-        //        }
-        //        else
-        //        {
-        //            MessageBox.Show("Employee's ID has not been found.");
-        //            return 0;
-        //        }
-
-        //    }
-        //    catch (MySqlException ex)
-        //    {
-        //        MessageBox.Show($"Error retrieving employee's ID: {ex.Message}");
-        //        return -1;
-        //    }
-        //}
-
-        public int GetWorkerID(string managerData)
-        {
-            int workerID = -1;
-            // Zakładamy, że managerData ma format "Imię Nazwisko"
-            string[] parts = managerData.Split(' ');
-            if (parts.Length < 2)
-            {
-                MessageBox.Show("Niepoprawny format danych managera.");
-                return workerID;
-            }
-            string firstName = parts[0];
-            string lastName = parts[1];
-
-            string query = "SELECT PracownikID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName";
-            MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
-            command.Parameters.AddWithValue("@FirstName", firstName);
-            command.Parameters.AddWithValue("@LastName", lastName);
-
-            using (MySqlDataReader reader = command.ExecuteReader())
-            {
-                if (reader.Read())
-                {
-                    workerID = reader.GetInt32("PracownikID");
-                }
-            }
-            return workerID;
-        }
-
-
-        public float GetWorkerSalary(string data)
+        public float GetWorkerSalary(int id)
         {
             try
             {
-                //InitializeConnection();
-                int ID = GetWorkerID(data);
-                string query = "SELECT SALARY FROM Pracownik WHERE ID == @ID";
+                string query = "SELECT Wyplata FROM Pracownik WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@ID", ID);
+                command.Parameters.AddWithValue("@ID", id);
                 object result = command.ExecuteScalar();
                 if (result != DBNull.Value)
                 {
