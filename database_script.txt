@@ -23,7 +23,7 @@ CREATE TABLE Stanowisko (
 CREATE TABLE Katalog_ksiazek (
 	ID INT(10) PRIMARY KEY,
     KsiazkiID INT(10),
-    Stan_magazynowy_ksiazki VARCHAR(10)
+    Stan_magazynowy_ksiazki VARCHAR(15)
 );
 
 CREATE TABLE Klienci (
@@ -218,37 +218,6 @@ end //
 delimiter ;
 
 delimiter //
-create procedure DodajWypozyczenie (
-    in p_KlientID int(10),
-    in p_KsiazkiID int(10),
-    in p_PracownikID int(10),
-    in p_DataWypozyczenia date,
-    in p_DataZwrotu date
-)
-begin
-    declare stan varchar(10);
-    -- sprawdzenie dostępności książki
-    select stan_magazynowy_ksiazki into stan
-    from katalog_ksiazek
-    where KsiazkiID = p_KsiazkiID;
-
-    if stan = 'AVAILABLE' then
-        -- dodanie wypożyczenia
-        insert into wypozyczenia (KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu)
-        values (p_KlientID, p_KsiazkiID, p_PracownikID, p_DataWypozyczenia, p_DataZwrotu);
-
-        -- aktualizacja stanu magazynowego
-        update katalog_ksiazek
-        set stan_magazynowy_ksiazki = 'UNAVAILABLE'
-        where KsiazkiID = p_KsiazkiID;
-    else
-        signal sqlstate '45000'
-        set message_text = 'Book is unavailable';
-    end if;
-end //
-delimiter ;
-
-delimiter //
 create function PobierzWypozyczeniaKlienta(p_KlientID int(10))
 returns text
 deterministic
@@ -326,8 +295,6 @@ grant select on Biblioteka.stanowisko to 'Pracownik'@'%';
 GRANT EXECUTE ON PROCEDURE Biblioteka.DodajKlienta TO 'Kierownik'@'%';
 GRANT EXECUTE ON PROCEDURE Biblioteka.DodajKlienta TO 'Pracownik'@'%';
 GRANT EXECUTE ON PROCEDURE Biblioteka.AKtualizujPracownika TO 'Kierownik'@'%';
-GRANT EXECUTE ON PROCEDURE Biblioteka.DodajWypozyczenie TO 'Pracownik'@'%';
-GRANT EXECUTE ON PROCEDURE Biblioteka.DodajWypozyczenie TO 'Kierownik'@'%';
 GRANT EXECUTE ON PROCEDURE Biblioteka.NaliczKareZaOpoznienie TO 'Kierownik'@'%';
 GRANT EXECUTE ON PROCEDURE Biblioteka.NaliczKareZaOpoznienie TO 'Pracownik'@'%';
 

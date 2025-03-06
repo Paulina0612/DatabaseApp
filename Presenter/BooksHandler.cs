@@ -128,6 +128,13 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@PracownikID", SQLCommunicationHandler.LoggedUserID);
                 command.ExecuteNonQuery();
 
+                string updateQuery = "update katalog_ksiazek set Stan_magazynowy_ksiazki=@Stan where ID=@KsiazkiID";
+                MySqlCommand updateCommand = new MySqlCommand(updateQuery, Program.communicationHandler.connection);
+
+                updateCommand.Parameters.AddWithValue("@KsiazkiID", bookID);
+                updateCommand.Parameters.AddWithValue("@Stan", "UNAVAILABLE");
+                updateCommand.ExecuteNonQuery();
+
                 return true;
             }
             catch (MySqlException ex)
