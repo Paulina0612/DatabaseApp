@@ -1,7 +1,10 @@
 ﻿using MySql.Data.MySqlClient;
+using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace DatabaseApp.Presenter
 {
@@ -118,8 +121,8 @@ namespace DatabaseApp.Presenter
                 Program.communicationHandler.InitializeConnection();
                 int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmail);
                 string query = @"
-                    insert into wypozyczenia (ID, KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu)
-                    values (@ID, @KlientID, @KsiazkiID, @PracownikID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), INTERVAL 30 DAY));";
+                    insert into wypozyczenia (ID, KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu, Czy_zakonczone)
+                    values (@ID, @KlientID, @KsiazkiID, @PracownikID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), INTERVAL 30 DAY), false);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", GetNextLoanId());
@@ -175,7 +178,7 @@ namespace DatabaseApp.Presenter
 
 
         // Removing records
-        public void RemoveBook(int bookID)
+        public bool RemoveBook(int bookID)
         {
             try
             {
@@ -186,38 +189,145 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@KsiazkiID", bookID);
                 command.ExecuteNonQuery();
 
-
-                MessageBox.Show("Book has been removed.");
+                return true;
             }
             catch (MySqlException ex)
             {
                 MessageBox.Show($"Error removing the book: {ex.Message}");
+                return false;
             }
 
         }
 
 
-        public void ReturnBook(string email, int bookID, bool ifPenaltyPayed)
+        public bool ReturnBook(int bookID)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                int clientID = Program.communicationHandler.clientsHandler.GetClientID(email);
-                string query = "CALL ZwrocKsiazke(@ClientID, @BookID, @IfPenaltyPayed)";
+                int lendID = GetLendID(bookID);
+
+                if (lendID == -1)
+                {
+                    return false;
+                }
+
+                string query = @"
+                    insert into zwroty (ID, Wypozyczenie_ID, Data, Kara, PracownikID)
+                    values (@ID, @WypozyczenieID, CURRENT_DATE(), @Kara, @PracownikID);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@ClientID", clientID);
-                command.Parameters.AddWithValue("@BookID", bookID);
-                command.Parameters.AddWithValue("@IfPenaltyPayed", ifPenaltyPayed);
+                command.Parameters.AddWithValue("@ID", GetNextReturnId());
+                command.Parameters.AddWithValue("@WypozyczenieID", lendID);
+                command.Parameters.AddWithValue("@Kara", CalculatePenalty(lendID));
+                command.Parameters.AddWithValue("@PracownikID", SQLCommunicationHandler.LoggedUserID);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Book has been returned.");
+                string updateQuery = "update katalog_ksiazek set Stan_magazynowy_ksiazki=@Stan where ID=@KsiazkiID";
+                MySqlCommand updateCommand = new MySqlCommand(updateQuery, Program.communicationHandler.connection);
+
+                updateCommand.Parameters.AddWithValue("@KsiazkiID", bookID);
+                updateCommand.Parameters.AddWithValue("@Stan", "AVAILABLE");
+                updateCommand.ExecuteNonQuery();
+
+                string upQuery = "update wypozyczenia set Czy_zakonczone=true where ID=@WypozyczenieID";
+                MySqlCommand upCommand = new MySqlCommand(upQuery, Program.communicationHandler.connection);
+
+                upCommand.Parameters.AddWithValue("@WypozyczenieID", lendID);
+                upCommand.ExecuteNonQuery();
+
+                return true;
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error returning the book: {ex.Message}");
+                return false;
             }
 
+        }
+
+        private float CalculatePenalty(int lendID)
+        {
+            float penalty = 0;
+
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string datediffQuery = "SELECT DATEDIFF((SELECT Data_spodziewanego_zwrotu from wypozyczenia where ID=@WypozyczenieID), " +
+                    "CURRENT_DATE()) as diff";
+                MySqlCommand command = new MySqlCommand(datediffQuery, Program.communicationHandler.connection);
+
+                command.Parameters.AddWithValue("@WypozyczenieID", lendID);
+
+                using (MySqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        penalty = reader.GetInt32("diff");
+                    }
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error calculating the penalty: {ex.Message}");
+            }
+
+            return penalty;
+        }
+
+        private int GetNextReturnId()
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT MAX(ID) FROM zwroty";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    int id;
+
+                    try { id = Convert.ToInt32(result) + 1; }
+                    catch (Exception) { id = 1; }
+
+                    return id;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error getting the next copy ID: {ex.Message}");
+                return -1;
+            }
+        }
+
+        private int GetLendID(int bookID)
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT ID FROM Wypozyczenia WHERE Katalog_ksiazekID = @BookID and czy_zakonczone=false";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                command.Parameters.AddWithValue("@BookID", bookID);
+
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    return Convert.ToInt32(result);
+                }
+                else
+                {
+                    return -1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error getting the next loan ID: {ex.Message}");
+                return -1;
+            }
         }
 
 

@@ -5,7 +5,6 @@ namespace DatabaseApp
 {
     public partial class ReturnBook : Form
     {
-        private bool ifPenaltyPayed = false;
 
         public ReturnBook()
         {
@@ -15,24 +14,15 @@ namespace DatabaseApp
         private void commitButton_Click(object sender, EventArgs e)
         {
             bool ifBookIDNumeric = int.TryParse(bookIDTextBox.Text, out int bookID);
-            int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmailTextBox.Text);
 
-            if (string.IsNullOrEmpty(clientEmailTextBox.Text) &&
-                (Program.communicationHandler.clientsHandler.GetClientData(clientID).getEmail() != null))
-                Program.IncorrectDataInformation();
-            else if (!ifBookIDNumeric && !Program.communicationHandler.booksHandler.IsBookBorrowedByClient(clientID, bookID))
-                Program.IncorrectDataInformation();
+            if (!ifBookIDNumeric) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.booksHandler.ReturnBook(clientEmailTextBox.Text, bookID, ifPenaltyPayed);
-                MessageBox.Show("Book returned.");
-            }
-        }
+                bool ifSuccess = Program.communicationHandler.booksHandler.ReturnBook(bookID);
 
-        private void penaltyCheckBox_CheckedChanged(object sender, EventArgs e)
-        {
-            if(ifPenaltyPayed) ifPenaltyPayed=false;
-            else ifPenaltyPayed = true;
+                if (ifSuccess) MessageBox.Show("Book returned successfully");
+                else MessageBox.Show("Error returning the book");
+            }
         }
     }
 }
