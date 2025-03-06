@@ -119,6 +119,13 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
+
+                if(GetBorrowedBooks().Count == 5)
+                {
+                    MessageBox.Show("Client has borrowed 5 books.");
+                    return false;
+                }
+
                 int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmail);
                 string query = @"
                     insert into wypozyczenia (ID, KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu, Czy_zakonczone)
@@ -335,7 +342,6 @@ namespace DatabaseApp.Presenter
         // Returning data
         public List<BookData> GetHistory()
         {
-            // TODO: Poprawić zapytanie na katalog książek
             List<BookData> history = new List<BookData>();
 
             try
@@ -343,12 +349,13 @@ namespace DatabaseApp.Presenter
                 Program.communicationHandler.InitializeConnection();
                 string query = @"
         SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
-        FROM Wypozyczenia w
-        JOIN Klienci c ON w.KlientID = c.ID
-        JOIN Ksiazki k ON w.Katalog_ksiazekID = k.ID
-        JOIN Autor a ON k.AutorID = a.ID
-        JOIN Gatunki g ON k.GatunekID = g.ID
-        WHERE c.ID = @ClientId";
+FROM Wypozyczenia w
+JOIN Klienci c ON w.KlientID = c.ID
+JOIN Katalog_ksiazek kk ON w.Katalog_ksiazekID = kk.ID
+JOIN Ksiazki k ON kk.KsiazkiID  = k.ID
+JOIN Autor a ON k.AutorID = a.ID
+JOIN Gatunki g ON k.GatunekID = g.ID
+WHERE c.ID = 0";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -366,7 +373,7 @@ namespace DatabaseApp.Presenter
                             authorLastName = reader.GetString("Nazwisko"),
                             genreName = reader.GetString("Nazwa_gatunku"),
                             ISBN = reader.GetString("ISBN"),
-                            ifAvailable = reader.GetBoolean("ifAvailable")
+                            ifAvailable = true
                         };
                         history.Add(book);
                     }
@@ -391,16 +398,14 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
                 string query = @"
-                SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN,
-                CASE 
-                     WHEN w.ID IN (SELECT Wypozyczenie_ID FROM Zwroty) THEN true 
-                        ELSE false 
-                    END AS ifAvailable
-                FROM Ksiazki k
-                JOIN Autor a ON k.AutorID = a.ID
-                JOIN Gatunki g ON k.GatunekID = g.ID
-                LEFT JOIN Wypozyczenia w ON k.ID = w.Katalog_ksiazekID
-                WHERE w.KlientID = @KlientID OR w.ID IS NULL";
+                SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
+FROM Wypozyczenia w
+JOIN Klienci c ON w.KlientID = c.ID
+JOIN Katalog_ksiazek kk ON w.Katalog_ksiazekID = kk.ID
+JOIN Ksiazki k ON kk.KsiazkiID  = k.ID
+JOIN Autor a ON k.AutorID = a.ID
+JOIN Gatunki g ON k.GatunekID = g.ID
+WHERE c.ID = 0 and w.Czy_zakonczone=false";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -461,6 +466,10 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
 
                     while (reader.Read())
                     {
+                        if(reader.GetString("Stan_magazynowy_ksiazki") == "REMOVED")
+                        {
+                            continue;
+                        }
                         BookData book = new BookData
                         {
                             ID = reader.GetInt32("ID"),

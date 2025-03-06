@@ -97,6 +97,7 @@
             this.Controls.Add(this.dataGridView1);
             this.Name = "History";
             this.Text = "History";
+            this.Load += new System.EventHandler(this.History_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

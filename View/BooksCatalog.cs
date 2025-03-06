@@ -27,6 +27,7 @@ namespace DatabaseApp
 
         private void BooksCatalog_Load(object sender, EventArgs e)
         {
+            //TODO: Nie wyswietlac ksiazek, ktore sa usuniete
             List<BookData> books = new List<BookData>();
             try
             {
