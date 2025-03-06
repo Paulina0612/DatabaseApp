@@ -17,8 +17,11 @@ namespace DatabaseApp
             else if(!Program.communicationHandler.booksHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) Program.IncorrectDataInformation();
             else
             {
-                Program.communicationHandler.booksHandler.LendBook(clientEmailTextBox.Text, int.Parse(bookIDTextBox.Text));
-                MessageBox.Show("Operation successful.");
+                bool ifSuccess = 
+                    Program.communicationHandler.booksHandler.LendBook(clientEmailTextBox.Text, int.Parse(bookIDTextBox.Text));
+
+                if (ifSuccess) MessageBox.Show("Book lent successfully");
+                else MessageBox.Show("Error lending the book");
             }
         }
 

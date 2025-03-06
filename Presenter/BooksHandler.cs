@@ -1,16 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-
-//-----------------------------------------------------------------------------------------------
-
-// TODO: Nie działa wypożyczanie książek: BooksCatalog pokazuje już nie pustą tabelę, ale dziwnie ją wyświetla, a przy próbie wypożyczenia książki wyrzuca incorrect data
-
-//-----------------------------------------------------------------------------------------------
 
 namespace DatabaseApp.Presenter
 {
@@ -120,26 +111,58 @@ namespace DatabaseApp.Presenter
             }
         }
 
-        public void LendBook(string clientEmail, int bookID)
+        public bool LendBook(string clientEmail, int bookID)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
                 int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmail);
-                string query = "CALL DodajWypozyczenie(@ClientID, @BookID, @WorkerID, CURDATE(), DATE_ADD(CURDATE(), INTERVAL 14 DAY))";
+                string query = @"
+                    insert into wypozyczenia (ID, KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu)
+                    values (@ID, @KlientID, @KsiazkiID, @PracownikID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), INTERVAL 30 DAY));";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@ClientID", clientID);
-                command.Parameters.AddWithValue("@BookID", bookID);
-                command.Parameters.AddWithValue("@WorkerID", SQLCommunicationHandler.LoggedUserID);
+                command.Parameters.AddWithValue("@ID", GetNextLoanId());
+                command.Parameters.AddWithValue("@KlientID", clientID);
+                command.Parameters.AddWithValue("@KsiazkiID", bookID);
+                command.Parameters.AddWithValue("@PracownikID", SQLCommunicationHandler.LoggedUserID);
                 command.ExecuteNonQuery();
 
-
-                MessageBox.Show("Loan has been added.");
+                return true;
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error lending the book: {ex.Message}");
+                return false;
+            }
+        }
+
+
+        private int GetNextLoanId()
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT MAX(ID) FROM wypozyczenia";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    int id;
+
+                    try { id = Convert.ToInt32(result) + 1; }
+                    catch (Exception) { id = 1; }
+
+                    return id;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error getting the next copy ID: {ex.Message}");
+                return -1;
             }
         }
 
