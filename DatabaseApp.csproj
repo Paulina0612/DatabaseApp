@@ -204,23 +204,17 @@
     </Compile>
     <Compile Include="View\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveAuthor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveAuthor.Designer.cs">
-      <DependentUpon>RemoveAuthor.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveBook.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveBook.Designer.cs">
       <DependentUpon>RemoveBook.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveGenre.cs">
+    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkersManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveGenre.Designer.cs">
-      <DependentUpon>RemoveGenre.cs</DependentUpon>
+    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkersManager.Designer.cs">
+      <DependentUpon>ChangeWorkersManager.cs</DependentUpon>
     </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.cs">
       <SubType>Form</SubType>
@@ -310,14 +304,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveAuthor.resx">
-      <DependentUpon>RemoveAuthor.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveBook.resx">
       <DependentUpon>RemoveBook.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveGenre.resx">
-      <DependentUpon>RemoveGenre.cs</DependentUpon>
+    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkersManager.resx">
+      <DependentUpon>ChangeWorkersManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.resx">
       <DependentUpon>RemoveWorker.cs</DependentUpon>

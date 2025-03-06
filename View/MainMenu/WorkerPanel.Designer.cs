@@ -40,8 +40,6 @@ namespace DatabaseApp
             this.addBookButton = new System.Windows.Forms.Button();
             this.removeBookButton = new System.Windows.Forms.Button();
             this.addGenreButton = new System.Windows.Forms.Button();
-            this.removeGenreButton = new System.Windows.Forms.Button();
-            this.removeAuthorButton = new System.Windows.Forms.Button();
             this.addAuthorButton = new System.Windows.Forms.Button();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -143,29 +141,9 @@ namespace DatabaseApp
             this.addGenreButton.UseVisualStyleBackColor = true;
             this.addGenreButton.Click += new System.EventHandler(this.addGenreButton_Click);
             // 
-            // removeGenreButton
-            // 
-            this.removeGenreButton.Location = new System.Drawing.Point(239, 315);
-            this.removeGenreButton.Name = "removeGenreButton";
-            this.removeGenreButton.Size = new System.Drawing.Size(172, 31);
-            this.removeGenreButton.TabIndex = 9;
-            this.removeGenreButton.Text = "Remove Genre";
-            this.removeGenreButton.UseVisualStyleBackColor = true;
-            this.removeGenreButton.Click += new System.EventHandler(this.removeGenreButton_Click);
-            // 
-            // removeAuthorButton
-            // 
-            this.removeAuthorButton.Location = new System.Drawing.Point(239, 389);
-            this.removeAuthorButton.Name = "removeAuthorButton";
-            this.removeAuthorButton.Size = new System.Drawing.Size(172, 31);
-            this.removeAuthorButton.TabIndex = 11;
-            this.removeAuthorButton.Text = "Remove Author";
-            this.removeAuthorButton.UseVisualStyleBackColor = true;
-            this.removeAuthorButton.Click += new System.EventHandler(this.removeAuthorButton_Click);
-            // 
             // addAuthorButton
             // 
-            this.addAuthorButton.Location = new System.Drawing.Point(239, 352);
+            this.addAuthorButton.Location = new System.Drawing.Point(239, 315);
             this.addAuthorButton.Name = "addAuthorButton";
             this.addAuthorButton.Size = new System.Drawing.Size(172, 31);
             this.addAuthorButton.TabIndex = 10;
@@ -186,11 +164,9 @@ namespace DatabaseApp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 443);
+            this.ClientSize = new System.Drawing.Size(460, 363);
             this.Controls.Add(this.welcomeLabel);
-            this.Controls.Add(this.removeAuthorButton);
             this.Controls.Add(this.addAuthorButton);
-            this.Controls.Add(this.removeGenreButton);
             this.Controls.Add(this.addGenreButton);
             this.Controls.Add(this.removeBookButton);
             this.Controls.Add(this.addBookButton);
@@ -225,8 +201,6 @@ namespace DatabaseApp
         private System.Windows.Forms.Button addBookButton;
         private System.Windows.Forms.Button removeBookButton;
         private System.Windows.Forms.Button addGenreButton;
-        private System.Windows.Forms.Button removeGenreButton;
-        private System.Windows.Forms.Button removeAuthorButton;
         private System.Windows.Forms.Button addAuthorButton;
         private System.Windows.Forms.Label welcomeLabel;
     }

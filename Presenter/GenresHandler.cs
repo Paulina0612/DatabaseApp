@@ -34,11 +34,17 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "DELETE FROM Gatunki WHERE Nazwa_gatunku = @Nazwa_gatunku";
-                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                string booksQuery = "DELETE FROM katalog_ksiazek kk WHERE (SELECT gatunekID from ksiazki k where kk.ksiazkiid=k.id)=@GatunekID";
+                MySqlCommand booksCommand = new MySqlCommand(booksQuery, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@Nazwa_gatunku", name);
-                command.ExecuteNonQuery();
+                booksCommand.Parameters.AddWithValue("@GatunekID", GetGenreID(name));
+                booksCommand.ExecuteNonQuery();
+
+                string genreQuery = "DELETE FROM Gatunki WHERE Nazwa_gatunku = @Nazwa_gatunku";
+                MySqlCommand genreCommand = new MySqlCommand(genreQuery, Program.communicationHandler.connection);
+
+                genreCommand.Parameters.AddWithValue("@Nazwa_gatunku", name);
+                genreCommand.ExecuteNonQuery();
 
 
                 MessageBox.Show("Genre has been deleted.");

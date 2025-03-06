@@ -141,6 +141,26 @@ namespace DatabaseApp.Presenter
             }
         }
 
+        public bool ChangeWorkersManager(int workerID, int managerID)
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "update pracownik set Kierownik_ID=@KierownikID where ID=@PracownikID";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                command.Parameters.AddWithValue("@PracownikID", workerID);
+                command.Parameters.AddWithValue("@KierownikID", managerID);
+                command.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error removing the book: {ex.Message}");
+                return false;
+            }
+        }
 
         public bool IfDirector()
         {

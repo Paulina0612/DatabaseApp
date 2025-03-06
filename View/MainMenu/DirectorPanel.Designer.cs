@@ -28,9 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.removeAuthorButton = new System.Windows.Forms.Button();
             this.addAuthorButton = new System.Windows.Forms.Button();
-            this.removeGenreButton = new System.Windows.Forms.Button();
             this.addGenreButton = new System.Windows.Forms.Button();
             this.removeBookButton = new System.Windows.Forms.Button();
             this.addBookButton = new System.Windows.Forms.Button();
@@ -46,37 +44,18 @@
             this.removeWorkerButton = new System.Windows.Forms.Button();
             this.changeSalaryButton = new System.Windows.Forms.Button();
             this.welcomeLabel = new System.Windows.Forms.Label();
+            this.changeWorkersManagerButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // removeAuthorButton
-            // 
-            this.removeAuthorButton.Location = new System.Drawing.Point(239, 392);
-            this.removeAuthorButton.Name = "removeAuthorButton";
-            this.removeAuthorButton.Size = new System.Drawing.Size(172, 31);
-            this.removeAuthorButton.TabIndex = 24;
-            this.removeAuthorButton.Text = "Remove Author";
-            this.removeAuthorButton.UseVisualStyleBackColor = true;
-            this.removeAuthorButton.Click += new System.EventHandler(this.removeAuthorButton_Click);
             // 
             // addAuthorButton
             // 
-            this.addAuthorButton.Location = new System.Drawing.Point(239, 355);
+            this.addAuthorButton.Location = new System.Drawing.Point(239, 318);
             this.addAuthorButton.Name = "addAuthorButton";
             this.addAuthorButton.Size = new System.Drawing.Size(172, 31);
             this.addAuthorButton.TabIndex = 23;
             this.addAuthorButton.Text = "Add Author";
             this.addAuthorButton.UseVisualStyleBackColor = true;
             this.addAuthorButton.Click += new System.EventHandler(this.addAuthorButton_Click);
-            // 
-            // removeGenreButton
-            // 
-            this.removeGenreButton.Location = new System.Drawing.Point(239, 318);
-            this.removeGenreButton.Name = "removeGenreButton";
-            this.removeGenreButton.Size = new System.Drawing.Size(172, 31);
-            this.removeGenreButton.TabIndex = 22;
-            this.removeGenreButton.Text = "Remove Genre";
-            this.removeGenreButton.UseVisualStyleBackColor = true;
-            this.removeGenreButton.Click += new System.EventHandler(this.removeGenreButton_Click);
             // 
             // addGenreButton
             // 
@@ -223,19 +202,28 @@
             this.welcomeLabel.TabIndex = 29;
             this.welcomeLabel.Text = "Manage Clients";
             // 
+            // changeWorkersManagerButton
+            // 
+            this.changeWorkersManagerButton.Location = new System.Drawing.Point(35, 318);
+            this.changeWorkersManagerButton.Name = "changeWorkersManagerButton";
+            this.changeWorkersManagerButton.Size = new System.Drawing.Size(172, 59);
+            this.changeWorkersManagerButton.TabIndex = 30;
+            this.changeWorkersManagerButton.Text = "Change Worker\'s Manager";
+            this.changeWorkersManagerButton.UseVisualStyleBackColor = true;
+            this.changeWorkersManagerButton.Click += new System.EventHandler(this.changeWorkersManagerButton_Click);
+            // 
             // DirectorPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(460, 444);
+            this.ClientSize = new System.Drawing.Size(460, 389);
+            this.Controls.Add(this.changeWorkersManagerButton);
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.changeSalaryButton);
             this.Controls.Add(this.removeWorkerButton);
             this.Controls.Add(this.addWorkerButton);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.removeAuthorButton);
             this.Controls.Add(this.addAuthorButton);
-            this.Controls.Add(this.removeGenreButton);
             this.Controls.Add(this.addGenreButton);
             this.Controls.Add(this.removeBookButton);
             this.Controls.Add(this.addBookButton);
@@ -259,10 +247,7 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Button removeAuthorButton;
         private System.Windows.Forms.Button addAuthorButton;
-        private System.Windows.Forms.Button removeGenreButton;
         private System.Windows.Forms.Button addGenreButton;
         private System.Windows.Forms.Button removeBookButton;
         private System.Windows.Forms.Button addBookButton;
@@ -278,5 +263,6 @@
         private System.Windows.Forms.Button removeWorkerButton;
         private System.Windows.Forms.Button changeSalaryButton;
         private System.Windows.Forms.Label welcomeLabel;
+        private System.Windows.Forms.Button changeWorkersManagerButton;
     }
 }

@@ -58,22 +58,10 @@ namespace DatabaseApp
             book.Show();
         }
 
-        private void removeGenreButton_Click(object sender, EventArgs e)
-        {
-            RemoveGenre book = new RemoveGenre();
-            book.Show();
-        }
-
         private void addAuthorButton_Click(object sender, EventArgs e)
         {
             AddAuthor book = new AddAuthor();
             book.Show();
-        }
-
-        private void removeAuthorButton_Click(object sender, EventArgs e)
-        {
-            RemoveAuthor removeAuthor = new RemoveAuthor();
-            removeAuthor.Show();
         }
 
     }

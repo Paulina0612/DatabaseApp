@@ -18,7 +18,6 @@ C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseAp
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.LendBook.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.PenaltyPayment.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.RemoveBook.resources
-C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.RemoveGenre.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.RemoveWorker.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.ReturnBook.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.SearchingClient.resources
@@ -29,7 +28,6 @@ C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseAp
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.BorrowedBooks.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.AddAuthor.resources
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.DirectorPanel.resources
-C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.RemoveAuthor.resources
 C:\Users\48730\source\repos\DatabaseApp\bin\Debug\DatabaseApp.exe.config
 C:\Users\48730\source\repos\DatabaseApp\bin\Debug\DatabaseApp.exe
 C:\Users\48730\source\repos\DatabaseApp\bin\Debug\DatabaseApp.pdb
@@ -194,3 +192,4 @@ C:\Users\aorlo\source\repos\Paulina0612\DatabaseApp\obj\Debug\Database.46312C09.
 C:\Users\aorlo\Source\Repos\Paulina0612\DatabaseApp\obj\Debug\DatabaseApp.exe
 C:\Users\aorlo\Source\Repos\Paulina0612\DatabaseApp\obj\Debug\DatabaseApp.pdb
 C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.View.WorkerAndDirectorPanel.ManagingBooks.TitlesCatalog.resources
+C:\Users\paula\Desktop\studia\Informatyka\rok_3\semestr_5\Bazy danych\DatabaseApp\obj\Debug\DatabaseApp.View.WorkerAndDirectorPanel.ManagingWorkers.ChangeWorkersManager.resources

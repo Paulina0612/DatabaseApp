@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DatabaseApp.View.WorkerAndDirectorPanel.ManagingWorkers;
+using System;
 using System.Windows.Forms;
 
 namespace DatabaseApp
@@ -58,22 +59,10 @@ namespace DatabaseApp
             book.Show();
         }
 
-        private void removeGenreButton_Click(object sender, EventArgs e)
-        {
-            RemoveGenre book = new RemoveGenre();
-            book.Show();
-        }
-
         private void addAuthorButton_Click(object sender, EventArgs e)
         {
             AddAuthor book = new AddAuthor();
             book.Show();
-        }
-
-        private void removeAuthorButton_Click(object sender, EventArgs e)
-        {
-            RemoveAuthor removeAuthor = new RemoveAuthor();
-            removeAuthor.Show();
         }
 
         private void addWorkerButton_Click(object sender, EventArgs e)
@@ -92,6 +81,12 @@ namespace DatabaseApp
         {
             ChangeWorkerSalary changeWorkerSalary = new ChangeWorkerSalary();
             changeWorkerSalary.Show();
+        }
+
+        private void changeWorkersManagerButton_Click(object sender, EventArgs e)
+        {
+            ChangeWorkersManager changeWorkersManager = new ChangeWorkersManager();
+            changeWorkersManager.Show();
         }
     }
 }
