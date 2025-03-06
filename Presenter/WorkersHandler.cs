@@ -10,12 +10,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DatabaseApp.SQLCommunicationHandler;
 
-//-----------------------------------------------------------------------------------------------
-
-// TODO: Nie działa wypożyczanie książek: Po wpisaniu danych wyrzuca incorrect data
-
-//-----------------------------------------------------------------------------------------------
-
 namespace DatabaseApp.Presenter
 {
     public class WorkersHandler
@@ -56,7 +50,6 @@ namespace DatabaseApp.Presenter
         {
             try
             {
-                //InitializeConnection();
                 string query = "SELECT MAX(ID) FROM Pracownik";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 

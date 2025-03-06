@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Mysqlx.Datatypes;
 using MySqlX.XDevAPI.Common;
 using Org.BouncyCastle.Utilities.Collections;
 using System;
@@ -13,44 +14,48 @@ namespace DatabaseApp.Presenter
 {
     public class ClientsHandler
     {
-        public void ClientRegistration(string firstName, string lastName, string email)
+        public bool ClientRegistration(string firstName, string lastName, string email, string cardNumber)
         {
-            Program.communicationHandler.InitializeConnection();
-            float balance = 0;
-            string cardNumber = string.Empty;  // Zmienna na numer karty, początkowo pusta
             try
             {
-                string procedureName = "DodajKlienta";
-                MySqlCommand command = new MySqlCommand(procedureName, Program.communicationHandler.connection);
+                Program.communicationHandler.InitializeConnection();
 
-                command.CommandType = System.Data.CommandType.StoredProcedure;
+                string query = "INSERT INTO klienci (ID, Imie, Nazwisko, Adres_e_mail, Naleznosc, Numer_karty)" +
+                    "VALUES (@ID, @FirstName, @LastName, @Email, 0, @NumerKarty)";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                // Generowanie prostego numeru karty (po prostu inkrementujemy liczbę)
-                cardNumber = GenerateSimpleCardNumber().Trim();
-
-                // Dodanie parametrów procedury
-                command.Parameters.AddWithValue("@p_Imie", firstName);
-                command.Parameters.AddWithValue("@p_Nazwisko", lastName);
-                command.Parameters.AddWithValue("@p_AdresEmail", email);
-                command.Parameters.AddWithValue("@p_Naleznosc", balance);
-                command.Parameters.AddWithValue("@p_NumerKarty", cardNumber);
-
-                // Dodanie ustawienia typu dla parametru NumerKarty
-                command.Parameters["@p_NumerKarty"].MySqlDbType = MySqlDbType.VarChar;
-
-                // Wykonanie procedury
+                command.Parameters.AddWithValue("@ID", GetNextClientID());
+                command.Parameters.AddWithValue("@FirstName", firstName);
+                command.Parameters.AddWithValue("@LastName", lastName);
+                command.Parameters.AddWithValue("@Email", email);
+                command.Parameters.AddWithValue("@NumerKarty", cardNumber);
                 command.ExecuteNonQuery();
 
+                return true;
 
-                MessageBox.Show("Client hsa been succesfully added.");
-
-                // Wyświetlenie zamaskowanego numeru karty
-                string maskedCard = MaskCardNumber(cardNumber);
-                MessageBox.Show($"Client's card number: {maskedCard}");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error adding the client: {ex.Message}");
+                MessageBox.Show($"Error adding the employee: {ex.Message}");
+                return false;
+            }
+        }
+
+        private int GetNextClientID()
+        {
+            try
+            {
+                Program.communicationHandler.InitializeConnection();
+                string query = "SELECT MAX(ID) FROM Klienci";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+
+                return Convert.ToInt32(command.ExecuteScalar()) + 1;
+
+            }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show($"Error retrieving the next client's ID: {ex.Message}");
+                return -1;
             }
         }
 
@@ -121,7 +126,8 @@ namespace DatabaseApp.Presenter
                     //}
 
                     //MessageBox.Show("Zalogowano jako Klient.");
-                    LoggedUserID = Program.communicationHandler.clientsHandler.GetClientID(email);
+                    SQLCommunicationHandler.LoggedUserID = Program.communicationHandler.clientsHandler.GetClientID(email);
+                    
                     return true;
                 }
                 else

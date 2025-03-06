@@ -41,14 +41,13 @@ namespace DatabaseApp
 
         public enum UserType
         {
-            None,
             Klient,
             Pracownik,
             Kierownik
         }
 
-        public UserType currentUserType = UserType.None; // flaga 
-        public UserType oldUserType = UserType.None;
+        public UserType currentUserType = UserType.Klient; // flaga 
+        public UserType oldUserType = UserType.Klient;
 
         // Metoda do inicjalizacji połączenia z określonym użytkownikiem
         public void InitializeConnection()

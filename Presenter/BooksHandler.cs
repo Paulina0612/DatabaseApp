@@ -355,7 +355,7 @@ JOIN Katalog_ksiazek kk ON w.Katalog_ksiazekID = kk.ID
 JOIN Ksiazki k ON kk.KsiazkiID  = k.ID
 JOIN Autor a ON k.AutorID = a.ID
 JOIN Gatunki g ON k.GatunekID = g.ID
-WHERE c.ID = 0";
+WHERE c.ID = @ClientId";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -405,7 +405,7 @@ JOIN Katalog_ksiazek kk ON w.Katalog_ksiazekID = kk.ID
 JOIN Ksiazki k ON kk.KsiazkiID  = k.ID
 JOIN Autor a ON k.AutorID = a.ID
 JOIN Gatunki g ON k.GatunekID = g.ID
-WHERE c.ID = 0 and w.Czy_zakonczone=false";
+WHERE c.ID = @ClientId and w.Czy_zakonczone=false";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
