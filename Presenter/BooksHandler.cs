@@ -183,10 +183,11 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "DELETE FROM Ksiazki WHERE ID = @KsiazkiID";
+                string query = "update katalog_ksiazek set Stan_magazynowy_ksiazki=@Stan where ID=@KsiazkiID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@KsiazkiID", bookID);
+                command.Parameters.AddWithValue("@Stan", "REMOVED");
                 command.ExecuteNonQuery();
 
                 return true;
