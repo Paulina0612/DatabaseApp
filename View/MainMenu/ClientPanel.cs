@@ -14,7 +14,6 @@ namespace DatabaseApp
     public partial class ClientPanel : Form
     {
         private int componentX = 243;
-        private int clientId;
 
         public ClientPanel()
         {

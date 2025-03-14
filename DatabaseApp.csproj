@@ -105,24 +105,6 @@
     <Compile Include="Presenter\GenresHandler.cs" />
     <Compile Include="Presenter\WorkersHandler.cs" />
     <Compile Include="ComboBoxItem.cs" />
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddAuthor.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddAuthor.Designer.cs">
-      <DependentUpon>AddAuthor.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddBook.Designer.cs">
-      <DependentUpon>AddBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddGenre.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\AddGenre.Designer.cs">
-      <DependentUpon>AddGenre.cs</DependentUpon>
-    </Compile>
     <Compile Include="BookData.cs" />
     <Compile Include="View\BooksCatalog.cs">
       <SubType>Form</SubType>
@@ -130,23 +112,11 @@
     <Compile Include="View\BooksCatalog.Designer.cs">
       <DependentUpon>BooksCatalog.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\ClientsPanel\BorrowedBooks.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ClientsPanel\BorrowedBooks.Designer.cs">
-      <DependentUpon>BorrowedBooks.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\TitlesCatalog.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\TitlesCatalog.Designer.cs">
       <DependentUpon>TitlesCatalog.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.Designer.cs">
-      <DependentUpon>ChangeWorkerSalary.cs</DependentUpon>
     </Compile>
     <Compile Include="View\MainMenu\ClientPanel.cs">
       <SubType>Form</SubType>
@@ -154,73 +124,19 @@
     <Compile Include="View\MainMenu\ClientPanel.Designer.cs">
       <DependentUpon>ClientPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\AddWorker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\AddWorker.Designer.cs">
-      <DependentUpon>AddWorker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\MainMenu\DirectorPanel.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainMenu\DirectorPanel.Designer.cs">
-      <DependentUpon>DirectorPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\ClientsPanel\History.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\ClientsPanel\History.Designer.cs">
-      <DependentUpon>History.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\LendBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\LendBook.Designer.cs">
-      <DependentUpon>LendBook.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\MainLogInForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\MainLogInForm.Designer.cs">
       <DependentUpon>MainLogInForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingClients\PenaltyPayment.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingClients\PenaltyPayment.Designer.cs">
-      <DependentUpon>PenaltyPayment.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveBook.Designer.cs">
-      <DependentUpon>RemoveBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkersManager.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkersManager.Designer.cs">
-      <DependentUpon>ChangeWorkersManager.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.Designer.cs">
       <DependentUpon>RemoveWorker.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\ReturnBook.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingBooks\ReturnBook.Designer.cs">
-      <DependentUpon>ReturnBook.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingClients\SearchingClient.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingClients\SearchingClient.Designer.cs">
-      <DependentUpon>SearchingClient.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenter\SQLCommunicationHandler.cs" />
     <Compile Include="View\MainMenu\WorkerPanel.cs">
@@ -229,47 +145,17 @@
     <Compile Include="View\MainMenu\WorkerPanel.Designer.cs">
       <DependentUpon>WorkerPanel.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\AddAuthor.resx">
-      <DependentUpon>AddAuthor.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\AddBook.resx">
-      <DependentUpon>AddBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\AddGenre.resx">
-      <DependentUpon>AddGenre.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\BooksCatalog.resx">
       <DependentUpon>BooksCatalog.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ClientsPanel\BorrowedBooks.resx">
-      <DependentUpon>BorrowedBooks.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\TitlesCatalog.resx">
       <DependentUpon>TitlesCatalog.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.resx">
-      <DependentUpon>ChangeWorkerSalary.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu\ClientPanel.resx">
       <DependentUpon>ClientPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\AddWorker.resx">
-      <DependentUpon>AddWorker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MainMenu\DirectorPanel.resx">
-      <DependentUpon>DirectorPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\ClientsPanel\History.resx">
-      <DependentUpon>History.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\LendBook.resx">
-      <DependentUpon>LendBook.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\MainLogInForm.resx">
       <DependentUpon>MainLogInForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingClients\PenaltyPayment.resx">
-      <DependentUpon>PenaltyPayment.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -280,20 +166,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\RemoveBook.resx">
-      <DependentUpon>RemoveBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkersManager.resx">
-      <DependentUpon>ChangeWorkersManager.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.resx">
       <DependentUpon>RemoveWorker.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingBooks\ReturnBook.resx">
-      <DependentUpon>ReturnBook.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingClients\SearchingClient.resx">
-      <DependentUpon>SearchingClient.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu\WorkerPanel.resx">
       <DependentUpon>WorkerPanel.cs</DependentUpon>

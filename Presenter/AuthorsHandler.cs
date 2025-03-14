@@ -43,7 +43,7 @@ namespace DatabaseApp.Presenter
                 {
                     try
                     {
-                        Convert.ToInt32(result);
+                        return Convert.ToInt32(result)+1;
                     }
                     catch (InvalidCastException)
                     {
@@ -54,7 +54,6 @@ namespace DatabaseApp.Presenter
                 {
                     return 1;
                 }
-                return 1;
             }
             catch (MySqlException ex)
             {

@@ -147,18 +147,18 @@ namespace DatabaseApp
 
                 if (ifSuccessful)
                 {
-                    if (Program.communicationHandler.workersHandler.IfDirector())
-                    {
-                        DirectorPanel directorPanel = new DirectorPanel();
-                        directorPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");
-                        directorPanel.Show();
-                    }
-                    else
-                    {
+                    //if (Program.communicationHandler.workersHandler.IfDirector())
+                    //{
+                        //DirectorPanel directorPanel = new DirectorPanel();
+                        //directorPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");
+                        //directorPanel.Show();
+                    //}
+                    //else
+                    //{
                         WorkerPanel workerPanel = new WorkerPanel();
                         workerPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");
                         workerPanel.Show();
-                    }
+                    //}
                 }
             }
         }

@@ -37,5 +37,15 @@ namespace DatabaseApp
             }
             LoadWorkersData();
         }
+
+        private void workerDataLabel_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void workerDataComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

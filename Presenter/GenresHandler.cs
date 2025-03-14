@@ -12,9 +12,10 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "INSERT INTO GENRES (ID, NAME) VALUES (0, @Name)"; 
+                string query = "INSERT INTO GENRES (ID, NAME) VALUES (@ID, @Name)"; 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
+                command.Parameters.AddWithValue("@ID", GetNextGenreID());
                 command.Parameters.AddWithValue("@Name", name);
                 command.ExecuteNonQuery();
             }
@@ -24,27 +25,33 @@ namespace DatabaseApp.Presenter
             }
         }
 
-        public void RemoveGenre(string name)
+        private int GetNextGenreID()
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string booksQuery = "DELETE FROM BOOKS_CATALOG kk " +
-                    "WHERE (SELECT GENRE_ID from BOOKS k where kk.BOOK_ID=k.id)=@GenreID";
-                MySqlCommand booksCommand = new MySqlCommand(booksQuery, Program.communicationHandler.connection);
-
-                booksCommand.Parameters.AddWithValue("@GenreID", GetGenreID(name));
-                booksCommand.ExecuteNonQuery();
-
-                string genreQuery = "DELETE FROM GENRES WHERE NAME = @GenreName";
-                MySqlCommand genreCommand = new MySqlCommand(genreQuery, Program.communicationHandler.connection);
-
-                genreCommand.Parameters.AddWithValue("@GenreName", name);
-                genreCommand.ExecuteNonQuery();
+                string query = "SELECT MAX(ID) FROM GENRES";
+                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
+                
+                object result = command.ExecuteScalar();
+                if (result != null)
+                {
+                    try
+                    {
+                        return Convert.ToInt32(result) + 1;
+                    }
+                    catch (InvalidCastException)
+                    {
+                        return 1;
+                    }
+                }
+                else
+                    return 0;
             }
             catch (MySqlException ex)
             {
                 Program.communicationHandler.ErrorOccured(ex.ToString());
+                return -1;
             }
         }
 
@@ -94,7 +101,7 @@ namespace DatabaseApp.Presenter
                 command.Parameters.AddWithValue("@GenreName", genreName);
                 object result = command.ExecuteScalar();
                 if (result != null)
-                    return Convert.ToInt32(result);
+                    return Convert.ToInt32(result)+1;
                 else
                     return 0;
 

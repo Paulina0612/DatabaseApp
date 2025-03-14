@@ -58,6 +58,7 @@
             // 
             // dataGridView1
             // 
+            this.dataGridView1.BackgroundColor = System.Drawing.Color.LightGray;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
@@ -68,7 +69,7 @@
             this.dataGridView1.Location = new System.Drawing.Point(23, 78);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.Size = new System.Drawing.Size(917, 441);
+            this.dataGridView1.Size = new System.Drawing.Size(1064, 441);
             this.dataGridView1.TabIndex = 20;
             // 
             // ID
@@ -112,7 +113,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(977, 557);
+            this.BackColor = System.Drawing.Color.PeachPuff;
+            this.ClientSize = new System.Drawing.Size(1111, 557);
             this.Controls.Add(this.genreLabel);
             this.Controls.Add(this.genreComboBox);
             this.Controls.Add(this.dataGridView1);

@@ -143,7 +143,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "update WORKERS set MANAGER-ID=@ManagerID where ID=@WorkerID";
+                string query = "update WORKERS set MANAGER_ID=@ManagerID where ID=@WorkerID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@WorkerID", workerID);
@@ -246,7 +246,7 @@ namespace DatabaseApp.Presenter
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                     while (reader.Read())
-                        positions.Add(new ComboBoxItem { ID = reader.GetInt32("ID"), Text = reader.GetString("Nazwa_stanowiska") });
+                        positions.Add(new ComboBoxItem { ID = reader.GetInt32("ID"), Text = reader.GetString("NAME") });
 
             }
             catch (MySqlException ex)

@@ -40,6 +40,7 @@
             this.workerDataComboBox.Name = "workerDataComboBox";
             this.workerDataComboBox.Size = new System.Drawing.Size(488, 28);
             this.workerDataComboBox.TabIndex = 0;
+            this.workerDataComboBox.SelectedIndexChanged += new System.EventHandler(this.workerDataComboBox_SelectedIndexChanged);
             // 
             // workerDataLabel
             // 
@@ -49,6 +50,7 @@
             this.workerDataLabel.Size = new System.Drawing.Size(60, 20);
             this.workerDataLabel.TabIndex = 1;
             this.workerDataLabel.Text = "Worker";
+            this.workerDataLabel.Click += new System.EventHandler(this.workerDataLabel_Click);
             // 
             // commitButton
             // 

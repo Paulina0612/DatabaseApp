@@ -133,9 +133,9 @@ namespace DatabaseApp.Presenter
                 int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmail);
                 string query = @"
                     insert into BORROWS 
-                        (ID, CLIENT_ID, BOOKS_CATALOG_ID, WORKER_ID, BORROW_DATE, DATE_DUE, IF_FINISHED)
+                        (ID, CLIENT_ID, BOOKS_CATALOG_ID, BORROW_DATE, DATE_DUE, IF_FINISHED)
                     values 
-                        (@ID, @ClientID, @BookID, @WorkerID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), 
+                        (@ID, @ClientID, @BookID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), 
                         INTERVAL 30 DAY), false);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -160,7 +160,7 @@ namespace DatabaseApp.Presenter
 
                 return true;
             }
-            catch (MySqlException ex)
+            catch 
             {
                 return false;
             }
@@ -232,8 +232,8 @@ namespace DatabaseApp.Presenter
                 }
 
                 string query = @"
-                    insert into returns (ID, BORROW_ID, RETURN_DATE, PENALTY, WORKER_ID)
-                    values (@ID, @BorrowID, CURRENT_DATE(), @Penalty, @WorkerID);";
+                    insert into returns (ID, BORROW_ID, RETURN_DATE, PENALTY)
+                    values (@ID, @BorrowID, CURRENT_DATE(), @Penalty);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", GetNextReturnId());
@@ -257,7 +257,7 @@ namespace DatabaseApp.Presenter
 
                 return true;
             }
-            catch (MySqlException ex)
+            catch 
             {
                 return false;
             }
@@ -449,7 +449,7 @@ namespace DatabaseApp.Presenter
         public List<BookData> GetBooksCatalog(int genreFilter)
         {
             string query = @"
-                SELECT k.ID, k.TITLE, a.FIRST_NAME, a.LAST_NAME, g.NAME, k.ISBN, kk.BOOK_STATE
+                SELECT kk.ID, k.TITLE, a.FIRST_NAME, a.LAST_NAME, g.NAME, k.ISBN, kk.BOOK_STATE
                 FROM BOOKS_CATALOG kk 
                 join BOOKS k on kk.BOOK_ID = k.ID 
                 JOIN AUTHORS a ON k.AUTHOR_ID = a.ID
