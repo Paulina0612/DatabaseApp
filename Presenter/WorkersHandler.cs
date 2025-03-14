@@ -1,12 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI;
-using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using static DatabaseApp.SQLCommunicationHandler;
 
@@ -20,8 +14,11 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
 
-                string query = "INSERT INTO Pracownik (ID, Imie, Nazwisko, Numer_Telefonu, Adres_e_mail, PESEL, Wyplata, Kierownik_ID, StanowiskoID, Haslo)" +
-                    "VALUES (@ID, @FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, @PositionID, @Password)";
+                string query = "INSERT INTO WORKERS " +
+                    "(ID, FIRST_NAME, LAST_NAME, PHONE_NUMBER, E_MAIL, PESEL, SALARY, MANAGER_ID, " +
+                    "POSITION_ID, PASSWORD)" +
+                    "VALUES (@ID, @FirstName, @LastName, @PhoneNumber, @Email, @PESEL, @Salary, @ManagerID, " +
+                    "@PositionID, @Password)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", GetNextWorkerID());
@@ -41,7 +38,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error adding the employee: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -50,23 +47,19 @@ namespace DatabaseApp.Presenter
         {
             try
             {
-                string query = "SELECT MAX(ID) FROM Pracownik";
+                string query = "SELECT MAX(ID) FROM WORKERS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 object result = command.ExecuteScalar();
 
                 if (result != null)
-                {
                     return Convert.ToInt32(result) + 1;
-                }
                 else
-                {
                     return -1;
-                }
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error checking the borrowing ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString() );
                 return 0;
             }
         }
@@ -77,13 +70,12 @@ namespace DatabaseApp.Presenter
 
             try
             {
-                // Inicjalizacja połączenia jako 'Pracownik'
                 Program.communicationHandler.currentUserType = UserType.Pracownik;
                 Program.communicationHandler.InitializeConnection();
 
-                // Sprawdzanie, czy użytkownik istnieje i czy jest pracownikiem czy kierownikiem
                 string getPositionID =
-                   "SELECT StanowiskoID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
+                   "SELECT POSITION_ID FROM WORKERS " +
+                   "WHERE FIRST_NAME = @FirstName AND LAST_NAME = @LastName AND PASSWORD = @Password";
 
                 command = new MySqlCommand(getPositionID, Program.communicationHandler.connection);
                 command.Parameters.AddWithValue("@FirstName", firstName);
@@ -98,7 +90,8 @@ namespace DatabaseApp.Presenter
 
                 // Pobieranie ID zalogowanego użytkownika
                 string query =
-                    "SELECT ID FROM Pracownik WHERE Imie = @FirstName AND Nazwisko = @LastName AND Haslo = @Password";
+                    "SELECT ID FROM WORKERS " +
+                    "WHERE FIRST_NAME = @FirstName AND LAST_NAME = @LastName AND PASSWORD = @Password";
 
                 command = new MySqlCommand(query, Program.communicationHandler.connection);
                 command.Parameters.AddWithValue("@FirstName", firstName);
@@ -139,18 +132,18 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "update pracownik set Kierownik_ID=@KierownikID where ID=@PracownikID";
+                string query = "update WORKERS set MANAGER-ID=@ManagerID where ID=@WorkerID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@PracownikID", workerID);
-                command.Parameters.AddWithValue("@KierownikID", managerID);
+                command.Parameters.AddWithValue("@WorkerID", workerID);
+                command.Parameters.AddWithValue("@ManagerID", managerID);
                 command.ExecuteNonQuery();
 
                 return true;
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error removing the book: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -169,7 +162,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "DELETE FROM Pracownik WHERE ID = @ID";
+                string query = "DELETE FROM WORKERS WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", id);
@@ -179,7 +172,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error removing the employee: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -190,7 +183,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "UPDATE Pracownik SET Wyplata = @NewSalary WHERE ID = @WorkerID";
+                string query = "UPDATE WORKERS SET SALARY = @NewSalary WHERE ID = @WorkerID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@NewSalary", newSalary);
@@ -201,7 +194,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error updating employee's salary: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -210,15 +203,13 @@ namespace DatabaseApp.Presenter
         {
             try
             {
-                string query = "SELECT Wyplata FROM Pracownik WHERE ID = @ID";
+                string query = "SELECT SALARY FROM WORKERS WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", id);
                 object result = command.ExecuteScalar();
                 if (result != DBNull.Value)
-                {
                     return Convert.ToSingle(result);
-                }
                 else
                 {
                     MessageBox.Show("No employee found with the provided ID");
@@ -228,7 +219,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return 0;
             }
         }
@@ -239,7 +230,7 @@ namespace DatabaseApp.Presenter
 
             try
             {
-                string query = "SELECT * FROM Stanowisko";
+                string query = "SELECT * FROM POSITIONS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
@@ -249,7 +240,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return positions;
@@ -261,18 +252,20 @@ namespace DatabaseApp.Presenter
 
             try
             {
-                string query = "SELECT ID, Imie, Nazwisko FROM Pracownik";
+                string query = "SELECT ID, FIRST_NAME, LAST_NAME FROM WORKERS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                     while (reader.Read())
-                        managers.Add(new ComboBoxItem { ID = reader.GetInt32("ID"), Text = String.Concat(reader.GetString("Imie"), " ", 
-                            reader.GetString("Nazwisko")) });
+                        managers.Add(new ComboBoxItem { 
+                            ID = reader.GetInt32("ID"), 
+                            Text = String.Concat(reader.GetString("FIRST_NAME"), " ",  
+                                reader.GetString("LAST_NAME")) });
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving the employee's salary: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return managers;

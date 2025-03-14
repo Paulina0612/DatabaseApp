@@ -1,10 +1,7 @@
 ﻿using MySql.Data.MySqlClient;
-using Org.BouncyCastle.Utilities.Collections;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace DatabaseApp.Presenter
 {
@@ -16,7 +13,7 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
 
-                string query = @"INSERT INTO Ksiazki (ID, Tytul, AutorID, GatunekID, ISBN) 
+                string query = @"INSERT INTO BOOKS (ID, TITLE, AUTHOR_ID, GENRE_ID, ISBN) 
                                     VALUES (@ID, @Title, @AuthorID, @GenreID, @ISBN)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -31,7 +28,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error adding the book: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -41,7 +38,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT MAX(ID) FROM Ksiazki";
+                string query = "SELECT MAX(ID) FROM BOOKS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
                 object result = command.ExecuteScalar();
                 if (result != null)
@@ -55,7 +52,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error getting the next book ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
         }
@@ -66,7 +63,7 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
 
-                string query = @"INSERT INTO Katalog_ksiazek (ID, KsiazkiID, Stan_magazynowy_ksiazki) 
+                string query = @"INSERT INTO BOOKS_CATALOG (ID, BOOK_ID, BOOK_STATE) 
                                     VALUES (@ID, @BookID, @State)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -80,7 +77,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error adding the book: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -90,7 +87,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT MAX(ID) FROM Katalog_ksiazek";
+                string query = "SELECT MAX(ID) FROM BOOKS_CATALOG";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
                 object result = command.ExecuteScalar();
                 if (result != null)
@@ -109,7 +106,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error getting the next copy ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
         }
@@ -128,21 +125,25 @@ namespace DatabaseApp.Presenter
 
                 int clientID = Program.communicationHandler.clientsHandler.GetClientID(clientEmail);
                 string query = @"
-                    insert into wypozyczenia (ID, KlientID, Katalog_ksiazekID, PracownikID, Data_Wypozyczenia, Data_Spodziewanego_Zwrotu, Czy_zakonczone)
-                    values (@ID, @KlientID, @KsiazkiID, @PracownikID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), INTERVAL 30 DAY), false);";
+                    insert into BORROWS 
+                        (ID, CLIENT_ID, BOOKS_CATALOG_ID, WORKER_ID, BORROW_DATE, DATE_DUE, IF_FINISHED)
+                    values 
+                        (@ID, @ClientID, @BookID, @WorkerID, CURRENT_DATE(), DATE_ADD(CURRENT_DATE(), 
+                        INTERVAL 30 DAY), false);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", GetNextLoanId());
-                command.Parameters.AddWithValue("@KlientID", clientID);
-                command.Parameters.AddWithValue("@KsiazkiID", bookID);
-                command.Parameters.AddWithValue("@PracownikID", SQLCommunicationHandler.LoggedUserID);
+                command.Parameters.AddWithValue("@ClientID", clientID);
+                command.Parameters.AddWithValue("@BookID", bookID);
+                command.Parameters.AddWithValue("@WorkerID", SQLCommunicationHandler.LoggedUserID);
                 command.ExecuteNonQuery();
 
-                string updateQuery = "update katalog_ksiazek set Stan_magazynowy_ksiazki=@Stan where ID=@KsiazkiID";
-                MySqlCommand updateCommand = new MySqlCommand(updateQuery, Program.communicationHandler.connection);
+                string updateQuery = "update BOOKS_CATALOG set BOOK_STATE=@State where ID=@BookID";
+                MySqlCommand updateCommand = new MySqlCommand(updateQuery, 
+                    Program.communicationHandler.connection);
 
-                updateCommand.Parameters.AddWithValue("@KsiazkiID", bookID);
-                updateCommand.Parameters.AddWithValue("@Stan", "UNAVAILABLE");
+                updateCommand.Parameters.AddWithValue("@BookID", bookID);
+                updateCommand.Parameters.AddWithValue("@State", "UNAVAILABLE");
                 updateCommand.ExecuteNonQuery();
 
                 return true;
@@ -178,30 +179,28 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error getting the next copy ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
         }
 
-
-        // Removing records
         public bool RemoveBook(int bookID)
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "update katalog_ksiazek set Stan_magazynowy_ksiazki=@Stan where ID=@KsiazkiID";
+                string query = "update BOOKS_CATALOG set BOOK_STATE=@State where ID=@BookID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@KsiazkiID", bookID);
-                command.Parameters.AddWithValue("@Stan", "REMOVED");
+                command.Parameters.AddWithValue("@BookID", bookID);
+                command.Parameters.AddWithValue("@State", "REMOVED");
                 command.ExecuteNonQuery();
 
                 return true;
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error removing the book: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
 
@@ -221,27 +220,27 @@ namespace DatabaseApp.Presenter
                 }
 
                 string query = @"
-                    insert into zwroty (ID, Wypozyczenie_ID, Data, Kara, PracownikID)
-                    values (@ID, @WypozyczenieID, CURRENT_DATE(), @Kara, @PracownikID);";
+                    insert into returns (ID, BORROW_ID, RETURN_DATE, PENALTY, WORKER_ID)
+                    values (@ID, @BorrowID, CURRENT_DATE(), @Penalty, @WorkerID);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", GetNextReturnId());
-                command.Parameters.AddWithValue("@WypozyczenieID", lendID);
-                command.Parameters.AddWithValue("@Kara", CalculatePenalty(lendID));
-                command.Parameters.AddWithValue("@PracownikID", SQLCommunicationHandler.LoggedUserID);
+                command.Parameters.AddWithValue("@BorrowID", lendID);
+                command.Parameters.AddWithValue("@Penalty", CalculatePenalty(lendID));
+                command.Parameters.AddWithValue("@WorkerID", SQLCommunicationHandler.LoggedUserID);
                 command.ExecuteNonQuery();
 
-                string updateQuery = "update katalog_ksiazek set Stan_magazynowy_ksiazki=@Stan where ID=@KsiazkiID";
+                string updateQuery = "update BOOKS_CATALOG set BOOK_STATE=@State where ID=@BookID";
                 MySqlCommand updateCommand = new MySqlCommand(updateQuery, Program.communicationHandler.connection);
 
-                updateCommand.Parameters.AddWithValue("@KsiazkiID", bookID);
-                updateCommand.Parameters.AddWithValue("@Stan", "AVAILABLE");
+                updateCommand.Parameters.AddWithValue("@BookID", bookID);
+                updateCommand.Parameters.AddWithValue("@State", "AVAILABLE");
                 updateCommand.ExecuteNonQuery();
 
-                string upQuery = "update wypozyczenia set Czy_zakonczone=true where ID=@WypozyczenieID";
+                string upQuery = "update borrows set if_finished=true where ID=@BorrowID";
                 MySqlCommand upCommand = new MySqlCommand(upQuery, Program.communicationHandler.connection);
 
-                upCommand.Parameters.AddWithValue("@WypozyczenieID", lendID);
+                upCommand.Parameters.AddWithValue("@BorrowID", lendID);
                 upCommand.ExecuteNonQuery();
 
                 return true;
@@ -260,11 +259,11 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string datediffQuery = "SELECT DATEDIFF((SELECT Data_spodziewanego_zwrotu from wypozyczenia where ID=@WypozyczenieID), " +
+                string datediffQuery = "SELECT DATEDIFF((SELECT BORROW_DATE from borrows where ID=@BorrowID), " +
                     "CURRENT_DATE()) as diff";
                 MySqlCommand command = new MySqlCommand(datediffQuery, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@WypozyczenieID", lendID);
+                command.Parameters.AddWithValue("@BorrowID", lendID);
 
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
@@ -276,7 +275,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error calculating the penalty: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return penalty;
@@ -287,7 +286,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT MAX(ID) FROM zwroty";
+                string query = "SELECT MAX(ID) FROM RETURNS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
                 object result = command.ExecuteScalar();
                 if (result != null)
@@ -306,7 +305,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error getting the next copy ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
         }
@@ -316,7 +315,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT ID FROM Wypozyczenia WHERE Katalog_ksiazekID = @BookID and czy_zakonczone=false";
+                string query = "SELECT ID FROM BORROWS WHERE BOOKS_CATALOG_ID = @BookID and IF_FINISHED=false";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@BookID", bookID);
@@ -333,13 +332,11 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error getting the next loan ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
         }
 
-
-        // Returning data
         public List<BookData> GetHistory()
         {
             List<BookData> history = new List<BookData>();
@@ -348,14 +345,14 @@ namespace DatabaseApp.Presenter
             {
                 Program.communicationHandler.InitializeConnection();
                 string query = @"
-        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
-FROM Wypozyczenia w
-JOIN Klienci c ON w.KlientID = c.ID
-JOIN Katalog_ksiazek kk ON w.Katalog_ksiazekID = kk.ID
-JOIN Ksiazki k ON kk.KsiazkiID  = k.ID
-JOIN Autor a ON k.AutorID = a.ID
-JOIN Gatunki g ON k.GatunekID = g.ID
-WHERE c.ID = @ClientId";
+                    SELECT k.ID, k.TITLE, a.FIRST_NAME, a.LAST_NAME, g.NAME, k.ISBN
+                    FROM BORROWS w
+                    JOIN CLIENTS c ON w.CLIENT_ID = c.ID
+                    JOIN BOOKS_CATALOG kk ON w.BOOKS_CATALOG_ID = kk.ID
+                    JOIN BOOKS k ON kk.BOOK_ID  = k.ID
+                    JOIN AUTHORS a ON k.AUTHOR_ID = a.ID
+                    JOIN GENRES g ON k.GENRE_ID = g.ID
+                    WHERE c.ID = @ClientId";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -368,10 +365,10 @@ WHERE c.ID = @ClientId";
                         BookData book = new BookData
                         {
                             ID = reader.GetInt32("ID"),
-                            title = reader.GetString("Tytul"),
-                            authorFirstName = reader.GetString("Imie"),
-                            authorLastName = reader.GetString("Nazwisko"),
-                            genreName = reader.GetString("Nazwa_gatunku"),
+                            title = reader.GetString("TITLE"),
+                            authorFirstName = reader.GetString("FIRST_NAME"),
+                            authorLastName = reader.GetString("LAST_NAME"),
+                            genreName = reader.GetString("NAME"),
                             ISBN = reader.GetString("ISBN"),
                             ifAvailable = true
                         };
@@ -382,7 +379,7 @@ WHERE c.ID = @ClientId";
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving history: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return history;
@@ -391,25 +388,24 @@ WHERE c.ID = @ClientId";
 
         public List<BookData> GetBorrowedBooks()
         {
-            // TODO: Poprawić zapytanie na katalog książek
             List<BookData> borrowedBooks = new List<BookData>();
 
             try
             {
                 Program.communicationHandler.InitializeConnection();
                 string query = @"
-                SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
-FROM Wypozyczenia w
-JOIN Klienci c ON w.KlientID = c.ID
-JOIN Katalog_ksiazek kk ON w.Katalog_ksiazekID = kk.ID
-JOIN Ksiazki k ON kk.KsiazkiID  = k.ID
-JOIN Autor a ON k.AutorID = a.ID
-JOIN Gatunki g ON k.GatunekID = g.ID
-WHERE c.ID = @ClientId and w.Czy_zakonczone=false";
+                SELECT k.ID, k.TITLE, a.FIRST_NAME, a.LAST_NAME, g.NAME, k.ISBN
+                FROM BORROWS w
+                JOIN CLIENTS c ON w.CLIENT_ID = c.ID
+                JOIN BOOKS_CATALOG kk ON w.BOOKS_CATALOG_ID = kk.ID
+                JOIN BOOKS k ON kk.BOOK_ID  = k.ID
+                JOIN AUTHORS a ON k.AUTHOR_ID = a.ID
+                JOIN GENRES g ON k.GENRE_ID = g.ID
+                WHERE c.ID = @ClientId and w.IF_FINISHED=false";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@KlientID", SQLCommunicationHandler.LoggedUserID);
+                command.Parameters.AddWithValue("@ClientId", SQLCommunicationHandler.LoggedUserID);
                 using (MySqlDataReader reader = command.ExecuteReader())
                 {
                     while (reader.Read())
@@ -417,12 +413,12 @@ WHERE c.ID = @ClientId and w.Czy_zakonczone=false";
                         BookData book = new BookData
                         {
                             ID = reader.GetInt32("ID"),
-                            title = reader.GetString("Tytul"),
-                            authorFirstName = reader.GetString("Imie"),
-                            authorLastName = reader.GetString("Nazwisko"),
-                            genreName = reader.GetString("Nazwa_gatunku"),
+                            title = reader.GetString("TITLE"),
+                            authorFirstName = reader.GetString("FIRST_NAME"),
+                            authorLastName = reader.GetString("LAST_NAME"),
+                            genreName = reader.GetString("NAME"),
                             ISBN = reader.GetString("ISBN"),
-                            ifAvailable = false // Wiemy, że książki są wypożyczone
+                            ifAvailable = false 
                         };
                         borrowedBooks.Add(book);
                     }
@@ -431,7 +427,7 @@ WHERE c.ID = @ClientId and w.Czy_zakonczone=false";
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving borrowed books: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return borrowedBooks;
@@ -441,12 +437,12 @@ WHERE c.ID = @ClientId and w.Czy_zakonczone=false";
         public List<BookData> GetBooksCatalog(int genreFilter)
         {
             string query = @"
-        SELECT kk.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN, kk.Stan_magazynowy_ksiazki
-FROM biblioteka.katalog_ksiazek kk 
-join biblioteka.ksiazki k on kk.KsiazkiID = k.ID 
-JOIN biblioteka.autor a ON k.AutorID = a.ID
-JOIN biblioteka.gatunki g ON k.GatunekID = g.ID
-WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
+                SELECT k.ID, k.TITLE, a.FIRST_NAME, a.LAST_NAME, g.NAME, k.ISBN, kk.BOOK_STATE
+                FROM BOOKS_CATALOG kk 
+                join BOOKS k on kk.BOOK_ID = k.ID 
+                JOIN AUTHORS a ON k.AUTHOR_ID = a.ID
+                JOIN GENRES g ON k.GENRE_ID = g.ID
+                WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
 
             try
             {
@@ -466,19 +462,19 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
 
                     while (reader.Read())
                     {
-                        if(reader.GetString("Stan_magazynowy_ksiazki") == "REMOVED")
+                        if(reader.GetString("BOOK_STATE") == "REMOVED")
                         {
                             continue;
                         }
                         BookData book = new BookData
                         {
                             ID = reader.GetInt32("ID"),
-                            title = reader.GetString("Tytul"),
-                            authorFirstName = reader.GetString("Imie"),
-                            authorLastName = reader.GetString("Nazwisko"),
-                            genreName = reader.GetString("Nazwa_gatunku"),
+                            title = reader.GetString("TITLE"),
+                            authorFirstName = reader.GetString("FIRST_NAME"),
+                            authorLastName = reader.GetString("LAST_NAME"),
+                            genreName = reader.GetString("NAME"),
                             ISBN = reader.GetString("ISBN"),
-                            ifAvailable = reader.GetString("Stan_magazynowy_ksiazki") == "AVAILABLE" ? true : false
+                            ifAvailable = reader.GetString("BOOK_STATE") == "AVAILABLE" ? true : false
                         };
 
                         books.Add(book);
@@ -489,7 +485,8 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
             }
             catch (Exception ex)
             {
-                throw new Exception($"Błąd podczas pobierania katalogu książek: {ex.Message}", ex);
+                Program.communicationHandler.ErrorOccured(ex.ToString());
+                return null;
             }
         }
 
@@ -497,11 +494,11 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
         public List<BookData> GetTitlesCatalog(int genreFilter)
         {
             string query = @"
-        SELECT k.ID, k.Tytul, a.Imie, a.Nazwisko, g.Nazwa_gatunku, k.ISBN
-FROM biblioteka.ksiazki k 
-JOIN biblioteka.autor a ON k.AutorID = a.ID
-JOIN biblioteka.gatunki g ON k.GatunekID = g.ID
-WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
+                SELECT k.ID, k.TITLE, a.FIRST_NAME, a.LAST_NAME, g.NAME, k.ISBN
+                FROM BOOKS k 
+                JOIN AUTHORS a ON k.AUTHOR_ID = a.ID
+                JOIN GENRES g ON k.GENRE_ID = g.ID
+                WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
 
             try
             {
@@ -524,10 +521,10 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
                         BookData book = new BookData
                         {
                             ID = reader.GetInt32("ID"),
-                            title = reader.GetString("Tytul"),
-                            authorFirstName = reader.GetString("Imie"),
-                            authorLastName = reader.GetString("Nazwisko"),
-                            genreName = reader.GetString("Nazwa_gatunku"),
+                            title = reader.GetString("TILE"),
+                            authorFirstName = reader.GetString("FIRST_NAME"),
+                            authorLastName = reader.GetString("LAST_NAME"),
+                            genreName = reader.GetString("NAME"),
                             ISBN = reader.GetString("ISBN")
                         };
 
@@ -539,7 +536,8 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
             }
             catch (Exception ex)
             {
-                throw new Exception($"Błąd podczas pobierania katalogu książek: {ex.Message}", ex);
+                Program.communicationHandler.ErrorOccured(ex.ToString());
+                return null;
             }
         }
 
@@ -548,25 +546,20 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
         {
             try
             {
-                //InitializeConnection();
-                string query = "SELECT Stan_magazynowy_ksiazki FROM Katalog_ksiazek WHERE ID = @KsiazkiID";
+                string query = "SELECT BOOK_STATE FROM BOOK_STATE WHERE ID = @BookID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@KsiazkiID", ID);
+                command.Parameters.AddWithValue("@BookID", ID);
                 object result = command.ExecuteScalar();
                 if (result != null && result.ToString() == "AVAILABLE")
-                {
                     return true;
-                }
                 else
-                {
                     return false;
-                }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error checking book's avaibility. {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -576,25 +569,20 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
         {
             try
             {
-                //InitializeConnection();
-                string query = "SELECT  COUNT(*) FROM Ksiazki WHERE ID = @ID";
+                string query = "SELECT  COUNT(*) FROM BOOKS WHERE ID = @ID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@ID", ID);
                 object result = command.ExecuteScalar();
                 if (result != null && Convert.ToInt32(result) > 0)
-                {
                     return true;
-                }
                 else
-                {
                     return false;
-                }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error checking book's avaibility in the database. {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }
@@ -604,26 +592,23 @@ WHERE (@GenreFilter IS NULL OR g.ID = @GenreFilter)";
         {
             try
             {
-                //InitializeConnection();
-                string query = "SELECT COUNT(*) FROM Wypozyczenia WHERE KlienciID = @KlientID AND Katalog_ksiazekID = @KsiazkaID ";
+                string query = @"SELECT COUNT(*) 
+                    FROM BORROWS 
+                    WHERE CLIENT_ID = @ClientID AND BOOKS_CATALOG_ID = @BookID";
                 MySqlCommand command = new MySqlCommand(@query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@KlientID", clientID);
-                command.Parameters.AddWithValue("@KsiazkaID", bookID);
+                command.Parameters.AddWithValue("@ClientID", clientID);
+                command.Parameters.AddWithValue("@BookID", bookID);
                 object result = command.ExecuteScalar();
                 if (result != null && Convert.ToInt32(result) > 0)
-                {
                     return true;
-                }
                 else
-                {
                     return false;
-                }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error checking book's borrowed status. {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return false;
             }
         }

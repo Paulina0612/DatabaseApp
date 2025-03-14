@@ -1,20 +1,7 @@
 ﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.SqlClient;
-using System.Diagnostics.Eventing.Reader;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Net;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DatabaseApp.Presenter;
 using MySql.Data.MySqlClient;
-using MySqlX.XDevAPI.Common;
-using Org.BouncyCastle.Asn1.X509;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace DatabaseApp
 {
@@ -22,7 +9,7 @@ namespace DatabaseApp
     {
         public MySqlConnection connection;
 
-        public static int LoggedUserID = 0; // zmienna globalna ustawiana przez logującego się uzytkownika
+        public static int LoggedUserID = 0; 
 
         public BooksHandler booksHandler;
         public GenresHandler genresHandler;
@@ -46,10 +33,10 @@ namespace DatabaseApp
             Kierownik
         }
 
-        public UserType currentUserType = UserType.Klient; // flaga 
+        public UserType currentUserType = UserType.Klient; 
         public UserType oldUserType = UserType.Klient;
 
-        // Metoda do inicjalizacji połączenia z określonym użytkownikiem
+       
         public void InitializeConnection()
         {
             try
@@ -75,13 +62,16 @@ namespace DatabaseApp
                 switch (currentUserType)
                 {
                     case UserType.Klient:
-                        connectionString = $"Server=localhost;Database=Biblioteka;User Id=Klient;Password=klient_password;";
+                        connectionString = $"Server=localhost;Database=LIB;User Id=CLIENT;" +
+                            $"Password=CLIENT_PASSWORD;";
                         break;
                     case UserType.Pracownik:
-                        connectionString = $"Server=localhost;Database=Biblioteka;User Id=Pracownik;Password=pracownik_password;";
+                        connectionString = $"Server=localhost;Database=LIB;User Id=WORKER;" +
+                            $"Password=WORKERS_PASSWORD;";
                         break;
                     case UserType.Kierownik:
-                        connectionString = $"Server=localhost;Database=Biblioteka;User Id=Kierownik;Password=kierownik_password;";
+                        connectionString = $"Server=localhost;Database=LIB;User Id=DIRECTOR;" +
+                            $"Password=DIRECTOR_PASSWORD;";
                         break;
                     default:
                         throw new InvalidOperationException("Invalid user type");
@@ -92,7 +82,7 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Connection to database failed.\n{ex.Message}");
+                ErrorOccured(ex.ToString());
             }
         }
 
@@ -101,20 +91,17 @@ namespace DatabaseApp
         {
             try
             {
-                //InitializeConnection();
                 if (connection == null || connection.State != System.Data.ConnectionState.Open)
                 {
                     InitializeConnection();
                 }
-                string query = "SELECT ID FROM Stanowisko WHERE Nazwa_stanowiska = @Name";
+                string query = "SELECT ID FROM POSITION WHERE NAME = @Name";
                 MySqlCommand command = new MySqlCommand(query, connection);
                 
                     command.Parameters.AddWithValue("@Name", name);
                     object result = command.ExecuteScalar();
                     if (result != null)
-                    {
                         return Convert.ToInt32(result);
-                    }
                     else
                     {
                         MessageBox.Show("The position's ID has not been found.");
@@ -124,39 +111,10 @@ namespace DatabaseApp
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving the position's ID {ex.Message}");
+                ErrorOccured(ex.ToString());
                 return -1;
             }
 
-        }
-        
-        public int GetLendID(int clientID, int bookID) // --------------------------------------------- Nie wywołujemy tego nigdzie
-        {
-            try
-            {
-                //InitializeConnection();
-                string query = "SELECT ID FROM Wypozyczenia WHERE KlienciID = @KlientID AND Katalog_ksiazekID = @KsiazkaID";
-                MySqlCommand command = new MySqlCommand(query, connection);
-                
-                    command.Parameters.AddWithValue("@KlientID", clientID);
-                    command.Parameters.AddWithValue("@KsiazkaID", bookID);
-                    object result = command.ExecuteScalar();
-                    if(result != null)
-                    {
-                        return Convert.ToInt32(result);
-                    }
-                    else
-                    {
-                        MessageBox.Show("No borrowing found for the provided data.");
-                        return -1;
-                    }
-                
-            }
-            catch(MySqlException ex)
-            {
-                MessageBox.Show($"Error checking the borrowing ID: {ex.Message}");
-                return 0;
-            }
         }
 
         public void ErrorOccured(string message)

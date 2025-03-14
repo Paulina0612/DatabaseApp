@@ -5,6 +5,7 @@ namespace DatabaseApp
 {
     public partial class MainLogInForm : Form
     {
+        private int componentsLocation = 250;
         public MainLogInForm()
         {
             InitializeComponent();
@@ -16,10 +17,22 @@ namespace DatabaseApp
             clientLogInForm.Show();
         }
 
-        private void LogInAsWorkerButton_Click(object sender, EventArgs e)
+        private void WorkerLogInAsWorkerButton_Click(object sender, EventArgs e)
         {
-            WorkerLogInForm workerLogInForm = new WorkerLogInForm();
-            workerLogInForm.Show();
+            nameLabel.Location = 
+                new System.Drawing.Point(componentsLocation, nameLabel.Location.Y);
+            firstNameTextBox.Location = 
+                new System.Drawing.Point(componentsLocation, firstNameTextBox.Location.Y);
+            lastNameLabel.Location = 
+                new System.Drawing.Point(componentsLocation, lastNameLabel.Location.Y);
+            lastNameTextBox.Location = 
+                new System.Drawing.Point(componentsLocation, lastNameTextBox.Location.Y);
+            passwordLabel.Location =
+                new System.Drawing.Point(componentsLocation, passwordLabel.Location.Y);
+            passwordTextBox.Location =
+                new System.Drawing.Point(componentsLocation, passwordTextBox.Location.Y);
+            workerLogInButton.Location =
+                new System.Drawing.Point(componentsLocation, workerLogInButton.Location.Y);
         }
 
         private void RegisterClientButton_Click(object sender, EventArgs e)
@@ -27,6 +40,7 @@ namespace DatabaseApp
             ClientRegistration clientRegistration = new ClientRegistration();
             clientRegistration.Show();
         }
+
     }
 }
 

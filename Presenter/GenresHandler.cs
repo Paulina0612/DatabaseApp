@@ -1,9 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DatabaseApp.Presenter
@@ -15,17 +12,15 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "INSERT INTO Gatunki (ID, Nazwa_gatunku) VALUES (0, @Name)"; //TODO: Ustawic automatyczne inkrementowanie ID
+                string query = "INSERT INTO GENRES (ID, NAME) VALUES (0, @Name)"; 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@Name", name);
                 command.ExecuteNonQuery();
-
-                MessageBox.Show("Genre has been added.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error adding genre: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
         }
 
@@ -34,24 +29,22 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string booksQuery = "DELETE FROM katalog_ksiazek kk WHERE (SELECT gatunekID from ksiazki k where kk.ksiazkiid=k.id)=@GatunekID";
+                string booksQuery = "DELETE FROM BOOKS_CATALOG kk " +
+                    "WHERE (SELECT GENRE_ID from BOOKS k where kk.BOOK_ID=k.id)=@GenreID";
                 MySqlCommand booksCommand = new MySqlCommand(booksQuery, Program.communicationHandler.connection);
 
-                booksCommand.Parameters.AddWithValue("@GatunekID", GetGenreID(name));
+                booksCommand.Parameters.AddWithValue("@GenreID", GetGenreID(name));
                 booksCommand.ExecuteNonQuery();
 
-                string genreQuery = "DELETE FROM Gatunki WHERE Nazwa_gatunku = @Nazwa_gatunku";
+                string genreQuery = "DELETE FROM GENRES WHERE NAME = @GenreName";
                 MySqlCommand genreCommand = new MySqlCommand(genreQuery, Program.communicationHandler.connection);
 
-                genreCommand.Parameters.AddWithValue("@Nazwa_gatunku", name);
+                genreCommand.Parameters.AddWithValue("@GenreName", name);
                 genreCommand.ExecuteNonQuery();
-
-
-                MessageBox.Show("Genre has been deleted.");
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error deleting the genre: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
         }
 
@@ -63,7 +56,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT * FROM gatunki";
+                string query = "SELECT * FROM GENRES";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -74,7 +67,7 @@ namespace DatabaseApp.Presenter
                         ComboBoxItem genre = new ComboBoxItem
                         {
                             ID = reader.GetInt32("ID"), 
-                            Text = reader.GetString("Nazwa_gatunku")
+                            Text = reader.GetString("NAME")
                         };
                         genres.Add(genre);
                     }
@@ -83,7 +76,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error fetching genres: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return genres;
@@ -95,25 +88,20 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT ID FROM Gatunki WHERE Nazwa_gatunku = @GenreName";
+                string query = "SELECT ID FROM GENRES WHERE NAME = @GenreName";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@GenreName", genreName);
                 object result = command.ExecuteScalar();
                 if (result != null)
-                {
                     return Convert.ToInt32(result);
-                }
                 else
-                {
-                    MessageBox.Show("The genre has not been found.");
                     return 0;
-                }
 
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving genre's ID {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
         }

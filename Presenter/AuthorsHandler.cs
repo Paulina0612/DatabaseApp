@@ -1,89 +1,58 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace DatabaseApp.Presenter
 {
     public class AuthorsHandler
     {
-        public void AddAuthor(string firstName, string lastName)
+        public bool AddAuthor(string firstName, string lastName)
         {
             try
             {
-                MessageBox.Show($"User type set to: {Program.communicationHandler.currentUserType}");
                 Program.communicationHandler.InitializeConnection();
-                string query = "INSERT INTO Autor (Imie, Nazwisko) VALUES (@FirstName, @LastName)";
+                string query = "INSERT INTO AUTHORS (ID, FIRST_NAME, LAST_NAME) " +
+                    "VALUES (@ID, @FirstName, @LastName)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
+                command.Parameters.AddWithValue("@ID", GetNextAuthorID());
                 command.Parameters.AddWithValue("@FirstName", firstName);
                 command.Parameters.AddWithValue("@LastName", lastName);
                 command.ExecuteNonQuery();
 
-                MessageBox.Show("Author has been added.");
+                return true;
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error adding the author: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
+                return false;
             }
         }
 
-        public void RemoveAuthor(string data)
+        public int GetNextAuthorID()
         {
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "DELETE FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
+                string query = "SELECT MAX(ID) FROM AUTHORS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@Data", data);
-                command.ExecuteNonQuery();
-
-                MessageBox.Show("Author has been removed.");
-            }
-            catch (MySqlException ex)
-            {
-                if (ex.Number == 1451)
-                {
-                    MessageBox.Show("To remove the author, you must first delete all their books.");
-                }
-                else
-                {
-                    MessageBox.Show($"Error removing the author: {ex.Message}");
-                }
-            }
-        }
-
-        public int GetAuthorID(string data)
-        {
-            try
-            {
-                //InitializeConnection();
-                string query = "SELECT ID FROM Autor WHERE CONCAT(Imie, ' ', Nazwisko) = @Data";
-                MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
-
-                command.Parameters.AddWithValue("@Data", data);
                 object result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    return Convert.ToInt32(result);
+                    return Convert.ToInt32(result) + 1;
                 }
                 else
                 {
-                    MessageBox.Show("Author's ID has not been found.");
-                    return 0;
+                    return 1;
                 }
-
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving author's ID: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
                 return -1;
             }
-
         }
 
         public List<ComboBoxItem> GetAuthors()
@@ -93,7 +62,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT * FROM autor";
+                string query = "SELECT * FROM AUTHORS";
 
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
@@ -104,7 +73,7 @@ namespace DatabaseApp.Presenter
                         ComboBoxItem book = new ComboBoxItem
                         {
                             ID = reader.GetInt32("ID"),
-                            Text = reader.GetString("Imie") + " " + reader.GetString("Nazwisko")
+                            Text = reader.GetString("FIRST_NAME") + " " + reader.GetString("LAST_NAME")
                         };
                         authors.Add(book);
                     }
@@ -113,7 +82,7 @@ namespace DatabaseApp.Presenter
             }
             catch (MySqlException ex)
             {
-                MessageBox.Show($"Error retrieving history: {ex.Message}");
+                Program.communicationHandler.ErrorOccured(ex.ToString());
             }
 
             return authors;
