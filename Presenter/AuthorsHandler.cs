@@ -41,12 +41,20 @@ namespace DatabaseApp.Presenter
                 object result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    return Convert.ToInt32(result) + 1;
+                    try
+                    {
+                        Convert.ToInt32(result);
+                    }
+                    catch (InvalidCastException)
+                    {
+                        return 1;
+                    }
                 }
                 else
                 {
                     return 1;
                 }
+                return 1;
             }
             catch (MySqlException ex)
             {

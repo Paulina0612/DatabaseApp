@@ -4,8 +4,6 @@ namespace DatabaseApp
 {
     partial class MainLogInForm
     {
-        private int[] y = {26, 49, 78, 101, 130, 153, 185 };
-        private int textBoxWidth = 344;
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -131,15 +129,15 @@ namespace DatabaseApp
             // 
             // firstNameTextBox
             // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(32723, y[1]);
+            this.firstNameTextBox.Location = new System.Drawing.Point(32723, Program.y[1]);
             this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.firstNameTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.firstNameTextBox.TabIndex = 21;
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
-            this.nameLabel.Location = new System.Drawing.Point(32723, y[0]);
+            this.nameLabel.Location = new System.Drawing.Point(32723, Program.y[0]);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(88, 20);
             this.nameLabel.TabIndex = 20;
@@ -149,7 +147,7 @@ namespace DatabaseApp
             // 
             this.workerLogInButton.BackColor = System.Drawing.Color.Linen;
             this.workerLogInButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.workerLogInButton.Location = new System.Drawing.Point(32723, y[6]);
+            this.workerLogInButton.Location = new System.Drawing.Point(32723, Program.y[6]);
             this.workerLogInButton.Name = "workerLogInButton";
             this.workerLogInButton.Size = new System.Drawing.Size(100, 26);
             this.workerLogInButton.TabIndex = 19;
@@ -159,23 +157,23 @@ namespace DatabaseApp
             // 
             // passwordTextBox
             // 
-            this.passwordTextBox.Location = new System.Drawing.Point(32756, y[5]);
+            this.passwordTextBox.Location = new System.Drawing.Point(32756, Program.y[5]);
             this.passwordTextBox.Name = "passwordTextBox";
             this.passwordTextBox.PasswordChar = '*';
-            this.passwordTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.passwordTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.passwordTextBox.TabIndex = 18;
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(32723, y[3]);
+            this.lastNameTextBox.Location = new System.Drawing.Point(32723, Program.y[3]);
             this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.lastNameTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.lastNameTextBox.TabIndex = 17;
             // 
             // passwordLabel
             // 
             this.passwordLabel.AutoSize = true;
-            this.passwordLabel.Location = new System.Drawing.Point(32723, y[4]);
+            this.passwordLabel.Location = new System.Drawing.Point(32723, Program.y[4]);
             this.passwordLabel.Name = "passwordLabel";
             this.passwordLabel.Size = new System.Drawing.Size(83, 20);
             this.passwordLabel.TabIndex = 16;
@@ -184,7 +182,7 @@ namespace DatabaseApp
             // lastNameLabel
             // 
             this.lastNameLabel.AutoSize = true;
-            this.lastNameLabel.Location = new System.Drawing.Point(32723, y[2]);
+            this.lastNameLabel.Location = new System.Drawing.Point(32723, Program.y[2]);
             this.lastNameLabel.Name = "lastNameLabel";
             this.lastNameLabel.Size = new System.Drawing.Size(86, 20);
             this.lastNameLabel.TabIndex = 15;
@@ -194,7 +192,7 @@ namespace DatabaseApp
             // 
             this.clientsLogInButton.BackColor = System.Drawing.Color.Linen;
             this.clientsLogInButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.clientsLogInButton.Location = new System.Drawing.Point(32723, y[4]);
+            this.clientsLogInButton.Location = new System.Drawing.Point(32723, Program.y[4]);
             this.clientsLogInButton.Name = "clientsLogInButton";
             this.clientsLogInButton.Size = new System.Drawing.Size(100, 26);
             this.clientsLogInButton.TabIndex = 26;
@@ -204,22 +202,22 @@ namespace DatabaseApp
             // 
             // cardNumberTextBox
             // 
-            this.cardNumberTextBox.Location = new System.Drawing.Point(32723, y[3]);
+            this.cardNumberTextBox.Location = new System.Drawing.Point(32723, Program.y[3]);
             this.cardNumberTextBox.Name = "cardNumberTextBox";
-            this.cardNumberTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.cardNumberTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.cardNumberTextBox.TabIndex = 25;
             // 
             // emailTextBox
             // 
-            this.emailTextBox.Location = new System.Drawing.Point(32723, y[1]);
+            this.emailTextBox.Location = new System.Drawing.Point(32723, Program.y[1]);
             this.emailTextBox.Name = "emailTextBox";
-            this.emailTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.emailTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.emailTextBox.TabIndex = 24;
             // 
             // cardNumberLabel
             // 
             this.cardNumberLabel.AutoSize = true;
-            this.cardNumberLabel.Location = new System.Drawing.Point(32723, y[2]);
+            this.cardNumberLabel.Location = new System.Drawing.Point(32723, Program.y[2]);
             this.cardNumberLabel.Name = "cardNumberLabel";
             this.cardNumberLabel.Size = new System.Drawing.Size(111, 20);
             this.cardNumberLabel.TabIndex = 23;
@@ -228,7 +226,7 @@ namespace DatabaseApp
             // emailLabel
             // 
             this.emailLabel.AutoSize = true;
-            this.emailLabel.Location = new System.Drawing.Point(32723, y[0]);
+            this.emailLabel.Location = new System.Drawing.Point(32723, Program.y[0]);
             this.emailLabel.Name = "emailLabel";
             this.emailLabel.Size = new System.Drawing.Size(50, 20);
             this.emailLabel.TabIndex = 22;
@@ -236,29 +234,29 @@ namespace DatabaseApp
             // 
             // clientEmailTextBox
             // 
-            this.clientEmailTextBox.Location = new System.Drawing.Point(Program.MAX, y[5]);
+            this.clientEmailTextBox.Location = new System.Drawing.Point(Program.MAX, Program.y[5]);
             this.clientEmailTextBox.Name = "clientEmailTextBox";
-            this.clientEmailTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.clientEmailTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.clientEmailTextBox.TabIndex = 33;
             // 
             // clientLastNameTextBox
             // 
-            this.clientLastNameTextBox.Location = new System.Drawing.Point(Program.MAX, y[3]);
+            this.clientLastNameTextBox.Location = new System.Drawing.Point(Program.MAX, Program.y[3]);
             this.clientLastNameTextBox.Name = "clientLastNameTextBox";
-            this.clientLastNameTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.clientLastNameTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.clientLastNameTextBox.TabIndex = 32;
             // 
             // clientFirstNameTextBox
             // 
-            this.clientFirstNameTextBox.Location = new System.Drawing.Point(Program.MAX, y[1]);
+            this.clientFirstNameTextBox.Location = new System.Drawing.Point(Program.MAX, Program.y[1]);
             this.clientFirstNameTextBox.Name = "clientFirstNameTextBox";
-            this.clientFirstNameTextBox.Size = new System.Drawing.Size(textBoxWidth, 26);
+            this.clientFirstNameTextBox.Size = new System.Drawing.Size(Program.textBoxWidth, 26);
             this.clientFirstNameTextBox.TabIndex = 31;
             // 
             // clientEmailLabel
             // 
             this.clientEmailLabel.AutoSize = true;
-            this.clientEmailLabel.Location = new System.Drawing.Point(Program.MAX, y[4]);
+            this.clientEmailLabel.Location = new System.Drawing.Point(Program.MAX, Program.y[4]);
             this.clientEmailLabel.Name = "clientEmailLabel";
             this.clientEmailLabel.Size = new System.Drawing.Size(55, 20);
             this.clientEmailLabel.TabIndex = 30;
@@ -267,7 +265,7 @@ namespace DatabaseApp
             // clientLastNameLabel
             // 
             this.clientLastNameLabel.AutoSize = true;
-            this.clientLastNameLabel.Location = new System.Drawing.Point(Program.MAX, y[2]);
+            this.clientLastNameLabel.Location = new System.Drawing.Point(Program.MAX, Program.y[2]);
             this.clientLastNameLabel.Name = "clientLastNameLabel";
             this.clientLastNameLabel.Size = new System.Drawing.Size(86, 20);
             this.clientLastNameLabel.TabIndex = 29;
@@ -276,7 +274,7 @@ namespace DatabaseApp
             // clientFirstNameLabel
             // 
             this.clientFirstNameLabel.AutoSize = true;
-            this.clientFirstNameLabel.Location = new System.Drawing.Point(Program.MAX, y[0]);
+            this.clientFirstNameLabel.Location = new System.Drawing.Point(Program.MAX, Program.y[0]);
             this.clientFirstNameLabel.Name = "clientFirstNameLabel";
             this.clientFirstNameLabel.Size = new System.Drawing.Size(88, 20);
             this.clientFirstNameLabel.TabIndex = 28;
@@ -286,7 +284,7 @@ namespace DatabaseApp
             // 
             this.registerButton.BackColor = System.Drawing.Color.Linen;
             this.registerButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.registerButton.Location = new System.Drawing.Point(Program.MAX, y[6]);
+            this.registerButton.Location = new System.Drawing.Point(Program.MAX, Program.y[6]);
             this.registerButton.Name = "registerButton";
             this.registerButton.Size = new System.Drawing.Size(100, 26);
             this.registerButton.TabIndex = 27;

@@ -19,56 +19,58 @@ namespace DatabaseApp
             RestetForm();
             int i = 0;
             emailLabel.Location = 
-                new System.Drawing.Point(componentsLocation, y[i++]);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             emailTextBox.Location = 
-                new System.Drawing.Point(componentsLocation, y[i++]);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             cardNumberLabel.Location =
-                new System.Drawing.Point(componentsLocation, y[i++]);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             cardNumberTextBox.Location =
-                new System.Drawing.Point(componentsLocation, y[i++]);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             clientsLogInButton.Location =
                 new System.Drawing.Point(componentsLocation + firstNameTextBox.Width - workerLogInButton.Width,
-                y[i++]);
+                Program.y[i++]);
         }
 
         private void WorkerLogInAsWorkerButton_Click(object sender, EventArgs e)
         {
             RestetForm();
+            int i = 0;
             nameLabel.Location = 
-                new System.Drawing.Point(componentsLocation, nameLabel.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             firstNameTextBox.Location = 
-                new System.Drawing.Point(componentsLocation, firstNameTextBox.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             lastNameLabel.Location = 
-                new System.Drawing.Point(componentsLocation, lastNameLabel.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             lastNameTextBox.Location = 
-                new System.Drawing.Point(componentsLocation, lastNameTextBox.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             passwordLabel.Location =
-                new System.Drawing.Point(componentsLocation, passwordLabel.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             passwordTextBox.Location =
-                new System.Drawing.Point(componentsLocation, passwordTextBox.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             workerLogInButton.Location =
                 new System.Drawing.Point(componentsLocation+firstNameTextBox.Width-workerLogInButton.Width, 
-                workerLogInButton.Location.Y);
+                Program.y[i++]);
         }
 
         private void RegisterClientButton_Click(object sender, EventArgs e)
         {
             RestetForm();
+            int i = 0;
             clientFirstNameLabel.Location =
-                new System.Drawing.Point(componentsLocation, nameLabel.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             clientFirstNameTextBox.Location =
-                new System.Drawing.Point(componentsLocation, firstNameTextBox.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             clientLastNameLabel.Location =
-                new System.Drawing.Point(componentsLocation, lastNameLabel.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             clientLastNameTextBox.Location =
-                new System.Drawing.Point(componentsLocation, lastNameTextBox.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             clientEmailLabel.Location =
-                new System.Drawing.Point(componentsLocation, passwordLabel.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             clientEmailTextBox.Location =
-                new System.Drawing.Point(componentsLocation, passwordTextBox.Location.Y);
+                new System.Drawing.Point(componentsLocation, Program.y[i++]);
             registerButton.Location =
                 new System.Drawing.Point(componentsLocation + firstNameTextBox.Width - registerButton.Width,
-                workerLogInButton.Location.Y);
+                Program.y[i++]);
         }
 
         private void RestetForm()

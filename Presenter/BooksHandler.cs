@@ -43,7 +43,14 @@ namespace DatabaseApp.Presenter
                 object result = command.ExecuteScalar();
                 if (result != null)
                 {
-                    return Convert.ToInt32(result) + 1;
+                    try
+                    {
+                        return Convert.ToInt32(result) + 1;
+                    }
+                    catch (Exception)
+                    {
+                        return 1;
+                    }
                 }
                 else
                 {
@@ -132,7 +139,12 @@ namespace DatabaseApp.Presenter
                         INTERVAL 30 DAY), false);";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                command.Parameters.AddWithValue("@ID", GetNextLoanId());
+                int id = GetNextLoanId();
+                if(id == -1)
+                {
+                    return false;
+                }
+                command.Parameters.AddWithValue("@ID", id);
                 command.Parameters.AddWithValue("@ClientID", clientID);
                 command.Parameters.AddWithValue("@BookID", bookID);
                 command.Parameters.AddWithValue("@WorkerID", SQLCommunicationHandler.LoggedUserID);
@@ -160,7 +172,7 @@ namespace DatabaseApp.Presenter
             try
             {
                 Program.communicationHandler.InitializeConnection();
-                string query = "SELECT MAX(ID) FROM wypozyczenia";
+                string query = "SELECT MAX(ID) FROM BORROWS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
                 object result = command.ExecuteScalar();
                 if (result != null)
@@ -521,7 +533,7 @@ namespace DatabaseApp.Presenter
                         BookData book = new BookData
                         {
                             ID = reader.GetInt32("ID"),
-                            title = reader.GetString("TILE"),
+                            title = reader.GetString("TITLE"),
                             authorFirstName = reader.GetString("FIRST_NAME"),
                             authorLastName = reader.GetString("LAST_NAME"),
                             genreName = reader.GetString("NAME"),
@@ -546,7 +558,7 @@ namespace DatabaseApp.Presenter
         {
             try
             {
-                string query = "SELECT BOOK_STATE FROM BOOK_STATE WHERE ID = @BookID";
+                string query = "SELECT BOOK_STATE FROM BOOKS_CATALOG WHERE ID = @BookID";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
                 command.Parameters.AddWithValue("@BookID", ID);

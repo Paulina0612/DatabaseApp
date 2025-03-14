@@ -14,7 +14,8 @@ namespace DatabaseApp
         {
             if (string.IsNullOrEmpty(clientEmailTextBox.Text)) Program.IncorrectDataInformation();
             else if (string.IsNullOrEmpty(bookIDTextBox.Text)) Program.IncorrectDataInformation();
-            else if(!Program.communicationHandler.booksHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) Program.IncorrectDataInformation();
+            else if(!Program.communicationHandler.booksHandler.IsBookAvailable(int.Parse(bookIDTextBox.Text))) 
+                MessageBox.Show("Book is not available");
             else
             {
                 bool ifSuccess = 
