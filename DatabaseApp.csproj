@@ -132,12 +132,6 @@
     </Compile>
     <Compile Include="View\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.Designer.cs">
-      <DependentUpon>RemoveWorker.cs</DependentUpon>
-    </Compile>
     <Compile Include="Presenter\SQLCommunicationHandler.cs" />
     <Compile Include="View\MainMenu\WorkerPanel.cs">
       <SubType>Form</SubType>
@@ -166,9 +160,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\RemoveWorker.resx">
-      <DependentUpon>RemoveWorker.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu\WorkerPanel.resx">
       <DependentUpon>WorkerPanel.cs</DependentUpon>
     </EmbeddedResource>

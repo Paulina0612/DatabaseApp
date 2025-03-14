@@ -39,7 +39,6 @@ CREATE TABLE BORROWS (
     ID INT(10) PRIMARY KEY,
     CLIENT_ID INT(10),
     BOOKS_CATALOG_ID INT(10),
-    WORKER_ID INT(10),
     BORROW_DATE DATE,
     DATE_DUE DATE,
     IF_FINISHED BOOL
@@ -49,8 +48,7 @@ CREATE TABLE RETURNS (
     ID INT(10) PRIMARY KEY,
     BORROW_ID INT(10),
     RETURN_DATE DATE,
-    PENALTY FLOAT(10, 2) NULL,
-    WORKER_ID INT(10)
+    PENALTY FLOAT(10, 2) NULL
 );
 
 CREATE TABLE AUTHORS (
@@ -80,15 +78,11 @@ ALTER TABLE LIB.BORROWS
     ADD CONSTRAINT FK_BORROWS_CLIENT
     FOREIGN KEY (CLIENT_ID) REFERENCES LIB.CLIENTS(ID),
     ADD CONSTRAINT FK_BORROWS_BOOKS_CATALOG
-    FOREIGN KEY (BOOKS_CATALOG_ID) REFERENCES LIB.BOOKS_CATALOG(ID),
-    ADD CONSTRAINT FK_BORROWS_WORKERS
-    FOREIGN KEY (WORKER_ID) REFERENCES LIB.WORKERS(ID);
+    FOREIGN KEY (BOOKS_CATALOG_ID) REFERENCES LIB.BOOKS_CATALOG(ID);
 
 ALTER TABLE LIB.RETURNS
     ADD CONSTRAINT FK_RETURNS_BORROWS
-    FOREIGN KEY (BORROW_ID) REFERENCES LIB.BORROWS(ID),
-    ADD CONSTRAINT FK_RETURNS_WORKERS
-    FOREIGN KEY (WORKER_ID) REFERENCES LIB.WORKERS(ID);
+    FOREIGN KEY (BORROW_ID) REFERENCES LIB.BORROWS(ID);
 
 ALTER TABLE LIB.BOOKS
     ADD CONSTRAINT FK_BOOKS_AUTHORS
@@ -113,18 +107,12 @@ alter table LIB.BORROWS
 	on delete cascade on update cascade,
 	add constraint FK_BORROWS_BOOKS_CATALOG_BEHAVIOUR
 	foreign key (BOOKS_CATALOG_ID) references LIB.BOOKS_CATALOG(ID)
-	on delete set null on update cascade,
-	add constraint FK_BORROWS_WORKERS_BEHAVIOUR
-	foreign key (WORKER_ID) references LIB.WORKERS(ID)
 	on delete set null on update cascade;
 	
 alter table LIB.RETURNS
 	add constraint FK_RETURNS_BORROWS_BEHAVIOUR
 	foreign key (BORROW_ID) references LIB.BORROWS(ID)
-	on delete cascade on update cascade,
-	add constraint FK_RETURNS_WORKERS_BEHAVIOUR
-	foreign key (WORKER_ID) references LIB.WORKERS(ID)
-	on delete set null on update cascade;
+	on delete cascade on update cascade;
 
 alter table LIB.BOOKS
 	add constraint FK_BOOKS_AUTHORS_BEHAVIOUR
@@ -169,16 +157,13 @@ grant select on LIB.POSITIONS to 'WORKER'@'%';
 flush privileges;
 
 
-delete from LIB.POSITIONS where ID=0;
 insert into LIB.POSITIONS (ID,NAME)
 values (0, "Worker");
 
 insert into LIB.POSITIONS (ID,NAME)
 values (1, "Director");
 
-select * from LIB.POSITIONS;
-
 insert into LIB.WORKERS (ID, FIRST_NAME, LAST_NAME, SALARY, PESEL, PHONE_NUMBER, E_MAIL, MANAGER_ID, POSITION_ID, PASSWORD)
-values (0, "Jan", "Kowalski", 0, "01134667891", "123456789", "jan.kowalski@onet.pl", null, 1, "aaa");
+values (0, "123", "123", 0, "01134117491", "123456789", "123", null, 1, "123");
 
 
