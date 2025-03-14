@@ -148,23 +148,11 @@
     <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.Designer.cs">
       <DependentUpon>ChangeWorkerSalary.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\MainMenu\ClientLogInForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainMenu\ClientLogInForm.Designer.cs">
-      <DependentUpon>ClientLogInForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\MainMenu\ClientPanel.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="View\MainMenu\ClientPanel.Designer.cs">
       <DependentUpon>ClientPanel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="View\MainMenu\ClientRegistration.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainMenu\ClientRegistration.Designer.cs">
-      <DependentUpon>ClientRegistration.cs</DependentUpon>
     </Compile>
     <Compile Include="View\WorkerAndDirectorPanel\ManagingWorkers\AddWorker.cs">
       <SubType>Form</SubType>
@@ -235,12 +223,6 @@
       <DependentUpon>SearchingClient.cs</DependentUpon>
     </Compile>
     <Compile Include="Presenter\SQLCommunicationHandler.cs" />
-    <Compile Include="View\MainMenu\WorkerLogInForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="View\MainMenu\WorkerLogInForm.Designer.cs">
-      <DependentUpon>WorkerLogInForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="View\MainMenu\WorkerPanel.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -268,14 +250,8 @@
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\ChangeWorkerSalary.resx">
       <DependentUpon>ChangeWorkerSalary.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\MainMenu\ClientLogInForm.resx">
-      <DependentUpon>ClientLogInForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu\ClientPanel.resx">
       <DependentUpon>ClientPanel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MainMenu\ClientRegistration.resx">
-      <DependentUpon>ClientRegistration.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingWorkers\AddWorker.resx">
       <DependentUpon>AddWorker.cs</DependentUpon>
@@ -318,9 +294,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\WorkerAndDirectorPanel\ManagingClients\SearchingClient.resx">
       <DependentUpon>SearchingClient.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="View\MainMenu\WorkerLogInForm.resx">
-      <DependentUpon>WorkerLogInForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainMenu\WorkerPanel.resx">
       <DependentUpon>WorkerPanel.cs</DependentUpon>
