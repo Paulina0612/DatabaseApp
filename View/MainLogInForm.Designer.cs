@@ -155,6 +155,7 @@ namespace DatabaseApp
             this.workerLogInButton.TabIndex = 19;
             this.workerLogInButton.Text = "Log In";
             this.workerLogInButton.UseVisualStyleBackColor = false;
+            this.workerLogInButton.Click += new System.EventHandler(this.WorkerLogInButton_Click);
             // 
             // passwordTextBox
             // 
@@ -199,6 +200,7 @@ namespace DatabaseApp
             this.clientsLogInButton.TabIndex = 26;
             this.clientsLogInButton.Text = "Log In";
             this.clientsLogInButton.UseVisualStyleBackColor = false;
+            this.clientsLogInButton.Click += new System.EventHandler(this.ClientLogInButton_Click);
             // 
             // cardNumberTextBox
             // 
@@ -290,6 +292,7 @@ namespace DatabaseApp
             this.registerButton.TabIndex = 27;
             this.registerButton.Text = "Register";
             this.registerButton.UseVisualStyleBackColor = true;
+            this.registerButton.Click += new System.EventHandler(this.ClientRegistrationButton_Click);
             // 
             // MainLogInForm
             // 

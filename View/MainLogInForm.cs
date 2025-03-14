@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Text;
 using System.Windows.Forms;
 
 namespace DatabaseApp
@@ -110,6 +111,92 @@ namespace DatabaseApp
                 new System.Drawing.Point(Program.MAX, passwordTextBox.Location.Y);
             registerButton.Location =
                 new System.Drawing.Point(Program.MAX, workerLogInButton.Location.Y);
+        }
+
+        private void ClientLogInButton_Click(object sender, EventArgs e)
+        {
+            bool ifCardNumberNumeric = int.TryParse(cardNumberTextBox.Text, out int n);
+
+            if (string.IsNullOrEmpty(emailTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(cardNumberTextBox.Text) && ifCardNumberNumeric && cardNumberTextBox.Text.Length != 7)
+                Program.IncorrectDataInformation();
+            else
+            {
+                bool ifSuccessful = Program.communicationHandler.clientsHandler.ClientLogIn(emailTextBox.Text, cardNumberTextBox.Text);
+
+                if (ifSuccessful)
+                {
+                    ClientPanel clientPanel = new ClientPanel();
+                    clientPanel.Show();
+                }
+                else MessageBox.Show("E-mail or card number incorrect.");
+            }
+        }
+
+        private void WorkerLogInButton_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(firstNameTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(lastNameTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(passwordTextBox.Text)) Program.IncorrectDataInformation();
+            else
+            {
+                bool ifSuccessful = Program.communicationHandler.workersHandler.WorkerLogIn(firstNameTextBox.Text, lastNameTextBox.Text,
+                    passwordTextBox.Text);
+
+                if (ifSuccessful)
+                {
+                    if (Program.communicationHandler.workersHandler.IfDirector())
+                    {
+                        DirectorPanel directorPanel = new DirectorPanel();
+                        directorPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");
+                        directorPanel.Show();
+                    }
+                    else
+                    {
+                        WorkerPanel workerPanel = new WorkerPanel();
+                        workerPanel.SetWelcomeLabelText("Welcome, " + firstNameTextBox.Text + " " + lastNameTextBox.Text + "!");
+                        workerPanel.Show();
+                    }
+                }
+            }
+        }
+
+        private void ClientRegistrationButton_Click(object sender, EventArgs e)
+        {
+            // Generating card number
+            string chars = "0123456789";
+            StringBuilder sb = new StringBuilder();
+            Random rnd = new Random();
+
+            for (int i = 0; i < 7; i++)
+            {
+                int index = rnd.Next(chars.Length);
+                sb.Append(chars[index]);
+            }
+
+            string password = sb.ToString();
+
+            if (string.IsNullOrEmpty(clientFirstNameTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(clientLastNameTextBox.Text)) Program.IncorrectDataInformation();
+            else if (string.IsNullOrEmpty(clientEmailTextBox.Text)) Program.IncorrectDataInformation();
+            else
+            {
+                try
+                {
+                    bool ifSuccess = Program.communicationHandler.clientsHandler.ClientRegistration(
+                        clientFirstNameTextBox.Text, clientLastNameTextBox.Text, clientEmailTextBox.Text, password);
+
+                    if (ifSuccess)
+                        MessageBox.Show("Client successfully added.\nGenerated password is: " + password);
+                    else
+                        MessageBox.Show("Adding client failed.");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show($"Error adding client: {ex.Message}");
+                }
+
+            }
         }
     }
 }

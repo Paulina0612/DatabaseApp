@@ -17,6 +17,7 @@ namespace DatabaseApp.Presenter
                     "VALUES (@ID, @FirstName, @LastName, @Email, 0, @CardNumber)";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
+                int id = GetNextClientID();
                 command.Parameters.AddWithValue("@ID", GetNextClientID());
                 command.Parameters.AddWithValue("@FirstName", firstName);
                 command.Parameters.AddWithValue("@LastName", lastName);
@@ -42,8 +43,14 @@ namespace DatabaseApp.Presenter
                 string query = "SELECT MAX(ID) FROM CLIENTS";
                 MySqlCommand command = new MySqlCommand(query, Program.communicationHandler.connection);
 
-                return Convert.ToInt32(command.ExecuteScalar()) + 1;
-
+                try
+                {
+                    return Convert.ToInt32(command.ExecuteScalar()) + 1;
+                }
+                catch (InvalidCastException)
+                {
+                    return 1;
+                }
             }
             catch (MySqlException ex)
             {
@@ -75,10 +82,7 @@ namespace DatabaseApp.Presenter
                     return true;
                 }
                 else
-                {
-                    MessageBox.Show("Wrong e-mail or card number.");
                     return false;
-                }
 
             }
             catch (MySqlException ex)
